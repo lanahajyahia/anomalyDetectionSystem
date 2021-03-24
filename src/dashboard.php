@@ -1,6 +1,6 @@
 <?php
  require("core.php");
- head();
+ include("navbar.php");
 ?>
 <div class="content-wrapper">
 
@@ -36,7 +36,7 @@
                             <div class="small-box bg-info">
                                <div class="inner">
                                    <h3><?php
-echo $count;
+echo "1";
 ?></h3>
                                    <p>SQLi Attacks</p>
                                </div>
@@ -85,7 +85,7 @@ echo "1";
                                <div class="icon">
                                    <i class="fas fa-keyboard"></i>
                                </div>
-                               <a href="Logs\domLogs.php" class="small-box-footer">View Logs <i class="fas fa-arrow-circle-right"></i></a>
+                               <a href="domLogs.php" class="small-box-footer">View Logs <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
 					    </div>
 					</div>
@@ -160,9 +160,8 @@ echo "1";
 
 					    </div>
 					</div>
-       
-</div>
+
 
 <?php
-footer();
+include("footer.php");
 ?>
