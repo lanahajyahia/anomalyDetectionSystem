@@ -1,6 +1,7 @@
 <?php
  require("core.php");
  include("navbar.php");
+ //head();
 ?>
 <div class="content-wrapper">
 
