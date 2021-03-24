@@ -11,14 +11,14 @@ session_start();
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 	<meta name="theme-color" content="#4b545c">
     <link rel="shortcut icon" href="assets/img/favicon.png">
-    <title>BeFree &rsaquo; Admin Panel</title>
+    <title>Anomaly Detection &rsaquo; Admin Panel</title>
 
 
     <!--STYLESHEET-->
     <!--=================================================-->
 
     <!--Bootstrap Stylesheet-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"> -->
 
 	<!--Font Awesome-->
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
@@ -81,14 +81,6 @@ session_start();
 
 	<!--Admin-->
     <script src="assets/js/admin.min.js"></script>
-
-<?php
-    if (basename($_SERVER['SCRIPT_NAME']) == 'bans-country.php') {
-        echo '
-    <!--Select2-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>';
-    }
-?>
 
     <!--DataTables-->
     <script src="https://cdn.datatables.net/v/bs4/dt-1.10.16/r-2.2.1/datatables.min.js"></script>

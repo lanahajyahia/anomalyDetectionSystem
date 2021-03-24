@@ -10,23 +10,25 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" style="padding: 0px">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="dashboard.php">Anomaly Detection</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Dashboard</a></li>
+      <li class="active"><a href="dashboard.php">Dashboard</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Logs <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="sqliLogs.php">SQLi</a></li>
-          <li><a href="reflectedLogs.php">Reflected xss</a></li>
+          <li><a href="Logs/sqliLogs.php">SQLi</a></li>
+          <li><a href="Logs/reflectedLogs.php">Reflected xss</a></li>
           <li><a href="Logs/storedLogs.php">Stored xss</a></li>
-          <li><a href="domLogs.php">Dom xss</a></li>
+          <li><a href="Logs/domLogs.php">Dom xss</a></li>
         </ul>
       </li>
-      <li><a href="#">Page 2</a></li>
+      <li><a href="user.php">Users</a></li>
+      <li><a href="monitoring.php">Website Monitor</a></li>
     </ul>
+    <!--  if login show name + logout -->
     <ul class="nav navbar-nav navbar-right">
       <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a href="signup.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
