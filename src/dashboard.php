@@ -58,7 +58,7 @@ echo "1";
                                <div class="icon">
                                    <i class="fas fa-retweet"></i>
                                </div>
-                               <a href="Logs\reflectedLogs.php" class="small-box-footer">View Logs <i class="fas fa-arrow-circle-right"></i></a>
+                               <a href="reflectedLogs.php" class="small-box-footer">View Logs <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
 					    </div>
 					    <div class="col-sm-6 col-lg-3">

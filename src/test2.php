@@ -11,7 +11,7 @@ if(isset($_GET["name"] )){
      $harmless_xss = $xss_detection->xss_clean($url);
    if($xss_detection->isXssFound() || strlen($harmless_xss) == 0 ){
       $_SESSION["alert"] = "someone is trying to inject js code in ur website!";
-      $_SESSION["injection_type"] ="xss-reflected";
+      $_SESSION["injection_type"] ="reflected";
       $_SESSION["injection_description"] ="Detects possible includes and typical script methods";
       $_SESSION["injection_date"] = "" . date("Y/m/d");
       $_SESSION["injection_time"] ="" . date("h:i:sa");

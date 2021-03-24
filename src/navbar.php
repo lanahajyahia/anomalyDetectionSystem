@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse" style="border-radius: 0px !important;">
+<nav class="navbar navbar-inverse" style="border-radius: 0px !important; margin-bottom: 0px !important">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="dashboard.php">Anomaly Detection</a>
@@ -20,13 +20,13 @@
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Logs <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="Logs/sqliLogs.php">SQLi</a></li>
-          <li><a href="Logs/reflectedLogs.php">Reflected xss</a></li>
+          <li><a href="reflectedLogs.php">Reflected xss</a></li>
           <li><a href="Logs/storedLogs.php">Stored xss</a></li>
           <li><a href="Logs/domLogs.php">Dom xss</a></li>
         </ul>
       </li>
       <li><a href="user.php">Users</a></li>
-      <li><a href="monitoring.php">Website Monitor</a></li>
+      <li><a href="monitor.php">Website Monitor</a></li>
     </ul>
     <!--  if login show name + logout -->
     <ul class="nav navbar-nav navbar-right">

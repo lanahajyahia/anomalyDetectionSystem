@@ -12,11 +12,9 @@ use const HTML_ENTITIES;
 
 final class xssDetection
 {
-    const VOKU_ANTI_XSS_GT = 'voku::anti-xss::gt';
+    const _ANTI_XSS_GT = 'gt';
 
-    const VOKU_ANTI_XSS_LT = 'voku::anti-xss::lt';
-
-    const VOKU_ANTI_XSS_STYLE = 'voku::anti-xss::STYLE';
+    const _ANTI_XSS_LT = 'lt';
 
     /**
      * List of never allowed regex replacements.
@@ -547,9 +545,9 @@ final class xssDetection
                         if ($tmpAntiXss->isXssFound() === true) {
                             $this->_xss_found = true;
 
-                            $urlPartClean = \str_replace(['&lt;', '&gt;'], [self::VOKU_ANTI_XSS_LT, self::VOKU_ANTI_XSS_GT], $urlPartClean);
+                            $urlPartClean = \str_replace(['&lt;', '&gt;'], [self::_ANTI_XSS_LT, self::_ANTI_XSS_GT], $urlPartClean);
                             $urlPartClean = UTF8::rawurldecode($urlPartClean);
-                            $urlPartClean = \str_replace([self::VOKU_ANTI_XSS_LT, self::VOKU_ANTI_XSS_GT], ['&lt;', '&gt;'], $urlPartClean);
+                            $urlPartClean = \str_replace([self::_ANTI_XSS_LT, self::_ANTI_XSS_GT], ['&lt;', '&gt;'], $urlPartClean);
 
                             $str = \str_ireplace($matches['attr'], $urlPartClean, $str);
                         }
@@ -559,9 +557,9 @@ final class xssDetection
         }
 
         if ($needProtection) {
-            $str = \str_replace(['&lt;', '&gt;'], [self::VOKU_ANTI_XSS_LT, self::VOKU_ANTI_XSS_GT], $str);
+            $str = \str_replace(['&lt;', '&gt;'], [self::_ANTI_XSS_LT, self::_ANTI_XSS_GT], $str);
             $str = $this->_entity_decode(UTF8::rawurldecode($str));
-            $str = \str_replace([self::VOKU_ANTI_XSS_LT, self::VOKU_ANTI_XSS_GT], ['&lt;', '&gt;'], $str);
+            $str = \str_replace([self::_ANTI_XSS_LT, self::_ANTI_XSS_GT], ['&lt;', '&gt;'], $str);
         }
 
         return $str;
