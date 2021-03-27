@@ -66,7 +66,7 @@ li.dropdown {
 <body>
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
-<div class="navbar-header">
+<div class="navbar-header" style="padding-left: 0.5em !important">
       <a class="navbar-brand" href="../dashboard.php">Anomaly Detection</a>
     </div>
 <ul>

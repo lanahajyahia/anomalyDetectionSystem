@@ -67,6 +67,7 @@ include("../server.php");
 $table = 'xss_detections';
 $sql   = $conn->query("SELECT id, type, date, time, response_header, description FROM `$table` WHERE type='reflected'");
 if ($sql->num_rows > 0) {
+	$_SESSION["reflected_count"] = $sql->num_rows;
 while ($row = mysqli_fetch_assoc($sql)) {
     echo '
 										<tr>
@@ -80,6 +81,8 @@ while ($row = mysqli_fetch_assoc($sql)) {
 										</tr>
     ';
 }
+}else{
+	$_SESSION["reflected_count"] = 0;
 }
 ?> 
 									</tbody>

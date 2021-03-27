@@ -1,6 +1,7 @@
 <?php
 require("../core.php");
 include("../navbar.php");
+include("../server.php");
 
 // if (isset($_GET['delete-id'])) {
 //     $id    = (int) $_GET["delete-id"];
@@ -64,9 +65,11 @@ include("../navbar.php");
 										</tr>
 									</thead>
 									<tbody>
-<!-- <?php
+									<?php
 $table = 'xss_detections';
-$sql   = $db->query("SELECT id, type, date, time, response_header, description type FROM `$table` WHERE type='reflected' ORDER by id DESC");
+$sql   = $conn->query("SELECT id, type, date, time, response_header, description FROM `$table` WHERE type='dom'");
+if ($sql->num_rows > 0) {
+	$_SESSION["dom_count"] = $sql->num_rows;
 while ($row = mysqli_fetch_assoc($sql)) {
     echo '
 										<tr>
@@ -76,29 +79,14 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                           <td>' . $row['time'] . '</td>
 						                  <td>' . $row['response_header'] . '</td>
                                           <td>' . $row['description'] . '</td>
-										  <td><img src="assets/img/icons/browser/' . $row['browser_code'] . '.png" /> ' . $row['browser'] . '</td>
-										  <td><img src="assets/img/icons/os/' . $row['os_code'] . '.png" /> ' . $row['os'] . '</td>
-										  <td><img src="assets/plugins/flags/blank.png" class="flag flag-' . strtolower($row['country_code']) . '" alt="' . $row['country'] . '" /> ' . $row['country'] . '</td>
-						                  <td><i class="fas fa-code"></i> SQLi</td>
-										  <td>
-                                            <a href="log-details.php?id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-tasks"></i> Details</a>
-											';
-    if (get_banned($row['ip']) == 1) {
-        echo '
-										    <a href="bans-ip.php?delete-id=' . get_bannedid($row['ip']) . '" class="btn btn-flat btn-success"><i class="fas fa-ban"></i> Unban</a>
-									        ';
-    } else {
-        echo '
-										    <a href="bans-ip.php?ip=' . $row['ip'] . '&reason=' . $row['type'] . '" class="btn btn-flat btn-warning"><i class="fas fa-ban"></i> Ban</a>
-									        ';
-    }
-    echo '
-											<a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger"><i class="fas fa-times"></i> Delete</a>
-										  </td>
+								
 										</tr>
-';
+    ';
 }
-?> -->
+}else{
+	$_SESSION["dom_count"] = 0 ." ";
+}
+?> 
 									</tbody>
 								    </table>
 

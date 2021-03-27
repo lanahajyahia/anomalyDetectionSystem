@@ -37,7 +37,7 @@
                             <div class="small-box bg-info">
                                <div class="inner">
                                    <h3><?php
-echo "1";
+echo ' ' . $_SESSION["sqli_count"];
 ?></h3>
                                    <p>SQLi Attacks</p>
                                </div>
@@ -51,7 +51,7 @@ echo "1";
 					        <div class="small-box bg-danger">
                                <div class="inner">
                                    <h3><?php
-echo "1";
+echo ' ' . $_SESSION["reflected_count"];
 ?></h3>
                                    <p>Reflected XSS Attacks</p>
                                </div>
@@ -65,7 +65,7 @@ echo "1";
 					        <div class="small-box bg-success">
                                <div class="inner">
                                    <h3><?php
-echo "1";
+echo $_SESSION["stored_count"];
 ?></h3>
                                    <p>Stored XSS Attacks</p>
                                </div>
@@ -79,7 +79,7 @@ echo "1";
 					        <div class="small-box bg-warning">
                                <div class="inner">
                                    <h3 style="color:white !important;"><?php
-echo "1";
+echo $_SESSION["dom_count"];
 ?></h3>
                                    <p style="color:white !important;">Dom XSS Attacks</p>
                                </div>
