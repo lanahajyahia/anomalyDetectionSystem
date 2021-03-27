@@ -27,10 +27,10 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 	<!--Stylesheet-->
-    <link href="assets/css/admin.min.css" rel="stylesheet">
+    <!-- <link href="assets/css/admin.min.css" rel="stylesheet"> -->
 
     <!--Switchery-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css" rel="stylesheet">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css" rel="stylesheet"> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 
 

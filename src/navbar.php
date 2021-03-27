@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ 
 </head>
 <body>
 
-<nav class="navbar" style="border-radius: 0px !important; margin-bottom: 0px !important">
+<nav class="navbar" style="border-radius: 0px !important; margin-bottom: 0px !important; background:#333 !important;">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="dashboard.php">Anomaly Detection</a>
@@ -30,12 +31,12 @@
     </ul>
     <!--  if login show name + logout -->
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="signup.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="..\multi_login\register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="..\multi_login\login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>
 
 
 </body>
-</html>
+</html> 
