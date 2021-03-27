@@ -1,12 +1,12 @@
 <?php
 namespace xss;
-
-include("../models/xssDetection.php");
 session_start();
+include("server.php");
+include("xssDetection.php");
 
 if(isset($_GET["name"] )){ 
      $url = getCurrentPageURL();
-     $xss_detection = new models\xssDetection();
+     $xss_detection = new xssDetection();
      $harm_string = "<IMG SRC=javascript:alert('XSS')>";
      $harmless_xss = $xss_detection->xss_clean($url);
    if($xss_detection->isXssFound() || strlen($harmless_xss) == 0 ){
@@ -16,7 +16,7 @@ if(isset($_GET["name"] )){
       $_SESSION["injection_date"] = "" . date("Y/m/d");
       $_SESSION["injection_time"] ="" . date("h:i:sa");
       $_SESSION["injection_url"] = $url;
-      header('location: testsfile.php');
+      header('location: testfile.php');
    }
 
 }
