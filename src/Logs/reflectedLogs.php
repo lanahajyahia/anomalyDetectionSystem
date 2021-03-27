@@ -1,6 +1,6 @@
 <?php
-require("core.php");
-include("navbar.php");
+require("../core.php");
+include("../navbar.php");
 
 // if (isset($_GET['delete-id'])) {
 //     $id    = (int) $_GET["delete-id"];
@@ -13,7 +13,7 @@ include("navbar.php");
 //     $query = $mysqli->query("DELETE FROM `$table` WHERE type='SQLi'");
 // }
 ?>
-<div class="content-wrapper">
+<div class="content-wrapper"  style="margin-left: 0px !important;">
 
 			<!--CONTENT CONTAINER-->
 			<!--===================================================-->
@@ -117,6 +117,9 @@ while ($row = mysqli_fetch_assoc($sql)) {
 			<!--===================================================-->
 			<!--END CONTENT CONTAINER-->
 </div>
+<?php
+include("../footer.php");
+?>
 <!-- <script>
 $(document).ready(function() {
 
@@ -132,6 +135,3 @@ $(document).ready(function() {
 	} );
 } );
 </script>     -->
-<?php
-include("footer.php");
-?>

@@ -1,9 +1,9 @@
 <?php
  require("core.php");
- include("navbar.php");
  //head();
 ?>
-<div class="content-wrapper">
+<div class="navv"><?php include("navbar.php");?></div>
+<div class="content-wrapper" style="margin-left: 0px !important;">
 
 			<!--CONTENT CONTAINER-->
 			<!--===================================================-->
@@ -58,7 +58,7 @@ echo "1";
                                <div class="icon">
                                    <i class="fas fa-retweet"></i>
                                </div>
-                               <a href="reflectedLogs.php" class="small-box-footer">View Logs <i class="fas fa-arrow-circle-right"></i></a>
+                               <a href="Logs/reflectedLogs.php" class="small-box-footer">View Logs <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
 					    </div>
 					    <div class="col-sm-6 col-lg-3">

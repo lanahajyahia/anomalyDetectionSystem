@@ -1,42 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>nav bar</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
- 
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: transparent;
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content1 {
+  display: none;
+  position: fixed;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content1 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.navbar-title{
+  font-size:1.235em;
+}
+.navbar-title:hover{
+ color:white !important;
+}
+.navbar{
+  padding: 0px !important;
+  background: #333 !important;
+}
+.dropdown-content1 a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content1 {
+  display: block;
+}
+</style>
 </head>
 <body>
-
-<nav class="navbar" style="border-radius: 0px !important; margin-bottom: 0px !important; background:#333 !important;">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="dashboard.php">Anomaly Detection</a>
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+<div class="navbar-header">
+      <a class="navbar-brand" href="../dashboard.php">Anomaly Detection</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="dashboard.php">Dashboard</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Logs <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="Logs/sqliLogs.php">SQLi</a></li>
-          <li><a href="reflectedLogs.php">Reflected xss</a></li>
-          <li><a href="Logs/storedLogs.php">Stored xss</a></li>
-          <li><a href="Logs/domLogs.php">Dom xss</a></li>
-        </ul>
-      </li>
-      <li><a href="user.php">Users</a></li>
-      <li><a href="monitor.php">Website Monitor</a></li>
-    </ul>
-    <!--  if login show name + logout -->
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="..\multi_login\register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="..\multi_login\login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
+<ul>
+  <li><a href="../dashboard.php">Dashboard</a></li>
+  <li><a href="#news">Users</a></li>
+  <li><a href="Logs/sqliLogs.php">SQLi</a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Cross site scripting</a>
+    <div class="dropdown-content1">
+      <a href="Logs/reflectedLogs.php">Reflected</a>
+      <a href="Logs/storedLogs.php">Stored</a>
+      <a href="Logs/domLogs.php">DOM</a>
+    </div>
+  </li>
+</ul> 
+<ul class=" navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>   
+</div>
+
+
 </nav>
-
-
 </body>
-</html> 
+</html>

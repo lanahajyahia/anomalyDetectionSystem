@@ -1,7 +1,6 @@
 <?php
-require("core.php");
-include("navbar.php");
-
+require("../core.php");
+include("../navbar.php");
 // if (isset($_GET['delete-id'])) {
 //     $id    = (int) $_GET["delete-id"];
 //     $table = $prefix . 'logs';
@@ -13,7 +12,7 @@ include("navbar.php");
 //     $query = $mysqli->query("DELETE FROM `$table` WHERE type='SQLi'");
 // }
 ?>
-<div class="content-wrapper">
+<div class="content-wrapper"  style="margin-left: 0px !important;">
 
 			<!--CONTENT CONTAINER-->
 			<!--===================================================-->
