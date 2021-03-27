@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse" style="border-radius: 0px !important; margin-bottom: 0px !important">
+<nav class="navbar" style="border-radius: 0px !important; margin-bottom: 0px !important">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="dashboard.php">Anomaly Detection</a>
