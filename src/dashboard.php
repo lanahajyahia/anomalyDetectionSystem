@@ -7,7 +7,7 @@
 
 			<!--CONTENT CONTAINER-->
 			<!--===================================================-->
-			<div class="content-header">
+			<div class="content-header" style="padding-bottom: 0px !important;">
 
 				<div class="container-fluid">
 				  <div class="row mb-2">
@@ -78,15 +78,15 @@ echo "1";
 					    <div class="col-sm-6 col-lg-3">
 					        <div class="small-box bg-warning">
                                <div class="inner">
-                                   <h3><?php
+                                   <h3 style="color:white !important;"><?php
 echo "1";
 ?></h3>
-                                   <p>Dom XSS Attacks</p>
+                                   <p style="color:white !important;">Dom XSS Attacks</p>
                                </div>
                                <div class="icon">
                                    <i class="fas fa-keyboard"></i>
                                </div>
-                               <a href="domLogs.php" class="small-box-footer">View Logs <i class="fas fa-arrow-circle-right"></i></a>
+                               <a href="domLogs.php" class="small-box-footer" style="color:white !important;">View Logs <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
 					    </div>
 					</div>

@@ -16,7 +16,7 @@ include("../navbar.php");
 
 			<!--CONTENT CONTAINER-->
 			<!--===================================================-->
-			<div class="content-header">
+			<div class="content-header" style="padding-bottom: 0px !important;">
 				
 				<div class="container-fluid">
 				  <div class="row mb-2">
@@ -25,7 +25,7 @@ include("../navbar.php");
         		    </div>
         		    <div class="col-sm-6">
         		      <ol class="breadcrumb float-sm-right">
-        		        <li class="breadcrumb-item"><a href="dashboard.php"><i class="fas fa-home"></i> Admin Panel</a></li>
+        		        <!-- <li class="breadcrumb-item"><a href="dashboard.php"><i class="fas fa-home"></i> Admin Panel</a></li> -->
         		        <li class="breadcrumb-item active">SQL Injection Logs</li>
         		      </ol>
         		    </div>
@@ -43,7 +43,7 @@ include("../navbar.php");
                     
 				    <div class="card">
 						<div class="card-header">
-							<h3 class="card-title">SQL Injection Logs</h3>
+							<h3 class="card-title">Reports</h3>
 						</div>
 						<div class="card-body">
 
@@ -63,7 +63,7 @@ include("../navbar.php");
 										</tr>
 									</thead>
 									<tbody>
-<?php
+<!-- <?php
 $table = 'xss_detections';
 $sql   = $mysqli->query("SELECT id, type, date, time, response_header, description type FROM `$table` WHERE type='reflected' ORDER by id DESC");
 while ($row = mysqli_fetch_assoc($sql)) {
@@ -94,7 +94,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
 										</tr>
 ';
 }
-?>
+?> -->
 									</tbody>
 								    </table>
 

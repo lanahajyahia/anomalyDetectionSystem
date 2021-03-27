@@ -82,10 +82,10 @@ li.dropdown {
     </div>
   </li>
 </ul> 
-<?php  if (isset($_SESSION['success'])) : ?>
+<?php  if (!isset($_SESSION['success'])) : ?>
 <ul class=" navbar-right">
-      <li><a href="../multi_login/login.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="../multi_login/register.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="../multi_login/register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="../multi_login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>   
     <?php else : ?>
       <ul class=" navbar-right">

@@ -17,17 +17,17 @@ include("../navbar.php");
 
 			<!--CONTENT CONTAINER-->
 			<!--===================================================-->
-			<div class="content-header">
+			<div class="content-header" style="padding-bottom: 0px !important;">
 				
 				<div class="container-fluid">
 				  <div class="row mb-2">
         		    <div class="col-sm-6">
-        		      <h1 class="m-0 text-dark"><i class="fas fa-align-justify"></i> SQL Injection Logs</h1>
+        		      <h1 class="m-0 text-dark"><i class="fas fa-align-justify"></i> Reflected XSS</h1>
         		    </div>
         		    <div class="col-sm-6">
         		      <ol class="breadcrumb float-sm-right">
-        		        <li class="breadcrumb-item"><a href="dashboard.php"><i class="fas fa-home"></i> Admin Panel</a></li>
-        		        <li class="breadcrumb-item active">SQL Injection Logs</li>
+        		        <!-- <li class="breadcrumb-item"><a href="dashboard.php"><i class="fas fa-home"></i> Admin Panel</a></li> -->
+        		        <li class="breadcrumb-item active">Reflected XSS Logs</li>
         		      </ol>
         		    </div>
         		  </div>
@@ -44,7 +44,7 @@ include("../navbar.php");
                     
 				    <div class="card">
 						<div class="card-header">
-							<h3 class="card-title">SQL Injection Logs</h3>
+							<h3 class="card-title">Reports</h3>
 						</div>
 						<div class="card-body">
 
@@ -54,7 +54,7 @@ include("../navbar.php");
 									<thead>
 										<tr>
 								          <th><i class="fas fa-list-ol"></i> ID</th>
-						                  <th><i class="fas fa-user"></i> type</th>
+						                  <th><i class="fas fa-cog"></i> type</th>
 						                  <th><i class="fas fa-calendar"></i> Date</th>
 										  <th><i class="fas fa-globe"></i> Time</th>
 										  <th><i class="fas fa-desktop"></i> HTTP header</th>

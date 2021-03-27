@@ -1,12 +1,12 @@
 <?php
 namespace xss;
 
-include("models\xssDetection.php");
+include("../models/xssDetection.php");
 session_start();
 
 if(isset($_GET["name"] )){ 
      $url = getCurrentPageURL();
-     $xss_detection = new xssDetection();
+     $xss_detection = new models\xssDetection();
      $harm_string = "<IMG SRC=javascript:alert('XSS')>";
      $harmless_xss = $xss_detection->xss_clean($url);
    if($xss_detection->isXssFound() || strlen($harmless_xss) == 0 ){
