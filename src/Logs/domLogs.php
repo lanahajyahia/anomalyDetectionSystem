@@ -1,7 +1,7 @@
 <?php
 require("../core.php");
 include("../navbar.php");
-include("../server.php");
+require("../server.php");
 
 // if (isset($_GET['delete-id'])) {
 //     $id    = (int) $_GET["delete-id"];

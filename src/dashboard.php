@@ -1,6 +1,16 @@
 <?php
  require("core.php");
- //head();
+ require("server.php");
+
+ //count rhe number of specific injection
+function injection_count($table,$type)
+{
+	global $connection;
+	$sql = "SELECT * FROM '$table' WHERE type='$type'";
+	$result = $connection->query($sql);
+	return " ".$result->num_rows;
+
+ }
 ?>
 <div class="navv"><?php include("navbar.php");?></div>
 <div class="content-wrapper" style="margin-left: 0px !important;">
@@ -37,7 +47,8 @@
                             <div class="small-box bg-info">
                                <div class="inner">
                                    <h3><?php
-echo ' ' . $_SESSION["sqli_count"];
+								   
+echo ' ' . injection_count('SQL_injections','sqli');
 ?></h3>
                                    <p>SQLi Attacks</p>
                                </div>
@@ -51,7 +62,8 @@ echo ' ' . $_SESSION["sqli_count"];
 					        <div class="small-box bg-danger">
                                <div class="inner">
                                    <h3><?php
-echo ' ' . $_SESSION["reflected_count"];
+
+echo ' ' . injection_count('XSS_injections','reflected');
 ?></h3>
                                    <p>Reflected XSS Attacks</p>
                                </div>
@@ -65,7 +77,7 @@ echo ' ' . $_SESSION["reflected_count"];
 					        <div class="small-box bg-success">
                                <div class="inner">
                                    <h3><?php
-echo $_SESSION["stored_count"];
+echo ' ' . injection_count('XSS_injections', 'stored');
 ?></h3>
                                    <p>Stored XSS Attacks</p>
                                </div>
@@ -79,7 +91,7 @@ echo $_SESSION["stored_count"];
 					        <div class="small-box bg-warning">
                                <div class="inner">
                                    <h3 style="color:white !important;"><?php
-echo $_SESSION["dom_count"];
+echo ' ' . injection_count('XSS_injections', 'dom');
 ?></h3>
                                    <p style="color:white !important;">Dom XSS Attacks</p>
                                </div>

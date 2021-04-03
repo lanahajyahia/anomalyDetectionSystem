@@ -1,4 +1,7 @@
 <?php
+session_start();
+    include("server.php");
+    include("xssDetection.php");
     session_start();
     // Generate a token
     $genToken = substr(str_shuffle(md5(microtime())), 0, 16);
