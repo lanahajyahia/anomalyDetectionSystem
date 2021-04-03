@@ -55,34 +55,29 @@ include("../server.php");
 									<thead>
 										<tr>
 								          <th><i class="fas fa-list-ol"></i> ID</th>
-						                  <th><i class="fas fa-cog"></i> type</th>
 						                  <th><i class="fas fa-calendar"></i> Date</th>
 										  <th><i class="fas fa-globe"></i> Time</th>
 										  <th><i class="fas fa-desktop"></i> HTTP header</th>
+										  <th><i class="fas fa-cog"></i> HTTP method</th>
 						                  <th><i class="fas fa-bomb"></i> Description</th>
 										</tr>
 									</thead>
 									<tbody>
 <?php
-$table = 'xss_detections';
-$sql   = $conn->query("SELECT id, type, date, time, response_header, description FROM `$table` WHERE type='reflected'");
-if ($sql->num_rows > 0) {
-	$_SESSION["reflected_count"] = $sql->num_rows;
+$table = 'XSS_injections';
+$sql   = $connection->query("SELECT id, date, time, http_url, http_method, description FROM `$table` WHERE type='reflected'");
 while ($row = mysqli_fetch_assoc($sql)) {
     echo '
 										<tr>
                                           <td>' . $row['id'] . '</td>
-						                  <td>' . $row['type'] . '</td>
 						                  <td>' . $row['date'] . '</td>
                                           <td>' . $row['time'] . '</td>
-						                  <td>' . $row['response_header'] . '</td>
+						                  <td>' . $row['http_url'] . '</td>
+										  <td>' . $row['http_method'] . '</td>
                                           <td>' . $row['description'] . '</td>
 								
 										</tr>
     ';
-}
-}else{
-	$_SESSION["reflected_count"] = 0;
 }
 ?> 
 									</tbody>

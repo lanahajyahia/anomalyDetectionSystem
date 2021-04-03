@@ -89,7 +89,7 @@ li.dropdown {
     </ul>   
     <?php else : ?>
       <ul class=" navbar-right">
-      <li><a href="../multi_login/account.php"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username']; ?> </a></li>
+      <li><a href="../multi_login/account.php"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['firstname']; ?> </a></li>
       <li><a href="../multi_login/signout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul> 
 <?php endif; ?>

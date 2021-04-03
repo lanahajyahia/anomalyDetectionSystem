@@ -16,12 +16,16 @@ if (!$link) {
 $sql = 'CREATE DATABASE '. $dbname;
 
 if ($link->query($sql) === TRUE) {
-  echo "Database created successfully";
+  //echo "Database created successfully";
   $connection = new mysqli($servername, $username, $password,$dbname);
   createUsersTable();
+  createSQLiTable();
+  createXSSInjectionsTable();
     
 } else {
-  echo "Error creating database: " . $link->error;
+ // echo "Error creating database: " . $link->error;
+  // if database exist connect to it
+  $connection = new mysqli($servername, $username, $password,$dbname);
 }
 
 //mysql_close($link);
@@ -40,59 +44,49 @@ function createUsersTable() {
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )";
     if ($connection->query($sql_user) === TRUE) {
-      echo "Table MyGuests created successfully";
+     // echo "Table USERS created successfully";
     } else {
-      echo "Error creating table: " . $connection->error;
+      //echo "Error creating table: " . $connection->error;
     }
     
 }
 function createXSSInjectionsTable() {
+  global $connection;
+  $sql_xss =  "CREATE TABLE XSS_injections (
+    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    date VARCHAR(30) NOT NULL,
+    time VARCHAR(50) NOT NULL,
+    http_url VARCHAR(500) NOT NULL,
+    http_method VARCHAR(50) NOT NULL, -- get or post
+    description VARCHAR(250) NOT NULL, -- description of injection
+    type VARCHAR(50) NOT NULL -- reflected / dom / stored / sqli
+    )";
+    if ($connection->query($sql_xss) === TRUE) {
+   //   echo "Table XSS  created successfully";
+    } else {
+     // echo "Error creating table: " . $connection->error;
+    }
+    
 }
 function createSQLiTable() {
+  global $connection;
+  $sql_sqli =  "CREATE TABLE SQL_injections (
+    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    date VARCHAR(30) NOT NULL,
+    time VARCHAR(50) NOT NULL,
+    http_url VARCHAR(500) NOT NULL,
+    http_method VARCHAR(50) NOT NULL, -- get or post
+    description VARCHAR(250) NOT NULL, -- description of injection
+    type VARCHAR(50) NOT NULL -- reflected / dom / stored / sqli
+    )";
+    if ($connection->query($sql_sqli) === TRUE) {
+     // echo "Table SQL created successfully";
+    } else {
+     // echo "Error creating table: " . $connection->error;
+    }
 }
-?>
  
  
  
  
  
- 
- <!-- <?php
-session_start(); 
-
-$servername = "db";
-$username = "root";
-$password = "example";
-$dbname = "anomalyDetection";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-if(isset($_SESSION["alert"])){
-$alert= $_SESSION["alert"];
-$type = $_SESSION["injection_type"];
-$desc = $_SESSION["injection_description"];
-$date = $_SESSION["injection_date"];
-$time = $_SESSION["injection_time"];
-$url =$_SESSION["injection_url"];
-$sql = "INSERT INTO xss_detections (type, date,time,response_header, description)
-VALUES ('$type','$date','$time','$url', '$desc')";
-
-if ($conn->query($sql) === TRUE) {
-//   echo "New record created successfully";
-  unset( $_SESSION["alert"]);
-  unset($_SESSION["injection_url"]);
-  unset($_SESSION["injection_time"]);
-  unset($_SESSION["injection_date"]);
-  unset($_SESSION["injection_description"]);
-  unset($_SESSION["injection_type"]);
-
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}}
-
-//$conn->close();
-?>  -->

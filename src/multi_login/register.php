@@ -10,6 +10,12 @@
 
 <form class="formdiv" method="post" action="register.php">
 <?php echo display_error(); ?>
+<div class="input-group">
+		<input type="firstname" placeholder="First Name" name="firstname">
+	</div>
+	<div class="input-group">
+		<input type="lastname" placeholder="Last name" name="lastname">
+	</div>
 	<div class="input-group">
 		<input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
 	</div>
