@@ -1,4 +1,63 @@
 <?php
+//phpinfo();
+session_start(); 
+
+$servername = "db";
+$username = "root";
+$password = "example";
+$dbname = "anomalyDetection";
+
+// Connect to MySQL // crate dbabase if not already exist
+$link = new mysqli($servername, $username, $password);
+if (!$link) {
+    die('Could not connect: ' . mysql_error());
+}
+// Create database
+$sql = 'CREATE DATABASE '. $dbname;
+
+if ($link->query($sql) === TRUE) {
+  echo "Database created successfully";
+  $connection = new mysqli($servername, $username, $password,$dbname);
+  createUsersTable();
+    
+} else {
+  echo "Error creating database: " . $link->error;
+}
+
+//mysql_close($link);
+
+// functions for table creation
+function createUsersTable() {
+  global $connection;
+  $sql_user =  "CREATE TABLE Users (
+    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(30) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    user_type VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+    if ($connection->query($sql_user) === TRUE) {
+      echo "Table MyGuests created successfully";
+    } else {
+      echo "Error creating table: " . $connection->error;
+    }
+    
+}
+function createXSSInjectionsTable() {
+}
+function createSQLiTable() {
+}
+?>
+ 
+ 
+ 
+ 
+ 
+ 
+ <!-- <?php
 session_start(); 
 
 $servername = "db";
@@ -36,4 +95,4 @@ if ($conn->query($sql) === TRUE) {
 }}
 
 //$conn->close();
-?>
+?>  -->

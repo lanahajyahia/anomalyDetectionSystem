@@ -18,10 +18,10 @@ Anomaly Detection System</h1></div>
 		<?php echo display_error(); ?>
 
 		<div class="input-group">
-			<input type="text" name="username" placeholder="username">
+			<input type="text" name="username" placeholder="Username or Email">
 		</div>
 		<div class="input-group">
-			<input type="password" name="password" placeholder="password">
+			<input type="password" name="password" placeholder="Password">
 		</div>
 		<div class="input-group">
 			<button type="submit" class="btn" name="login_btn">Log In</button>
