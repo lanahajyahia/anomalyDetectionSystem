@@ -41,6 +41,8 @@ function createUsersTable() {
     lastname VARCHAR(50) NOT NULL,
     user_type VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
+    code mediumint(50) NOT NULL,
+    status text NOT NULL,
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )";
     if ($connection->query($sql_user) === TRUE) {

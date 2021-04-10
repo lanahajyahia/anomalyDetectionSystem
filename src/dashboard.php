@@ -98,7 +98,7 @@ echo ' ' . injection_count('XSS_injections', 'dom');
                                <div class="icon">
                                    <i class="fas fa-keyboard"></i>
                                </div>
-                               <a href="domLogs.php" class="small-box-footer" style="color:white !important;">View Logs <i class="fas fa-arrow-circle-right"></i></a>
+                               <a href="Logs\domLogs.php" class="small-box-footer" style="color:white !important;">View Logs <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
 					    </div>
 					</div>
