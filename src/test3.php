@@ -31,12 +31,6 @@
 
     // API area
     if(isset($_GET['api'])) {
-        // $genLink = '<br /><a class="btn btn-info" href="packet.php?rq=' . $genToken . '&inspect" role="button">Generate Url</a>';
-
-        // $getTpl = file_get_contents("req.tpl.html");
-        // $getTpl = str_replace("REQ_URL", "", $getTpl);
-        // $getTpl = str_replace("CURRENT_HERE", $genLink, $getTpl);
-        // echo $getTpl;
         // Create a bin
         if(isset($_GET['create'])) {
             // Save the url
@@ -113,7 +107,7 @@
         $urlTpl .= '</div>';
         $urlTpl .= '</div>';
 
-        // Button export data + clear log
+        // Button
         $urlTpl .= '<div class="col-md-2">';
         $urlTpl .= '<a href="?export=' . $_GET['rq'] . '"><img height="32" src="export.png" alt="Export Data" /></a>';
         $urlTpl .= '<a class="btn btn-light" href="packet.php?rq=' . $_GET['rq'] . '&clear" style="margin-left:26px;" role="button">Clear Log</a>';

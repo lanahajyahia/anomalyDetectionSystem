@@ -87,9 +87,28 @@ function register(){
 	}
 	if (empty($email)) { 
 		array_push($errors, "Email is required"); 
+	}else{
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			array_push($errors, "Email is not valid!");
+		}
 	}
 	if (empty($password_1)) { 
 		array_push($errors, "Password is required"); 
+	}else{
+		// Validate password strength
+       $uppercase = preg_match('@[A-Z]@', $password_1);
+       $lowercase = preg_match('@[a-z]@', $password_1);
+       $number    = preg_match('@[0-9]@', $password_1);
+       $specialChars = preg_match('@[^\w]@', $password_1);
+
+       if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password_1) < 8) {
+	     	 array_push($errors, "Password should be:");
+			 array_push($errors, "*at least 8 characters in length");
+			 array_push($errors, "*include at least one upper case letter");
+			 array_push($errors, "*one number");
+			 array_push($errors, "*one special character");
+	    }
+      
 	}
 	if ($password_1 != $password_2) {
 		array_push($errors, "The two passwords do not match");
@@ -147,7 +166,7 @@ function getUserById($id){
 	return $user;
 }
 
-// escape string
+// escape string specail chars if any 
 function e($val){
 	global $connection;
 	return mysqli_real_escape_string($connection, trim($val));

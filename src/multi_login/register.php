@@ -8,7 +8,7 @@
 </head>
 <body class="register">
 
-<form class="formdiv" method="post" action="register.php">
+<form class="formdiv" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <?php echo display_error(); ?>
 <div class="input-group">
 		<input type="firstname" placeholder="First Name" name="firstname">
