@@ -40,7 +40,6 @@ require("server.php");
 						</div>
 						<div class="card-body">
 
-                                   <a href="delete-all.php" class="btn btn-flat btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
                                     
 <table id="dt-basic" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
@@ -66,8 +65,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                           <td>' . $row['email'] . '</td>
 						                  <td>' . $row['username'] . '</td>
 										  <td>' . $row['user_type'] . '</td>
-                                          <td>' . $row['reg_date'] . '</td>
-								
+                                          <td>' . $row['reg_date'] . '</td>								
 										</tr>
     ';
 }
@@ -79,7 +77,9 @@ while ($row = mysqli_fetch_assoc($sql)) {
                      </div>
                 </div>
                 <div class="panel-heading">
-                   <a href="exportData.php" class="btn btn-success pull-right">Export to excel</a>
+                <a href="delete-all.php" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
+
+                <a href="exportData.php" class="btn btn-success pull-right">Export to excel</a>
                 </div>
 				</div>
                     

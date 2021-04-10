@@ -18,7 +18,7 @@ $sql = 'CREATE DATABASE '. $dbname;
 if ($link->query($sql) === TRUE) {
   //echo "Database created successfully";
   $connection = new mysqli($servername, $username, $password,$dbname);
-  createUsersTable();
+ createUsersTable();
   createSQLiTable();
   createXSSInjectionsTable();
     

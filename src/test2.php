@@ -3,9 +3,8 @@ namespace xss;
 session_start();
 include("server.php");
 include("xssDetection.php");
-
-if(isset($_GET["name"] )){ 
-     $url = getCurrentPageURL();
+if(isset($_SESSION["body-url"])){ 
+     $url = urldecode($_SESSION["body-url"]);
      $xss_detection = new xssDetection();
      $harm_string = "<IMG SRC=javascript:alert('XSS')>";
      $harmless_xss = $xss_detection->xss_clean($url);
@@ -18,7 +17,6 @@ if(isset($_GET["name"] )){
       $_SESSION["injection_url"] = $url;
       header('location: testfile.php');
    }
-
 }
 function getCurrentPageURL()
 {
@@ -54,9 +52,8 @@ function test_input($data) {
 <div class="row">
  <?php echo $url;
    echo "</br>";  
- echo $harmless_xss;
  echo "</br>";  
- echo $ $harm_string ;?>
+ echo  $_SESSION["body-url"] . "hi" ;?>
 </div>
 
 </body>
