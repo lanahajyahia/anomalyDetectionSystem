@@ -144,6 +144,7 @@ function register(){
 		$password = md5($password_1);//encrypt the password before saving in the database
 		$code = rand(999999, 111111);
         $status = "notverified";
+		
 		// if (isset($_POST['user_type'])) {
 			$user_type = e($_POST['user_type']);
 			$query = "INSERT INTO Users (username, email, firstname, lastname, user_type, password,code,status) 

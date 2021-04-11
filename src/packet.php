@@ -1,7 +1,5 @@
 <?php
     session_start();
-    require("test2.php");
-    session_start();
     // Generate a token
     $genToken = substr(str_shuffle(md5(microtime())), 0, 16);
 
