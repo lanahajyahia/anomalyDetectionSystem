@@ -188,9 +188,9 @@ function register(){
     //if user click verification code submit button
     if(isset($_POST['check'])){
         $_SESSION['info'] = "";
-        $otp_code = mysqli_real_escape_string($con, $_POST['otp']);
+        $otp_code = mysqli_real_escape_string($connection, $_POST['otp']);
         $check_code = "SELECT * FROM Users WHERE code = $otp_code";
-        $code_res = mysqli_query($con, $check_code);
+        $code_res = mysqli_query($connection, $check_code);
         if(mysqli_num_rows($code_res) > 0){
             $fetch_data = mysqli_fetch_assoc($code_res);
             $fetch_code = $fetch_data['code'];
@@ -198,11 +198,11 @@ function register(){
             $code = 0;
             $status = 'verified';
             $update_otp = "UPDATE Users SET code = $code, status = '$status' WHERE code = $fetch_code";
-            $update_res = mysqli_query($con, $update_otp);
+            $update_res = mysqli_query($connection, $update_otp);
             if($update_res){
                 $_SESSION['name'] = $name;
                 $_SESSION['email'] = $email;
-                header('location: index.php');
+                header('location: ../index.php');
                 exit();
             }else{
                 $errors['otp-error'] = "Failed while updating code!";

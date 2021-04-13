@@ -4,6 +4,7 @@
 */
 declare(strict_types=1);
 namespace xss;
+
 use const ENT_DISALLOWED;
 use const ENT_HTML5;
 use const ENT_QUOTES;
