@@ -1,4 +1,4 @@
-# anomalyDetectionSystem
+# Anomaly Detection System
 web applications anomaly detection.
 run:
  docker-compose up -d
