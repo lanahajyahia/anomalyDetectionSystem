@@ -4,8 +4,7 @@ run:<br/>
  docker-compose up -d<br/>
 shutdown:<br/>
  docker-compose down<br/>
- <br/>
- <br/>
+ 
  # Alogorithm requirements
   A Proxy System that stands between the server and web sites, listens to HTTP requests.<br/>
    takes each HTTP request as a string decodes it and search for injection pattern in real-time.
