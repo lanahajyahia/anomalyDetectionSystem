@@ -9,7 +9,7 @@ shutdown:<br/>
   A Proxy System that stands between the server and web sites, listens to HTTP requests.<br/>
    takes each HTTP request as a string decodes it and search for injection pattern in real-time.
    if injection found we send an email alert to the user with the injection details.
-   (http request, type(xss,sqli), time, date)
+   (http request, type(xss reflected, xss stored, sqli), time, date)
    <br/>
     - the system only detects injections it don't prevent.<br/>
     - the system detects 70% of injections.<br/>
