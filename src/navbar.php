@@ -70,8 +70,8 @@ li.dropdown {
       <a class="navbar-brand" href="../dashboard.php">Anomaly Detection</a>
     </div>
 <ul>
-  <li><a href="../dashboard.php">Dashboard</a></li>
-  <li><a href="../users.php">Users</a></li>
+  <li><a href="../../dashboard.php">Dashboard</a></li>
+  <li><a href="../../users.php">Users</a></li>
   <li><a href="../Logs/sqliLogs.php">SQLi</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Cross site scripting</a>
