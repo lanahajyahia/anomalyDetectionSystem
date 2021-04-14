@@ -7,9 +7,11 @@ shutdown:<br/>
  <br/>
  <br/>
  # Alogorithm requirements
- 1. A Proxy System that stands between the server and web sites, listens to HTTP requests.<br/>
- takes each HTTP request as a string decodes it and search for injection pattern in real-time.
- if injection found we send an email alert to the user. 
+  A Proxy System that stands between the server and web sites, listens to HTTP requests.<br/>
+   takes each HTTP request as a string decodes it and search for injection pattern in real-time.
+   if injection found we send an email alert to the user with the injection details.
+   (http request, type(xss,sqli), time, date)
+    ** the system only detects injections it don't prevent
  
  # UI 
  - user and admin registration
