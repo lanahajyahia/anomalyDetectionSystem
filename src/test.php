@@ -81,8 +81,3 @@ if ($conn->query($sql) === TRUE) {
 </body>
 </html> -->
 
-
-
-Fatal error: Uncaught Error: Call to a member function query() on null in /var/www/html/dashboard.php:8 
-Stack trace: #0 /var/www/html/dashboard.php(49): injection_count('SQL_injections', 'sqli') 
-#1 {main} thrown in /var/www/html/dashboard.php on line 8

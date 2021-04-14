@@ -23,12 +23,12 @@ if (isset($_GET['delete-all'])) {
 				<div class="container-fluid">
 				  <div class="row mb-2">
         		    <div class="col-sm-6">
-        		      <h1 class="m-0 text-dark"><i class="fas fa-align-justify"></i> System Users</h1>
+        		      <h1 class="m-0 text-dark"><i class="fas fa-users"></i> System Users</h1>
         		    </div>
         		    <div class="col-sm-6">
         		      <ol class="breadcrumb float-sm-right">
         		        <!-- <li class="breadcrumb-item"><a href="dashboard.php"><i class="fas fa-home"></i> Admin Panel</a></li> -->
-        		        <li class="breadcrumb-item active">Users</li>
+        		        <li class="breadcrumb-item active">Admin Page / Users</li>
         		      </ol>
         		    </div>
         		  </div>
@@ -150,7 +150,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
 <?php
 include("footer.php");
 ?>
-<!-- <script>
+<script>
 $(document).ready(function() {
 
 	$('#dt-basic').dataTable( {
@@ -164,4 +164,4 @@ $(document).ready(function() {
 		}
 	} );
 } );
-</script>     -->
+</script>    
