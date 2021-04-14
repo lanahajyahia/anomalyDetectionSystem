@@ -10,7 +10,11 @@ shutdown:<br/>
    takes each HTTP request as a string decodes it and search for injection pattern in real-time.
    if injection found we send an email alert to the user with the injection details.
    (http request, type(xss,sqli), time, date)
-    ** the system only detects injections it don't prevent
+   <br/>
+    - the system only detects injections it don't prevent.
+    - the system detects 70% of injections.
+    - the system detects injection in time close to real-time of the attack.
+    
  
  # UI 
  - user and admin registration
