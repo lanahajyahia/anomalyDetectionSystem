@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include("../server.php");
+include("server.php");
 // connect to database
 // $db = mysqli_connect('db', 'root', 'example', 'anomalyDetection');
 
@@ -47,13 +47,15 @@ function login(){
 			if ($logged_in_user['user_type'] == 'admin') {
 
 				$_SESSION['user'] = $logged_in_user;
+				
 				$_SESSION['success']  = "You are now logged in";
-				header('location: admin/home.php');		  
+				// echo '' . $_SESSION['user']['fullname'];
+				 header('location: admin/dashboard.php');		  
 			}else{
 				$_SESSION['user'] = $logged_in_user;
 				$_SESSION['success']  = "You are now logged in";
 
-				header('location: ../index.php');
+				header('location: user/dashboard.php');
 			}
 		}else {
 			array_push($errors, "Wrong username/password combination");

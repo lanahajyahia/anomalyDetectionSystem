@@ -50,9 +50,9 @@ function createUsersTable() {
     } else {
       //echo "Error creating table: " . $connection->error;
     }
-   
+     $pass = md5('admin');
      $sql = "INSERT INTO Users (username, email, fullname, user_type, password,code,status) 
-     VALUES('admin', 'admin@admin.com','admin', 'admin', 'admin',1111,'x')";
+     VALUES('admin', 'admin@admin.com','admin', 'admin','$pass',1111,'x')";
      if (mysqli_query($connection, $sql)) {
       echo "New record created successfully";
     } else {

@@ -19,7 +19,7 @@ li a, .dropbtn {
   color: white;
   text-align: center;
   padding: 14px 16px;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 li a:hover, .dropdown:hover .dropbtn {
@@ -67,32 +67,29 @@ li.dropdown {
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
 <div class="navbar-header" style="padding-left: 0.5em !important">
-      <a class="navbar-brand" href="../dashboard.php">Anomaly Detection</a>
+      <a class="navbar-brand" href="../admin/dashboard.php">Anomaly Detection</a>
     </div>
 <ul>
-  <li><a href="../../dashboard.php">Dashboard</a></li>
-  <li><a href="../../users.php">Users</a></li>
-  <li><a href="../Logs/sqliLogs.php">SQLi</a></li>
+  
+  <li><a href="../admin/dashboard.php">Dashboard</a></li>
+  <li><a href="../admin/users.php">Users</a></li>
+  <li><a href="../admin/Logs/sqliLogs.php">SQL Injection</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Cross site scripting</a>
     <div class="dropdown-content1">
-      <a href="../Logs/reflectedLogs.php">Reflected</a>
-      <a href="../Logs/storedLogs.php">Stored</a>
-      <a href="../Logs/domLogs.php">DOM</a>
+      <a href="../admin/Logs/reflectedLogs.php">Reflected</a>
+      <a href="../admin/Logs/storedLogs.php">Stored</a>
     </div>
   </li>
+  <li><a href="../admin/Logs/csrfLogs.php">CSRF</a></li>
+  <li><a href="../../dashboard.php">About</a></li>
 </ul> 
-<?php  if (!isset($_SESSION['success'])) : ?>
-<ul class=" navbar-right">
-      <li><a href="../multi_login/register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="../multi_login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>   
-    <?php else : ?>
+
       <ul class=" navbar-right">
-      <li><a href="../multi_login/account.php"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['firstname']; ?> </a></li>
-      <li><a href="../multi_login/signout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="../multi_login/account.php"><span class="glyphicon glyphicon-user"></span> <?php  echo $_SESSION['user']['username']; ?> </a></li>
+      <li><a href="../login.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul> 
-<?php endif; ?>
+
      
 </div>
 

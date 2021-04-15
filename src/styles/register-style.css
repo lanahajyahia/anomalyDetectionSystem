@@ -10,6 +10,9 @@
     /* padding-top: 72px; */
 	
 } 
+button {
+	font-family: SFProDisplay-Bold, Helvetica, Arial, sans-serif  !important;
+}
 .register ,.create-user {
 	/* font-size: 120%; */
 	background: #F8F8FF;
@@ -92,7 +95,7 @@
     line-height: 48px;
     padding: 0 16px;
     width: 100%;
-	font-family: inherit;
+	font-family: SFProDisplay-Bold, Helvetica, Arial, sans-serif !important;
 	color: #fff;
 	cursor: pointer;
     display: inline-block;

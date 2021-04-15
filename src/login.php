@@ -27,7 +27,7 @@ Anomaly Detection System</h1></div>
 			<button type="submit" class="btn" name="login_btn">Log In</button>
 		</div>
 		<p>
-			Not yet a member? <a href="register.php">Sign up</a>
+		 <a style="color: #7596c8; font-family: 'Roboto-Regular', 'Helvetica', 'sans-serif';  font-size: 14px;  line-height: 16px; text-decoration: none;" href="register.php">Forgot Password?</a>
 		</p>
 	</form>
 	</div>
