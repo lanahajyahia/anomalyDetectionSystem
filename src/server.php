@@ -37,8 +37,7 @@ function createUsersTable() {
     id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    firstname VARCHAR(50) NOT NULL,
-    lastname VARCHAR(50) NOT NULL,
+    fullname VARCHAR(100) NOT NULL,
     user_type VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     code mediumint(50) NOT NULL,
@@ -47,10 +46,18 @@ function createUsersTable() {
     )";
     if ($connection->query($sql_user) === TRUE) {
      // echo "Table USERS created successfully";
+    
     } else {
       //echo "Error creating table: " . $connection->error;
     }
-    
+   
+     $sql = "INSERT INTO Users (username, email, fullname, user_type, password,code,status) 
+     VALUES('admin', 'admin@admin.com','admin', 'admin', 'admin',1111,'x')";
+     if (mysqli_query($connection, $sql)) {
+      echo "New record created successfully";
+    } else {
+      echo "Error: " . $sql . "<br>" . mysqli_error($connection);
+    }
 }
 function createXSSInjectionsTable() {
   global $connection;

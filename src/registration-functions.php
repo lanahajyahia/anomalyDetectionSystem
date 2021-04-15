@@ -10,7 +10,7 @@ $email    = "";
 $errors   = array(); 
 
 // call the register() function if register_btn is clicked
-if (isset($_POST['register_btn'])) {
+if (isset($_POST['add_user'])) {
 	register();
 }
 // call the login() function if register_btn is clicked
@@ -68,24 +68,24 @@ function register(){
 
 	// receive all input values from the form. Call the e() function
     // defined below to escape form values
-	$firstname   =  e($_POST['firstname']);
-	$lastname    =  e($_POST['lastname']);
+	$fullname   =   e($_POST['fullname']);
 	$username    =  e($_POST['username']);
 	$email       =  e($_POST['email']);
 	$password_1  =  e($_POST['password_1']);
 	$password_2  =  e($_POST['password_2']);
+	$user_type =    $_POST['usertype'];
 
 	// form validation: ensure that the form is correctly filled
-	if (empty($firstname)) { 
-		array_push($errors, "Firstname is required"); 
-	}else if(strlen($firstname) < 3){
-		array_push($errors,"Firstname must have at least 3 characters");
+	if (empty($fullname)) { 
+		array_push($errors, "Name is required"); 
+	}else if(strlen($fullname) < 3){
+		array_push($errors,"Name must have at least 3 characters");
 	}
-	if (empty($lastname)) { 
-		array_push($errors, "Lastname is required"); 
-	}else if(strlen($lastname) < 3){
-		array_push($errors,"Lastname must have at least 3 characters");
+	if (empty($user_type)) { 
+		array_push($errors, "User type is required"); 
 	}
+	
+	
 	if (empty($username)) { 
 		array_push($errors, "Username is required"); 
 	}else{
@@ -146,24 +146,24 @@ function register(){
         $status = "notverified";
 		
 		// if (isset($_POST['user_type'])) {
-			$user_type = e($_POST['user_type']);
-			$query = "INSERT INTO Users (username, email, firstname, lastname, user_type, password,code,status) 
-					  VALUES('$username', '$email','$firstname','$lastname', '$user_type', '$password','$code','$status')";
+			// $user_type = e($_POST['user_type']);
+			$query = "INSERT INTO Users (username, email, fullname, user_type, password,code,status) 
+					  VALUES('$username', '$email','$fullname', '$user_type', '$password','$code','$status')";
 			$data_check = mysqli_query($connection, $query);
 			if($data_check){
 				$subject = "Email Verification Code";
 				$message = "Your verification code is $code";
 				$sender = "From: anomalydetectionregister@gmail.com";
-				if(mail($email, $subject, $message, $sender)){
-					$info = "We've sent a verification code to your email - $email";
-					$_SESSION['info'] = $info;
-					$_SESSION['email'] = $email;
-					$_SESSION['password'] = $password;
-					header('location: user-otp.php');
-					exit();
-				}else{
-					array_push($errors,"Failed while sending code!");
-				}
+				// if(mail($email, $subject, $message, $sender)){
+				// 	$info = "We've sent a verification code to your email - $email";
+				// 	$_SESSION['info'] = $info;
+				// 	$_SESSION['email'] = $email;
+				// 	$_SESSION['password'] = $password;
+				// 	header('location: user-otp.php');
+				// 	exit();
+				// }else{
+				// 	array_push($errors,"Failed while sending code!");
+				// }
 			$_SESSION['success']  = "New user successfully created!!";
 		}else{
 			array_push($errors,"Failed while inserting data into database!");
@@ -240,6 +240,7 @@ function display_error() {
 		echo '</div>';
 	}
 }
+
 
 function isLoggedIn()
 {
