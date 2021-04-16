@@ -12,5 +12,3 @@
 	
 	 
 	header('location: login.php');
-
-?>

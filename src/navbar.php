@@ -65,6 +65,10 @@ li.dropdown {
  .navbar-div {
     display: initial;
 } 
+.username-nav{
+  padding-top: 14px;
+    color: white;
+}
 </style>
 </head>
 <body>
@@ -100,7 +104,7 @@ li.dropdown {
 </ul> 
 
       <ul class=" navbar-right">
-      <li><a href="../multi_login/account.php"><span class="glyphicon glyphicon-user"></span> <?php  echo $_SESSION['user']['username']; ?> </a></li>
+      <li class="username-nav"><?php  echo $_SESSION['user']['username']; ?></li>
       <li><a href="../login.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul> 
 

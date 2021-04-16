@@ -1,22 +1,24 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 include("server.php");
 ?>
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h2>HTML Forms</h2>
+	<h2>HTML Forms</h2>
 
-<form action="..\test2.php" method="get">
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="name" value="John"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="name" value="Doe"><br><br>
-  <input type="submit" value="Submit">
-</form> 
+	<form action="..\test2.php" method="get">
+		<label for="fname">First name:</label><br>
+		<input type="text" id="fname" name="name" value="John"><br>
+		<label for="lname">Last name:</label><br>
+		<input type="text" id="lname" name="name" value="Doe"><br><br>
+		<input type="submit" value="Submit">
+	</form>
 
 </body>
+
 </html>
 
 <?php
@@ -35,60 +37,60 @@ require("../server.php");
 //     $query = $mysqli->query("DELETE FROM `$table` WHERE type='SQLi'");
 // }
 ?>
-<div class="content-wrapper"  style="margin-left: 0px !important;">
+<div class="content-wrapper" style="margin-left: 0px !important;">
 
-			<!--CONTENT CONTAINER-->
-			<!--===================================================-->
-			<div class="content-header" style="padding-bottom: 0px !important;">
-				
-				<div class="container-fluid">
-				  <div class="row mb-2">
-        		    <div class="col-sm-6">
-        		      <h1 class="m-0 text-dark"><i class="fas fa-align-justify"></i> Reflected XSS</h1>
-        		    </div>
-        		    <div class="col-sm-6">
-        		      <ol class="breadcrumb float-sm-right">
-        		        <!-- <li class="breadcrumb-item"><a href="dashboard.php"><i class="fas fa-home"></i> Admin Panel</a></li> -->
-        		        <li class="breadcrumb-item active">Stored XSS Logs</li>
-        		      </ol>
-        		    </div>
-        		  </div>
-    			</div>
-            </div>
+	<!--CONTENT CONTAINER-->
+	<!--===================================================-->
+	<div class="content-header" style="padding-bottom: 0px !important;">
 
-				<!--Page content-->
-				<!--===================================================-->
-				<div class="content">
-				<div class="container-fluid">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0 text-dark"><i class="fas fa-align-justify"></i> Reflected XSS</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<!-- <li class="breadcrumb-item"><a href="dashboard.php"><i class="fas fa-home"></i> Admin Panel</a></li> -->
+						<li class="breadcrumb-item active">Stored XSS Logs</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                <div class="row">
+	<!--Page content-->
+	<!--===================================================-->
+	<div class="content">
+		<div class="container-fluid">
+
+			<div class="row">
 				<div class="col-md-12">
-                    
-				    <div class="card">
+
+					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title">Reports</h3>
 						</div>
 						<div class="card-body">
-                                    
-<table id="dt-basic" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-									<thead>
-										<tr>
-								          <th><i class="fas fa-list-ol"></i> ID</th>
-						                  <th><i class="fas fa-calendar"></i> Date</th>
-										  <th><i class="fas fa-globe"></i> Time</th>
-										  <th><i class="fas fa-desktop"></i> HTTP header</th>
-										  <th><i class="fas fa-cog"></i> HTTP method</th>
-										  <!-- <th><i class="fas fa-map"></i> injection</th> -->
-						                  <th><i class="fas fa-bomb"></i> Description</th>
-										  <!-- <th><i class="fas fa-cog"></i> Actions</th> -->
-										</tr>
-									</thead>
-									<tbody>
-<?php
-$table = 'XSS_injections';
-$sql   = $connection->query("SELECT id, date, time, http_url, http_method, description FROM `$table` WHERE type='reflected'");
-while ($row = mysqli_fetch_assoc($sql)) {
-    echo '
+
+							<table id="dt-basic" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th><i class="fas fa-list-ol"></i> ID</th>
+										<th><i class="fas fa-calendar"></i> Date</th>
+										<th><i class="fas fa-globe"></i> Time</th>
+										<th><i class="fas fa-desktop"></i> HTTP header</th>
+										<th><i class="fas fa-cog"></i> HTTP method</th>
+										<!-- <th><i class="fas fa-map"></i> injection</th> -->
+										<th><i class="fas fa-bomb"></i> Description</th>
+										<!-- <th><i class="fas fa-cog"></i> Actions</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									$table = 'XSS_injections';
+									$sql   = $connection->query("SELECT id, date, time, http_url, http_method, description FROM `$table` WHERE type='reflected'");
+									while ($row = mysqli_fetch_assoc($sql)) {
+										echo '
 										<tr>
                                           <td>' . $row['id'] . '</td>
 						                  <td>' . $row['date'] . '</td>
@@ -99,29 +101,29 @@ while ($row = mysqli_fetch_assoc($sql)) {
 								
 										</tr>
     ';
-}
-?> 
-									</tbody>
-								    </table>
+									}
+									?>
+								</tbody>
+							</table>
 
-                        </div>
-                     </div>
-                </div>
+						</div>
+					</div>
+				</div>
 				<div class="panel-heading">
-                <a href="delete-all.php" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
+					<a href="delete-all.php" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
 
-                <a href="exportData.php" class="btn btn-success pull-right">Export to excel</a>
-                </div>
+					<a href="exportData.php" class="btn btn-success pull-right">Export to excel</a>
 				</div>
-                    
-				</div>
-				</div>
-				<!--===================================================-->
-				<!--End page content-->
-
 			</div>
-			<!--===================================================-->
-			<!--END CONTENT CONTAINER-->
+
+		</div>
+	</div>
+	<!--===================================================-->
+	<!--End page content-->
+
+</div>
+<!--===================================================-->
+<!--END CONTENT CONTAINER-->
 </div>
 <?php
 include("../footer.php");
