@@ -18,6 +18,12 @@ if (isset($_POST['login_btn'])) {
 	login();
 }
 
+// call function isUserVerified() if sumbit button clicked
+if(isset($_POST['check'])){
+	isUserVerified();
+}
+
+
 // LOGIN USER
 function login(){
 	global $connection, $username, $errors;
@@ -50,19 +56,55 @@ function login(){
 				
 				$_SESSION['success']  = "You are now logged in";
 				// echo '' . $_SESSION['user']['fullname'];
-				 header('location: admin/dashboard.php');		  
+				 if($logged_in_user['status']== 'notverified'){
+					header('location: user-otp.php');
+				}else{
+					header('location: admin/dashboard.php');				}		  
 			}else{
+				if($logged_in_user['status']== 'notverified'){
+					header('location: user-otp.php');
+				}else{
+					header('location: admin/dashboard.php');
+				}
 				$_SESSION['user'] = $logged_in_user;
 				$_SESSION['success']  = "You are now logged in";
 
-				header('location: user/dashboard.php');
+				// header('location: user/dashboard.php');
 			}
 		}else {
 			array_push($errors, "Wrong username/password combination");
 		}
 	}
-}
 
+}
+ //if user click verification code submit button
+ function isUserVerified(){
+	global $connection, $errors,$name;
+	$_SESSION['info'] = "";
+	$otp_code = mysqli_real_escape_string($connection, $_POST['otp']);
+	$check_code = "SELECT * FROM Users WHERE code = $otp_code";
+	$code_res = mysqli_query($connection, $check_code);
+	if(mysqli_num_rows($code_res) > 0){
+		$fetch_data = mysqli_fetch_assoc($code_res);
+		$fetch_code = $fetch_data['code'];
+		$email = $fetch_data['email'];
+		$code = 0;
+		$status = 'verified';
+		$update_otp = "UPDATE Users SET code = $code, status = '$status' WHERE code = $fetch_code";
+		$update_res = mysqli_query($connection, $update_otp);
+		if($update_res){
+			$_SESSION['name'] = $name;
+			$_SESSION['email'] = $email;
+			header('location: user/dashboard.php');
+			exit();
+		}else{
+			$errors['otp-error'] = "Failed while updating code!";
+		}
+	}else{
+		$errors['otp-error'] = "You've entered incorrect code!";
+	}
+ }
+ 
 // REGISTER USER
 function register(){
 	// call these variables with the global keyword to make them available in function
@@ -70,12 +112,12 @@ function register(){
 
 	// receive all input values from the form. Call the e() function
     // defined below to escape form values
-	$fullname   =   e($_POST['fullname']);
+	$fullname    =  e($_POST['fullname']);
 	$username    =  e($_POST['username']);
 	$email       =  e($_POST['email']);
 	$password_1  =  e($_POST['password_1']);
 	$password_2  =  e($_POST['password_2']);
-	$user_type =    $_POST['usertype'];
+	$user_type   =  $_POST['usertype'];
 
 	// form validation: ensure that the form is correctly filled
 	if (empty($fullname)) { 
@@ -86,8 +128,6 @@ function register(){
 	if (empty($user_type)) { 
 		array_push($errors, "User type is required"); 
 	}
-	
-	
 	if (empty($username)) { 
 		array_push($errors, "Username is required"); 
 	}else{
@@ -156,64 +196,24 @@ function register(){
 				$subject = "Email Verification Code";
 				$message = "Your verification code is $code";
 				$sender = "From: anomalydetectionregister@gmail.com";
-				// if(mail($email, $subject, $message, $sender)){
-				// 	$info = "We've sent a verification code to your email - $email";
-				// 	$_SESSION['info'] = $info;
-				// 	$_SESSION['email'] = $email;
-				// 	$_SESSION['password'] = $password;
-				// 	header('location: user-otp.php');
-				// 	exit();
-				// }else{
-				// 	array_push($errors,"Failed while sending code!");
-				// }
+				if(mail($email, $subject, $message, $sender)){
+					$info = "We've sent a verification code to your email - $email";
+					$_SESSION['info'] = $info;
+					$_SESSION['email'] = $email;
+					$_SESSION['password'] = $password;
+					// header('location: user-otp.php');
+					exit();
+				}else{
+					array_push($errors,"Failed while sending code!");
+				}
 			$_SESSION['success']  = "New user successfully created!!";
 		}else{
 			array_push($errors,"Failed while inserting data into database!");
-		}}
-	// }else{
-	// 		$query = "INSERT INTO Users (username, email, firstname, lastname, user_type, password,code,status) 
-	// 				  VALUES('$username', '$email','$firstname','$lastname', '$user_type', '$password','$code',$status)";
-	// 		mysqli_query($connection, $query);
-
-	// 		// get id of the created user
-	// 		$logged_in_user_id = mysqli_insert_id($connection);
-
-	// 		$_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
-	// 		$_SESSION['success']  = "You are now logged in";
-						
-	// 	}
-	     	// header('location: ../index.php');
+		}
+	    }
 		}	
 	
 }
-
-    //if user click verification code submit button
-    if(isset($_POST['check'])){
-        $_SESSION['info'] = "";
-        $otp_code = mysqli_real_escape_string($connection, $_POST['otp']);
-        $check_code = "SELECT * FROM Users WHERE code = $otp_code";
-        $code_res = mysqli_query($connection, $check_code);
-        if(mysqli_num_rows($code_res) > 0){
-            $fetch_data = mysqli_fetch_assoc($code_res);
-            $fetch_code = $fetch_data['code'];
-            $email = $fetch_data['email'];
-            $code = 0;
-            $status = 'verified';
-            $update_otp = "UPDATE Users SET code = $code, status = '$status' WHERE code = $fetch_code";
-            $update_res = mysqli_query($connection, $update_otp);
-            if($update_res){
-                $_SESSION['name'] = $name;
-                $_SESSION['email'] = $email;
-                header('location: ../index.php');
-                exit();
-            }else{
-                $errors['otp-error'] = "Failed while updating code!";
-            }
-        }else{
-            $errors['otp-error'] = "You've entered incorrect code!";
-        }
-    }
-
 
 // return user array from their id
 function getUserById($id){

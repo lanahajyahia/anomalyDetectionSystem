@@ -10,7 +10,7 @@ $dbname = "anomalyDetection";
 // Connect to MySQL // crate dbabase if not already exist
 $link = new mysqli($servername, $username, $password);
 if (!$link) {
-    die('Could not connect: ' . mysql_error());
+    die('Could not connect: ' . mysqli_error($link));
 }
 // Create database
 $sql = 'CREATE DATABASE '. $dbname;
@@ -52,7 +52,7 @@ function createUsersTable() {
     }
      $pass = md5('admin');
      $sql = "INSERT INTO Users (username, email, fullname, user_type, password,code,status) 
-     VALUES('admin', 'admin@admin.com','admin', 'admin','$pass',1111,'x')";
+     VALUES('admin', 'admin@admin.com','admin', 'admin','$pass',1111,'verified')";
      if (mysqli_query($connection, $sql)) {
       echo "New record created successfully";
     } else {

@@ -29,6 +29,8 @@ if (isset($_GET['delete-all'])) {
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/usersstyle.css" rel="stylesheet" type="text/css">
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -38,22 +40,7 @@ if (isset($_GET['delete-all'])) {
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
- <style>
-     .error {
-    color: #5a5c69;
-     font-size: 1em  !important;
-    position: relative;
-    line-height: 1;
-    /* width: 12.5rem; */
-    font-weight: bold;
-    color: red;
-    width: 100%;
-}
- ul {
-    background-color: transparent  !important;}
-    .btn.btn-flat {
-    border-radius: 19px;}
- </style>
+
 </head>
 
 <body id="page-top">
@@ -184,11 +171,11 @@ while ($row = mysqli_fetch_assoc($sql)) {
 								     </div>
                                      
 								</div>
-                                <p style="margin-bottom:0!important; padding-left:0.9em;">user type</p>
-                                  <input style="margin-left: 0.9em !important; " type="radio" id="admin" name="usertype" value="admin">
-                                  <label style="font-weight: 500 !important;"for="admin">Admin</label>
-                                  <input style="margin-left: 0.5em !important; " type="radio" id="user" name="usertype" value="user">
-                                  <label style="font-weight: 500 !important;"for="user">User</label><br>
+                                  <p class="usertypep">user type</p>
+                                  <input class="input-usertype" type="radio" id="admin" name="usertype" value="admin">
+                                  <label class="label-usertype" for="admin">Admin</label>
+                                  <input class="input-usertype" type="radio" id="user" name="usertype" value="user">
+                                  <label class="label-usertype" for="user">User</label><br>
                         </div>
                         <div class="card-footer">
 							<button class="btn btn-flat btn-primary" name="add_user" type="submit">Add</button>

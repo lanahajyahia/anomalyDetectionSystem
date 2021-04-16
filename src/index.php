@@ -11,6 +11,6 @@
 	// 
 	
 	 
-	header('location: admin/dashboard.php');
+	header('location: login.php');
 
 ?>

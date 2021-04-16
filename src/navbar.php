@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,6 +62,9 @@ li.dropdown {
 .dropdown:hover .dropdown-content1 {
   display: block;
 }
+ .navbar-div {
+    display: initial;
+} 
 </style>
 </head>
 <body>
@@ -70,19 +74,29 @@ li.dropdown {
       <a class="navbar-brand" href="../admin/dashboard.php">Anomaly Detection</a>
     </div>
 <ul>
-  
-  <li><a href="../admin/dashboard.php">Dashboard</a></li>
-  <li><a href="../admin/users.php">Users</a></li>
+  <div class="navbar-div">
+  <li><a href="../admin/dashboard.php">Dashboard</a></li></div>
+  <?php if($_SESSION['user']['user_type'] == "admin") : ?>
+    <!-- if admin show users if user hide use -->
+  <div class="navbar-div" aria-label="users">
+  <li><a href="../admin/users.php">Users</a></li></div>
+  <?php endif; ?>
+
+  <div  class="navbar-div">
   <li><a href="../admin/Logs/sqliLogs.php">SQL Injection</a></li>
+    </div>
+    <div class="navbar-div">
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Cross site scripting</a>
     <div class="dropdown-content1">
       <a href="../admin/Logs/reflectedLogs.php">Reflected</a>
       <a href="../admin/Logs/storedLogs.php">Stored</a>
     </div>
-  </li>
-  <li><a href="../admin/Logs/csrfLogs.php">CSRF</a></li>
-  <li><a href="../../dashboard.php">About</a></li>
+  </li></div>
+  <div class="navbar-div">
+  <li><a href="../admin/Logs/csrfLogs.php">CSRF</a></li></div>
+  <div  class="navbar-div">
+  <li><a href="../../dashboard.php">About</a></li></div>
 </ul> 
 
       <ul class=" navbar-right">

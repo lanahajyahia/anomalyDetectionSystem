@@ -13,10 +13,14 @@ if($email == false){
     <link rel="stylesheet" href="styles\register-style.css">
 
 </head>
-<body>
+
+<body class="login">
+
     <div class="container">
+    
         <div class="row">
-            <div class="col-md-4 offset-md-4 form">
+        <div class="_8esl">
+            <div class="_8esk">
                 <form action="user-otp.php" method="POST" autocomplete="off">
                     <h2 class="text-center">Code Verification</h2>
                     <?php 
@@ -41,16 +45,18 @@ if($email == false){
                         <?php
                     }
                     ?>
-                    <div class="form-group">
+                    <div class="input-group">
                         <input class="form-control" type="number" name="otp" placeholder="Enter verification code" required>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control button" type="submit" name="check" value="Submit">
+                    <div class="">
+                        <input style="line-height: 33px; width: 17%;"class="btn" type="submit" name="check" value="Submit">
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    </div>
+    
     
 </body>
 </html>
