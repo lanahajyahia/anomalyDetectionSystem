@@ -79,33 +79,33 @@ li.dropdown {
     </div>
 <ul>
   <div class="navbar-div">
-  <li><a href="../admin/dashboard.php">Dashboard</a></li></div>
+  <li><a href="../../admin/dashboard.php">Dashboard</a></li></div>
   <?php if($_SESSION['user']['user_type'] == "admin") : ?>
     <!-- if admin show users if user hide use -->
   <div class="navbar-div" aria-label="users">
-  <li><a href="../admin/users.php">Users</a></li></div>
+  <li><a href="../../admin/users.php">Users</a></li></div>
   <?php endif; ?>
 
   <div  class="navbar-div">
-  <li><a href="../admin/Logs/sqliLogs.php">SQL Injection</a></li>
+  <li><a href="../../admin/Logs/sqliLogs.php">SQL Injection</a></li>
     </div>
     <div class="navbar-div">
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Cross site scripting</a>
     <div class="dropdown-content1">
-      <a href="../admin/Logs/reflectedLogs.php">Reflected</a>
-      <a href="../admin/Logs/storedLogs.php">Stored</a>
+      <a href="../../admin/Logs/reflectedLogs.php">Reflected</a>
+      <a href="../../admin/Logs/storedLogs.php">Stored</a>
     </div>
   </li></div>
   <div class="navbar-div">
-  <li><a href="../admin/Logs/csrfLogs.php">CSRF</a></li></div>
+  <li><a href="../../admin/Logs/csrfLogs.php">CSRF</a></li></div>
   <div  class="navbar-div">
   <li><a href="../../dashboard.php">About</a></li></div>
 </ul> 
 
       <ul class=" navbar-right">
       <li class="username-nav"><?php  echo $_SESSION['user']['username']; ?></li>
-      <li><a href="../login.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="../../login.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul> 
 
      

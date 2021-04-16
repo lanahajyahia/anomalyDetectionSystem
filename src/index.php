@@ -1,5 +1,5 @@
 <?php
-// include('multi_login/registration-functions.php');
+require('server.php');
 // if (!isLoggedIn()) {
 	// $_SESSION['msg'] = "You must log in first";
 

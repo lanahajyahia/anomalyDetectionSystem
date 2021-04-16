@@ -54,9 +54,9 @@ function createUsersTable()
   $sql = "INSERT INTO Users (username, email, fullname, user_type, password,code,status) 
      VALUES('admin', 'admin@admin.com','admin', 'admin','$pass',1111,'verified')";
   if (mysqli_query($connection, $sql)) {
-    echo "New record created successfully";
+    // echo "New record created successfully";
   } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($connection);
+    // echo "Error: " . $sql . "<br>" . mysqli_error($connection);
   }
 }
 function createXSSInjectionsTable()
