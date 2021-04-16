@@ -184,7 +184,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
 								     </div>
                                      
 								</div>
-                                <p style="margin-bottom: 0 !important; padding-left: 0.9em;">user type</p>
+                                <p style="margin-bottom:0!important; padding-left:0.9em;">user type</p>
                                   <input style="margin-left: 0.9em !important; " type="radio" id="admin" name="usertype" value="admin">
                                   <label style="font-weight: 500 !important;"for="admin">Admin</label>
                                   <input style="margin-left: 0.5em !important; " type="radio" id="user" name="usertype" value="user">
