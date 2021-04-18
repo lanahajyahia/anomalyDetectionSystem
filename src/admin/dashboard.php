@@ -1,9 +1,7 @@
 <?php
 session_start();
 include('includes/header.php');
-// include('includes/navbar.php');
 ?>
-
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -24,8 +22,6 @@ include('includes/header.php');
             </div>
 
             <!-- Content Row -->
-
-            <!-- <h2 class="h3 mb-0 text-gray-800 fas" style="font-size: 1.5em;padding-left: 0.5em;">Today's Statistics</h2> -->
             <div class="row">
                 <!-- SQLi -->
                 <div class="col-xl-3 col-md-6 mb-4">
@@ -46,7 +42,7 @@ include('includes/header.php');
                                 </div>
                             </div>
                         </div>
-                        <a href="Logs\sqliLogs.php" class="small-box-footer" style="align-self: center;">View All Logs </i></a>
+                        <a href="<?php echo htmlspecialchars('Logs\sqliLogs.php'); ?>" class="small-box-footer" style="align-self: center;">View All Logs </i></a>
 
                     </div>
                 </div>
@@ -66,7 +62,7 @@ include('includes/header.php');
                                 </div>
                             </div>
                         </div>
-                        <a href="Logs\reflectedLogs.php" class="small-box-footer" style="align-self: center;">View All Logs </i></a>
+                        <a href="<?php echo htmlspecialchars('Logs\reflectedLogs.php'); ?>" class="small-box-footer" style="align-self: center;">View All Logs </i></a>
 
                     </div>
                 </div>
@@ -97,7 +93,7 @@ include('includes/header.php');
                                 </div>
                             </div>
                         </div>
-                        <a href="Logs\storedLogs.php" class="small-box-footer" style="align-self: center;">View All Logs </i></a>
+                        <a href="<?php echo htmlspecialchars('Logs\storedLogs.php'); ?>" class="small-box-footer" style="align-self: center;">View All Logs </i></a>
 
                     </div>
                 </div>
@@ -117,7 +113,7 @@ include('includes/header.php');
                                 </div>
                             </div>
                         </div>
-                        <a href="Logs\csrfLogs.php" class="small-box-footer" style="align-self: center;">View All Logs </i></a>
+                        <a href="<?php echo htmlspecialchars('Logs\csrfLogs.php'); ?>" class="small-box-footer" style="align-self: center;">View All Logs </i></a>
 
                     </div>
                 </div>
@@ -205,9 +201,6 @@ include('includes/header.php');
 
     </div>
     <!-- End of Main Content -->
-
-
-
 
     <?php
     include('includes/scripts.php');

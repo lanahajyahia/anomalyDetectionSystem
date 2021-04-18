@@ -28,7 +28,7 @@ if ($email == false) {
                         if (isset($_SESSION['info'])) {
                         ?>
                             <div class="alert alert-success text-center">
-                                <?php echo $_SESSION['info']; ?>
+                                <?php echo "We've sent a verification code to your email - $email" ?>
                             </div>
                         <?php
                         }

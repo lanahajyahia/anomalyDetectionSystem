@@ -11,7 +11,7 @@ session_start();
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 	<meta name="theme-color" content="#4b545c">
     <link rel="shortcut icon" href="assets/img/favicon.png">
-    <title>Anomaly Detection &rsaquo; Admin Panel</title>
+    <!-- <title>Anomaly Detection &rsaquo; Admin Panel</title> -->
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">

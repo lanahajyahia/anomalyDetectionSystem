@@ -1,10 +1,21 @@
-<?php include('registration-functions.php') ?>
+<?php 
+session_start();
+include('registration-functions.php') ?>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<title>Log In</title>
 	<link rel="stylesheet" type="text/css" href="styles/register-style.css">
+	<style>
+		.forgot-pass {
+			color: #7596c8;
+			font-family: 'Roboto-Regular', 'Helvetica', 'sans-serif';
+			font-size: 14px;
+			line-height: 16px;
+			text-decoration: none;
+		}
+	</style>
 </head>
 
 <body class="login">
@@ -31,7 +42,7 @@
 					<button type="submit" class="btn" name="login_btn">Log In</button>
 				</div>
 				<p>
-					<a style="color: #7596c8; font-family: 'Roboto-Regular', 'Helvetica', 'sans-serif';  font-size: 14px;  line-height: 16px; text-decoration: none;" href="register.php">Forgot Password?</a>
+					<a class="forgot-pass" href="forgotpassword.php">Forgot Password?</a>
 				</p>
 			</form>
 		</div>

@@ -30,7 +30,7 @@ function login()
 	global $connection, $username, $errors;
 
 	// grap form values
-	
+
 	$username = e($_POST['username']);
 	$password = e($_POST['password']);
 
@@ -53,8 +53,8 @@ function login()
 			// check if user is admin or user
 			$logged_in_user = mysqli_fetch_assoc($results);
 			if ($logged_in_user['user_type'] == 'admin') {
-
 				$_SESSION['user'] = $logged_in_user;
+				$_SESSION['email'] = $logged_in_user['email'];
 
 				$_SESSION['success']  = "You are now logged in";
 				// echo '' . $_SESSION['user']['fullname'];
@@ -65,6 +65,9 @@ function login()
 				}
 			} else {
 				if ($logged_in_user['status'] == 'notverified') {
+
+					$_SESSION['user'] = $logged_in_user;
+					$_SESSION['email'] = $logged_in_user['email'];
 					header('location: user-otp.php');
 				} else {
 					header('location: admin/dashboard.php');
@@ -201,9 +204,9 @@ function register()
 				$sender = "From: anomalydetectionregister@gmail.com";
 				if (mail($email, $subject, $message, $sender)) {
 					$info = "We've sent a verification code to your email - $email";
-					// $_SESSION['info'] = $info;
-					$_SESSION['email'] = $email;
-					// $_SESSION['password'] = $password;
+					$_SESSION['info'] = $info;
+					// $_SESSION['email'] = $email;
+					$_SESSION['password'] = $password;
 					// header('location: user-otp.php');
 					// exit();
 				} else {
