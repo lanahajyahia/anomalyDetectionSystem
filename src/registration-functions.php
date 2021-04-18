@@ -210,6 +210,7 @@ function register()
 					// header('location: user-otp.php');
 					// exit();
 				} else {
+					echo "falied";
 					array_push($errors, "Failed while sending code!");
 				}
 				$_SESSION['success']  = "New user successfully created!!";
