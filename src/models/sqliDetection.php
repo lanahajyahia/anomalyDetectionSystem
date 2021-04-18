@@ -2,8 +2,7 @@
 
 namespace sqli;
 
-require_once(htmlspecialchars('sqlifilters'));
-
+require_once('sqlifilters.php');
 
 class sqliDetection
 {
@@ -29,8 +28,24 @@ class sqliDetection
         return $this->sqli_description;
     }
 
-    public function sqli_detect($http_request){
+    public function sqli_detect($http_request)
+    {
         // TO DO asyncronize for 
-    }
+        $sqli_filters = get_filters();
+        foreach ($sqli_filters as $filter) {
+            $pattern = $filter['rule'];
 
+            $is_found = preg_match("/". $pattern."/i", $http_request) ;
+
+            if ($is_found == 1) {
+                //echo $filter['rule'];
+               
+                $this->sqli_found = true;
+                echo $filter['description'];
+                $this->sqli_description = $filter['description'];
+                // break;
+            }
+           
+        }
+    }
 }
