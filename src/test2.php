@@ -2,7 +2,10 @@
 namespace xss;
 session_start();
 include("server.php");
-include("xssDetection.php");
+include("models/xssDetection.php");
+
+$str = "' UNION SELECT sum(columnname ) from tablename --";
+echo preg_match("/(?:(union(.*)select(.*)from))/i",$str);
 if(isset($_SESSION["body-url"])){ 
      $url = urldecode($_SESSION["body-url"]);
      $xss_detection = new xssDetection();
