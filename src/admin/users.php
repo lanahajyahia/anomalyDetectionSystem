@@ -2,6 +2,8 @@
 // require("../core.php");
 // require("../server.php"); 
 include("../registration-functions.php");
+require_once("../exportData.php");
+
 
 
 if (isset($_GET['delete-id'])) {
@@ -12,6 +14,10 @@ if (isset($_GET['delete-id'])) {
 if (isset($_GET['delete-all'])) {
     $table = 'Users';
     $query = $connection->query("DELETE FROM `$table`");
+}
+if (isset($_GET['export'])) {
+    exportUsers();
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -116,7 +122,7 @@ if (isset($_GET['delete-all'])) {
             <div class="panel-heading">
                 <a href="?delete-all" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
 
-                <a href="exportData.php" class="btn btn-success pull-right">Export to excel</a>
+                <a href="?export" class="btn btn-success pull-right">Export to excel</a>
             </div>
 
 
@@ -202,24 +208,6 @@ if (isset($_GET['delete-all'])) {
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-
-    <!-- Bootstrap core JavaScript-->
-    <!-- <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
-
-    <!-- Core plugin JavaScript-->
-    <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
-
-    <!-- Custom scripts for all pages-->
-    <!-- <script src="js/sb-admin-2.min.js"></script> -->
-
-    <!-- Page level plugins -->
-    <!-- <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
-
-    <!-- Page level custom scripts -->
-    <!-- <script src="js/demo/datatables-demo.js"></script> -->
 
 </body>
 

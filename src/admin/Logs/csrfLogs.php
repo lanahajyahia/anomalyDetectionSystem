@@ -89,7 +89,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
 				<div class="panel-heading">
                 <a href="delete-all.php" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
 
-                <a href="exportData.php" class="btn btn-success pull-right">Export to excel</a>
+                <a href="../../exportData.php" class="btn btn-success pull-right">Export to excel</a>
                 </div>
 				</div>
                     

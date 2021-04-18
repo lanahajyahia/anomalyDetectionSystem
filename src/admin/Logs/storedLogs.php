@@ -1,16 +1,22 @@
 <?php
 // require("../../core.php");
 require("../../server.php");
+require_once("../../exportData.php");
+
+$table = htmlspecialchars('XSS_injections');
+$type = htmlspecialchars('stored');
 
 
 if (isset($_GET['delete-id'])) {
     $id    = (int) $_GET["delete-id"];
-    $table = 'Users';
     $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");
 }
 if (isset($_GET['delete-all'])) {
-    $table = 'Users';
     $query = $connection->query("DELETE FROM `$table`");
+}
+if (isset($_GET['export'])) {
+    exportAttack($table, $type);
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -86,10 +92,14 @@ if (isset($_GET['delete-all'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $table = 'XSS_injections';
-                                $sql   = $connection->query("SELECT id, date, time, http_url, http_method, description FROM `$table` WHERE type='stored'");
-                                while ($row = mysqli_fetch_assoc($sql)) {
-                                    echo '
+
+                                $sql   = $connection->query("SELECT id, date, time, http_url, http_method, description FROM `$table` WHERE type='$type'");
+                                if ($sql->num_rows == 0) {
+                                    $_SESSION['empty-table-stored'] = 'empty';
+                                } else {
+                                    $_SESSION['empty-table-stored'] = 'not';
+                                    while ($row = mysqli_fetch_assoc($sql)) {
+                                        echo '
 										<tr>
                                           <td>' . $row['id'] . '</td>
 						                  <td>' . $row['date'] . '</td>
@@ -100,6 +110,7 @@ if (isset($_GET['delete-all'])) {
 								
 										</tr>
     ';
+                                    }
                                 }
                                 ?>
                             </tbody>
@@ -110,7 +121,11 @@ if (isset($_GET['delete-all'])) {
             <div class="panel-heading">
                 <a href="delete-all.php" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
 
-                <a href="exportData.php" class="btn btn-success pull-right">Export to excel</a>
+                <?php if ($_SESSION['empty-table-stored'] == 'empty') : ?>
+                    <a href="" class="btn btn-success pull-right" style="pointer-events: none;">Export to excel</a>
+                <?php else : ?>
+                    <a href="?export" class="btn btn-success pull-right">Export to excel</a>
+                <?php endif; ?>
             </div>
 
         </div>
