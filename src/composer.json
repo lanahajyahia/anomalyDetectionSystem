@@ -1,0 +1,13 @@
+{
+    "name": "hajya/anomaly-detection-system",
+    "type": "project",
+    "require": {
+        "sendgrid/sendgrid": "^7.9"
+    },
+    "authors": [
+        {
+            "name": "lanahajyahia",
+            "email": "46194686+lanahajyahia@users.noreply.github.com"
+        }
+    ]
+}

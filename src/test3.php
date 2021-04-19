@@ -35,14 +35,14 @@
 
   // $string_ = "SELECT * FROM products WHERE category = 'Gifts'--' AND released = 1";
 
-  // $string_ = " UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30  ";
+  // $string_ = " http://www.exapmle.com/something?name= UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30  ";
   // $string_ = '";waitfor delay "0:0:5"-- ';
-$string_ = "%2c(select%20*%20from%20(select(sleep(10)))a)
-
-
-";
-  $detect->sqli_detect($string_);
+  // $string_ = " ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8)";
+  // $string_ = 'http://acunetix.php.example/wordpress/wp-content/plugins/demo_vul/endpoint.php?user=1+ORDER+BY+10';
+//  $string_ = '-1+union+select+1,2,3,4,5,6,7,8,9,(SELECT+group_concat(table_name)+from+information_schema.tables+where+table_schema=database())';
+$string_ = '+union+select+1,2,3,4,5,6,7,8,9,(SELECT+user_pass+FROM+wp_users+WHERE+ID=1)';
+// $ss = urldecode($string_);
+// echo¿ $string_;
+  var_dump($detect->sqli_detect($string_));
    //echo preg_match("/(?:(sleep\\((\\s*)(\\d*)(\\s*)\\)|benchmark\\((.*)\\,(.*)\\)))/i",$string_);
   //  echo $detect->get_sqli_description();
-
-?>
