@@ -3,8 +3,8 @@
 require("../../server.php");
 require_once("../../exportData.php");
 
-$table = htmlspecialchars('SQL_injections');
-$type =  htmlspecialchars('sqli');
+$table = 'SQL_injections';
+$type =  'sqli';
 if (isset($_GET['delete-id'])) {
     $id    = (int) $_GET["delete-id"];
     $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");
@@ -14,6 +14,7 @@ if (isset($_GET['delete-all'])) {
 }
 if (isset($_GET['export'])) {
     exportAttack($table, $type);
+    // echo $table;
     exit;
 }
 ?>

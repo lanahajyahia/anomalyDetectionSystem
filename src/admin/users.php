@@ -5,14 +5,12 @@ include("../registration-functions.php");
 require_once("../exportData.php");
 
 
-
+$table = 'Users';
 if (isset($_GET['delete-id'])) {
     $id    = (int) $_GET["delete-id"];
-    $table = 'Users';
     $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");
 }
 if (isset($_GET['delete-all'])) {
-    $table = 'Users';
     $query = $connection->query("DELETE FROM `$table`");
 }
 if (isset($_GET['export'])) {
@@ -213,5 +211,5 @@ if (isset($_GET['export'])) {
 
 </html>
 <?php
-    include('includes/scripts.php');
-    include('includes/footer.php'); ?>
+include('includes/scripts.php');
+include('includes/footer.php'); ?>

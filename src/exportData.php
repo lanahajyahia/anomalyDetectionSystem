@@ -7,7 +7,7 @@ function exportAttack($table_name, $type)
   global $connection;
 
   //get records from database
-  $query = $connection->query("SELECT * FROM '$table_name' ORDER BY id DESC WHERE type='$type'");
+  $query = $connection->query("SELECT * FROM $table_name ORDER BY id DESC");
 
   if ($query->num_rows > 0) {
     $delimiter = ",";
@@ -37,7 +37,7 @@ function exportAttack($table_name, $type)
     //output all remaining data on a file pointer
     fpassthru($f);
   }
-  exit();
+  // exit();
 }
 function exportUsers()
 {
