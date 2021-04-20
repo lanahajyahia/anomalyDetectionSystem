@@ -46,7 +46,7 @@ function is_sqli($string)
         }else{
             echo "fail";
         }
-        // sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "Someone is trying to hack your website\n" . $attack_description);
+        sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "Someone is trying to hack your website\n" . $attack_description);
         return true;
     }
 }

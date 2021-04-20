@@ -1,8 +1,7 @@
 <?php
 session_start();
 include("server.php");
-// connect to database
-// $db = mysqli_connect('db', 'root', 'example', 'anomalyDetection');
+include("sendmail.php");
 
 // variable declaration
 $username = "";
@@ -22,7 +21,19 @@ if (isset($_POST['login_btn'])) {
 if (isset($_POST['check'])) {
 	isUserVerified();
 }
-
+if (isset($_POST['check'])) {
+	isUserVerified();
+}
+if (isset($_POST['resend'])) {
+	// sendmail($email,)
+}
+// log user out if logout button clicked
+if (isset($_GET['logout'])) {
+	// remove all session variables
+	session_unset();
+	session_destroy(); // destroy the session
+	header("location: login.php");
+}
 
 // LOGIN USER
 function login()
@@ -30,7 +41,6 @@ function login()
 	global $connection, $username, $errors;
 
 	// grap form values
-
 	$username = e($_POST['username']);
 	$password = e($_POST['password']);
 
@@ -57,7 +67,6 @@ function login()
 				$_SESSION['email'] = $logged_in_user['email'];
 
 				$_SESSION['success']  = "You are now logged in";
-				// echo '' . $_SESSION['user']['fullname'];
 				if ($logged_in_user['status'] == 'notverified') {
 					header('location: user-otp.php');
 				} else {
@@ -65,17 +74,13 @@ function login()
 				}
 			} else {
 				if ($logged_in_user['status'] == 'notverified') {
-
-					$_SESSION['user'] = $logged_in_user;
-					$_SESSION['email'] = $logged_in_user['email'];
 					header('location: user-otp.php');
 				} else {
 					header('location: admin/dashboard.php');
 				}
 				$_SESSION['user'] = $logged_in_user;
 				$_SESSION['success']  = "You are now logged in";
-
-				// header('location: user/dashboard.php');
+				$_SESSION['email'] = $logged_in_user['email'];
 			}
 		} else {
 			array_push($errors, "Wrong username/password combination");
@@ -193,44 +198,19 @@ function register()
 			$code = rand(999999, 111111);
 			$status = "notverified";
 
-			// if (isset($_POST['user_type'])) {
-			// $user_type = e($_POST['user_type']);
 			$query = "INSERT INTO Users (username, email, fullname, user_type, password,code,status) 
 					  VALUES('$username', '$email','$fullname', '$user_type', '$password','$code','$status')";
 			$data_check = mysqli_query($connection, $query);
 			if ($data_check) {
 				$subject = "Email Verification Code";
 				$message = "Your verification code is $code";
-				$sender = "From: anomalydetectionregister@gmail.com";
-				if (mail($email, $subject, $message, $sender)) {
-					$info = "We've sent a verification code to your email - $email";
-					$_SESSION['info'] = $info;
-					// $_SESSION['email'] = $email;
-					$_SESSION['password'] = $password;
-					// header('location: user-otp.php');
-					// exit();
-				} else {
-					echo "falied";
-					array_push($errors, "Failed while sending code!");
-				}
+				sendmail($email, $subject, $message);
 				$_SESSION['success']  = "New user successfully created!!";
 			} else {
 				array_push($errors, "Failed while inserting data into database!");
 			}
 		}
 	}
-	// exit();
-}
-
-// return user array from their id
-function getUserById($id)
-{
-	global $connection;
-	$query = "SELECT * FROM Users WHERE id=" . $id;
-	$result = mysqli_query($connection, $query);
-
-	$user = mysqli_fetch_assoc($result);
-	return $user;
 }
 
 // escape string specail chars if any 
@@ -263,12 +243,6 @@ function isLoggedIn()
 	}
 }
 
-// log user out if logout button clicked
-if (isset($_GET['logout'])) {
-	session_destroy();
-	unset($_SESSION['user']);
-	header("location: login.php");
-}
 function isAdmin()
 {
 	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin') {

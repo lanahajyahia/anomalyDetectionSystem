@@ -24,15 +24,11 @@ if ($email == false) {
                 <div class="_8esk">
                     <form action="user-otp.php" method="POST" autocomplete="off">
                         <h2 class="text-center">Code Verification</h2>
-                        <?php
-                        if (isset($_SESSION['info'])) {
-                        ?>
-                            <div class="alert alert-success text-center">
-                                <?php echo "We've sent a verification code to your email - $email" ?>
-                            </div>
-                        <?php
-                        }
-                        ?>
+
+                        <div class="alert alert-success text-center">
+                            <?php echo "We've sent a verification code to your email - $email" ?>
+                        </div>
+
                         <?php
                         if (count($errors) > 0) {
                         ?>
@@ -50,7 +46,10 @@ if ($email == false) {
                             <input class="form-control" type="number" name="otp" placeholder="Enter verification code" required>
                         </div>
                         <div class="">
+                            <input style="background-color: #e4e6eb; color: #4b4f56; line-height: 33px; width: 17%;" class="btn" type="submit" name="resend" value="Resend">
                             <input style="line-height: 33px; width: 17%;" class="btn" type="submit" name="check" value="Submit">
+
+
                         </div>
                     </form>
                 </div>

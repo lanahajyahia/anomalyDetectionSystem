@@ -2,10 +2,10 @@
 //phpinfo();
 session_start();
 
-$servername = "db";
-$username = "root";
-$password = "example";
-$dbname = "anomalyDetection";
+$servername = htmlspecialchars("db");
+$username = htmlspecialchars("root");
+$password = htmlspecialchars("example");
+$dbname = htmlspecialchars("anomalyDetection");
 
 // Connect to MySQL // crate dbabase if not already exist
 $link = new mysqli($servername, $username, $password);
@@ -33,7 +33,8 @@ if ($link->query($sql) === TRUE) {
 function createUsersTable()
 {
   global $connection;
-  $sql_user =  "CREATE TABLE Users (
+  $table_name = htmlspecialchars("Users");
+  $sql_user =  "CREATE TABLE $table_name (
     id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL,
@@ -51,7 +52,7 @@ function createUsersTable()
     //echo "Error creating table: " . $connection->error;
   }
   $pass = md5('admin');
-  $sql = "INSERT INTO Users (username, email, fullname, user_type, password,code,status) 
+  $sql = "INSERT INTO $table_name (username, email, fullname, user_type, password,code,status) 
      VALUES('admin', 'admin@admin.com','admin', 'admin','$pass',1111,'verified')";
   if (mysqli_query($connection, $sql)) {
     // echo "New record created successfully";
@@ -62,7 +63,8 @@ function createUsersTable()
 function createXSSInjectionsTable()
 {
   global $connection;
-  $sql_xss =  "CREATE TABLE XSS_injections (
+  $table_name = htmlspecialchars("XSS_injections");
+  $sql_xss =  "CREATE TABLE $table_name (
     id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     date VARCHAR(30) NOT NULL,
     time VARCHAR(50) NOT NULL,
@@ -79,8 +81,9 @@ function createXSSInjectionsTable()
 }
 function createSQLiTable()
 {
+  $table_name = htmlspecialchars("SQL_injections");
   global $connection;
-  $sql_sqli =  "CREATE TABLE SQL_injections (
+  $sql_sqli =  "CREATE TABLE $table_name (
     id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     date VARCHAR(30) NOT NULL,
     time VARCHAR(50) NOT NULL,

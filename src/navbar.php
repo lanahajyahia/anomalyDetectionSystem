@@ -121,7 +121,8 @@
 
       <ul class=" navbar-right">
         <li class="username-nav"><?php echo $_SESSION['user']['username']; ?></li>
-        <li><a href="<?php echo htmlspecialchars('../../login.php'); ?>"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a href="<?php
+        echo htmlspecialchars('../../login.php'); ?>"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
 
 
