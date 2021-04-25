@@ -15,7 +15,8 @@
 // //    Connection: keep-alive
 // //    ';
 // // $harm_string = 'http://testsite.test/<script>alert("TEST");</script>';
-// $harm_string = "https://sendgrid.com/docs/ui/sending-email/sender-verification/"; 
+// // $harm_string = 'aba.myspecies.info/search/lana/<img src%3D"http%3A%2f%2furl.to.file.which%2fnot.exist" onerror%3Dalert(document.cookie)%3B>'; 
+// $harm_string = "aba.myspecies.info/search/site/%3CSCRIPT%20type%3D%22text%2Fjavascript%22%3E%20var%20adr%20%3D%20%27..%2Fevil.php%3Fcakemonster%3D%27%20%2B%20escape%28document.cookie%29%3B%20%3C%2FSCRIPT%3E";
 // // "<SCRIPT type='text/javascript'>var adr = '../evil.php?cakemonster=' + escape(document.cookie);</SCRIPT>";
 // //  echo urlencode("https://insecure-website.com/products?category=Gifts'+OR+1=1--");
 // // echo '</br>';
@@ -31,7 +32,7 @@
 //   // echo "no injection " . $harmless_xss;
 // }
 
-// namespace sqli;
+namespace sqli;
 
 include("models/sqliDetection.php");
 // $detect = new sqliDetection();
@@ -40,14 +41,15 @@ include("models/sqliDetection.php");
 
 // $string_ = "SELECT * FROM products WHERE category = 'Gifts'--' AND released = 1";
 
-// $string_ = " http://www.exapmle.com/something?name= UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30  ";
+// $string_ = " http://www.example.com/something?name= UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30  ";
 // $string_ = '";waitfor delay "0:0:5"-- ';
 // $string_ = " ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8)";
 // $string_ = 'http://acunetix.php.example/wordpress/wp-content/plugins/demo_vul/endpoint.php?user=1+ORDER+BY+10';
 //  $string_ = '-1+union+select+1,2,3,4,5,6,7,8,9,(SELECT+group_concat(table_name)+from+information_schema.tables+where+table_schema=database())';
-$string_ = '+union+select+1,2,3,4,5,6,7,8,9,(SELECT+user_pass+FROM+wp_users+WHERE+ID=1)';
-// $ss = urldecode($string_);
-// echo¿ $string_;
-var_dump(is_sqli($string_));
-   //echo preg_match("/(?:(sleep\\((\\s*)(\\d*)(\\s*)\\)|benchmark\\((.*)\\,(.*)\\)))/i",$string_);
-  //  echo $detect->get_sqli_description();
+$string_ = " ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13";
+$ss = urldecode($string_);
+ echo $ss;
+
+var_dump(is_sqli($ss));
+   // echo preg_match("/(?:(sleep\\((\\s*)(\\d*)(\\s*)\\)|benchmark\\((.*)\\,(.*)\\)))/i",$string_);
+   // echo $detect->get_sqli_description();

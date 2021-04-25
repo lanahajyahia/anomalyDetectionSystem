@@ -25,6 +25,7 @@ function sqli_detect($string)
             $results_array[] = $filter['description'];
         }
     }
+    echo var_dump($results_array);
     return $results_array;
 }
 
@@ -39,14 +40,15 @@ function is_sqli($string)
         // session mail of user....
         $date= date("Y-m-d");
         $time= date("h:i:sa"); 
+        $url_endoe = urlencode($string);
         $sql = "INSERT INTO SQL_injections (date, time, http_url,http_method,description,type)
-        VALUES ('$date', '$time', '$string', 'get','$attack_description','sqli')";
+        VALUES ('$date', '$time', '$url_endoe', 'GET','$attack_description','sqli')";
         if($connection->query($sql) === TRUE){
             echo "succed";
         }else{
-            echo "fail";
+            echo "  fail     ";
         }
-        sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "Someone is trying to hack your website\n" . $attack_description);
+        // sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "Someone is trying to hack your website\n" . $attack_description);
         return true;
     }
 }
