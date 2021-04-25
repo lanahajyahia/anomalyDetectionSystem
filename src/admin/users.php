@@ -1,6 +1,7 @@
 <?php
 // require("../core.php");
 // require("../server.php"); 
+session_start();
 include("../registration-functions.php");
 require_once("../exportData.php");
 
@@ -9,6 +10,12 @@ $table = 'Users';
 if (isset($_GET['delete-id'])) {
     $id    = (int) $_GET["delete-id"];
     $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");
+}
+if (isset($_GET['edit-id'])) {
+    $id    = (int) $_GET["delete-id"];
+    $query = $connection->query("SELECT * FROM `$table` WHERE id='$id'");
+    $_SESSION['username-to-edit'] = 'lana';
+    require('edituser.php');
 }
 if (isset($_GET['delete-all'])) {
     $query = $connection->query("DELETE FROM `$table`");
@@ -50,10 +57,6 @@ if (isset($_GET['export'])) {
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-
-
-
 
         </nav>
         <!-- End of Topbar -->

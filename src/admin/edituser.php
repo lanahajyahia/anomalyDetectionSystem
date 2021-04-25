@@ -58,6 +58,33 @@
     .slider.round:before {
         border-radius: 50%;
     }
+
+    #editUserDiv {
+        align-items: center;
+        align-self: center;
+        z-index: 2;
+        position: absolute;
+        /* right: 50%; */
+        left: 50%;
+        margin: auto;
+        width: auto;
+        height: 100%;
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+    }
+
+    #wrapper{
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+    }
+
+    label {
+        top: -1em;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
 </style>
 
 <!-- <form class="form-horizontal" action="" method="post">
@@ -104,8 +131,9 @@
         }
 
         ?> -->
+
 <script>
-    function show(elementId,buttonId) {
+    function show(elementId, buttonId) {
         // var htmlS
         document.getElementById(elementId).style.display = "block";
         var button = document.getElementById(buttonId); // Assumes element with id='button'
@@ -119,70 +147,97 @@
             }
         };
     }
-
-    function showPass() {
-        // var htmlS
-        document.getElementById("passwordEditId").style.display = "block";
-    }
 </script>
-<table id="tblEditUser">
-    <tr>
-        <td><label> Change Username </label></td>
-        <td>
-
-            <label class="switch">
-                <input id="isCheckedUsernameChangeBtn" type="checkbox" onclick="show('usernameEditId',this.id); <?php $_SESSION['on'] = 'on' ?>">
-                <span class="slider round"></span>
-            </label>
-
-        </td>
 
 
-    </tr>
-
-    <tr id="usernameEditId" style="display:none">
-        <td><label>Username: </label></td>
-        <td>
-            <!-- <input type="text" name="username" class="form-control" required> -->
-            <input type="text" name="username" placeholder="" class="" value="username">
-        </td>
-
-    </tr>
-
-    <tr>
-        <td><label> Change Password </label></td>
-        <td>
-
-            <label class="switch">
-                <input id="isCheckedPasswordchangeBtn" type="checkbox" onclick="show('passwordEditId',this.id);">
-                <span class="slider round"></span>
-            </label>
-
-        </td>
+<div id="editUserDiv" class="col-md-3" style="padding-top: 3.8em;">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Edit User</h3>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <p style="font-size=1em"> </p>
+                <div class="form-group">
+                    <!-- <label class="control-label">Username: </label> -->
+                    <div class="col-sm-12">
+                        <!-- <input type="text" name="username" class="form-control" required> -->
+                        <label> Change Username </label>
 
 
-    </tr>
+                        <label class="switch" style="top -1em">
+                            <input id="isCheckedUsernameChangeBtn" type="checkbox" onclick="show('usernameEditId',this.id); ">
+                            <span class="slider round"></span>
+                        </label>
 
-    <tr id="passwordEditId" style="display:none">
-        <td><label>Password* </label></td>
-        <td>
-            <!-- <input type="text" name="username" class="form-control" required> -->
-            <input type="password" name="username" placeholder="" class="">
-        </td>
 
-        <td><label>Password Confirmation* </label></td>
-        <td>
-            <!-- <input type="text" name="username" class="form-control" required> -->
-            <input type="password" name="username" placeholder="" class="">
-        </td>
 
-    </tr>
-    <td>
-        <label>User type:</label>
-        <input class="input-usertype" type="radio" id="admin" name="usertype" value="admin">
-        <label class="label-usertype" for="admin">Admin</label>
-        <input class="input-usertype" type="radio" id="user" name="usertype" value="user">
-        <label class="label-usertype" for="user">User</label><br>
-    </td>
-</table>
+                    </div>
+                    <div id="usernameEditId" style="display:none">
+                        <td><label>Username: </label></td>
+                        <td>
+                            <!-- <input type="text" name="username" class="form-control" required> -->
+                            <input type="text" name="username" placeholder="" class="" value=" <?php echo $_SESSION['username-to-edit'] ?>">
+                        </td>
 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <!-- <label class="control-label">Username: </label> -->
+                    <div class="col-sm-12">
+                        <label> Change Password </label>
+
+
+                        <label class="switch">
+                            <input id="isCheckedPasswordchangeBtn" type="checkbox" onclick="show('passwordEditId',this.id);">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!-- <label class="control-label">Email: </label> -->
+                    <div class="col-sm-12">
+                        <!-- <input type="email" name="email" class="form-control" required> -->
+                        <div id="passwordEditId" style="display:none">
+
+                            <label>Password* </label>
+
+                            <!-- <input type="text" name="username" class="form-control" required> -->
+                            <input type="password" name="username" placeholder="" class="">
+
+
+
+                            <label>Password Confirmation* </label>
+
+                            <!-- <input type="text" name="username" class="form-control" required> -->
+                            <input type="password" name="username" placeholder="" class="">
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <label class="">user type</label>
+                <input class="" type="radio" id="admin" name="usertype" value="admin">
+                <label class="" for="admin">Admin</label>
+                <input class="" type="radio" id="user" name="usertype" value="user">
+                <label class="" for="user">User</label><br>
+        </div>
+        <div class="card-footer panel-heading">
+            <a href="?cancel" class="btn btn-success pull-right btn-danger" title="cancel"><i class="fas"></i> Cancel</a>
+
+            <a href="?save-edit" class="btn btn-success pull-right">Save</a>
+        </div>
+        <!-- <div class="card-footer">
+            <button class="btn btn-flat btn-primary" name="add_user" type="submit">Add</button>
+            <button type="reset" class="btn btn-flat btn-default">Reset</button>
+        </div> -->
+    </div>
+
+
+</div>
+
+</div>
