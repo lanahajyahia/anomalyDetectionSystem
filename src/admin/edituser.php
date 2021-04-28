@@ -60,17 +60,20 @@
     }
 
     #editUserDiv {
-        align-items: center;
-        align-self: center;
+        vertical-align: middle;
         z-index: 2;
         position: absolute;
         /* right: 50%; */
-        left: 50%;
+        left: 40%;
         margin: auto;
-        width: auto;
+        /* width: auto; */
         height: 100%;
-        filter: blur(0px);
-        -webkit-filter: blur(0px);
+     
+        margin-left: auto;
+        margin-right: auto;
+
+  width: auto;
+  padding: 10px;
     }
 
     #wrapper{
@@ -79,11 +82,14 @@
     }
 
     label {
-        top: -1em;
+        top: -0.3em;
     }
 
     * {
         box-sizing: border-box;
+    }
+    #passwordEditId, #usernameEditId{
+        display: none;
     }
 </style>
 
@@ -131,7 +137,11 @@
         }
 
         ?> -->
-
+<?php 
+if (isset($_GET['cancel'])) {
+ exit;
+}
+?>
 <script>
     function show(elementId, buttonId) {
         // var htmlS
@@ -157,7 +167,7 @@
         </div>
         <div class="card-body">
             <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <p style="font-size=1em"> </p>
+                
                 <div class="form-group">
                     <!-- <label class="control-label">Username: </label> -->
                     <div class="col-sm-12">
@@ -165,19 +175,17 @@
                         <label> Change Username </label>
 
 
-                        <label class="switch" style="top -1em">
+                        <label class="switch">
                             <input id="isCheckedUsernameChangeBtn" type="checkbox" onclick="show('usernameEditId',this.id); ">
                             <span class="slider round"></span>
                         </label>
 
-
-
                     </div>
-                    <div id="usernameEditId" style="display:none">
+                    <div id="usernameEditId">
                         <td><label>Username: </label></td>
                         <td>
                             <!-- <input type="text" name="username" class="form-control" required> -->
-                            <input type="text" name="username" placeholder="" class="" value=" <?php echo $_SESSION['username-to-edit'] ?>">
+                            <input type="text" name="username" value=" <?php echo $_SESSION['username-to-edit'] ?>">
                         </td>
 
                     </div>
@@ -199,12 +207,12 @@
                     <!-- <label class="control-label">Email: </label> -->
                     <div class="col-sm-12">
                         <!-- <input type="email" name="email" class="form-control" required> -->
-                        <div id="passwordEditId" style="display:none">
+                        <div id="passwordEditId" >
 
                             <label>Password* </label>
 
                             <!-- <input type="text" name="username" class="form-control" required> -->
-                            <input type="password" name="username" placeholder="" class="">
+                            <input type="password" name="username">
 
 
 
@@ -240,4 +248,3 @@
 
 </div>
 
-</div>
