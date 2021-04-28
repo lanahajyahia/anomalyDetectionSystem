@@ -12,10 +12,19 @@ if (isset($_GET['delete-id'])) {
     $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");
 }
 if (isset($_GET['edit-id'])) {
-    $id    = (int) $_GET["delete-id"];
-    $query = $connection->query("SELECT * FROM `$table` WHERE id='$id'");
-    $_SESSION['username-to-edit'] = 'lana';
+    $id    = (int) $_GET["edit-id"];
+    // echo "hi";
+    $query = $connection->query("SELECT username, user_type,password FROM `$table` WHERE id='$id'");
+    
+    $row = mysqli_fetch_assoc($query);
+    echo $row['username'] . "id: " . $id;
+    $_SESSION['username-to-edit'] = $row['username'] ."";
+    $_SESSION['type-to-edit'] = $row['user_type'] ."";
+    $_SESSION['id-to-edit'] = $id;
+
+
     require('edituser.php');
+    // session_abort();
 }
 if (isset($_GET['delete-all'])) {
     $query = $connection->query("DELETE FROM `$table`");
@@ -92,7 +101,7 @@ if (isset($_GET['export'])) {
 
                             <tbody>
                                 <?php
-                                $table = 'Users';
+
                                 $sql   = $connection->query("SELECT id, email, username, reg_date ,user_type FROM `$table`");
                                 while ($row = mysqli_fetch_assoc($sql)) {
                                     echo '

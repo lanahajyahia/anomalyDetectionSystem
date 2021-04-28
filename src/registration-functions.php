@@ -12,6 +12,10 @@ $errors   = array();
 if (isset($_POST['add_user'])) {
 	register();
 }
+if (isset($_POST['save-edit'])) {
+	update_user_BY_admin();
+	// echo "sd";
+}
 // call the login() function if register_btn is clicked
 if (isset($_POST['login_btn'])) {
 	login();
@@ -116,6 +120,27 @@ function isUserVerified()
 	}
 }
 
+function update_user_BY_admin()
+{
+	global $connection, $errors, $username;
+	$id = $_SESSION['id-to-edit'];
+	echo $id;
+	$username1 = $_POST['username-update'];
+	echo $username1;
+
+	$query = $connection->query("UPDATE Users SET username='$username1' WHERE id='$id'");
+	if ($connection->query($query) === TRUE) {
+		echo "Record updated successfully";
+	} else {
+		echo "Error updating record: " . $connection->error;
+	}
+	// if ($password != null) {
+	//     $password = hash('sha256', $_POST['password']);
+	//     $query = $mysqli->query("UPDATE `$table` SET username='$username', password='$password' WHERE id='$id'");
+	// }
+	// echo '<meta http-equiv="refresh" content="0;url=users.php">';
+
+}
 // REGISTER USER
 function register()
 {

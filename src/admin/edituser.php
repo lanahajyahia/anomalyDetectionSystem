@@ -68,15 +68,15 @@
         margin: auto;
         /* width: auto; */
         height: 100%;
-     
+
         margin-left: auto;
         margin-right: auto;
 
-  width: auto;
-  padding: 10px;
+        width: auto;
+        padding: 10px;
     }
 
-    #wrapper{
+    #wrapper {
         filter: blur(8px);
         -webkit-filter: blur(8px);
     }
@@ -88,60 +88,46 @@
     * {
         box-sizing: border-box;
     }
-    #passwordEditId, #usernameEditId{
+
+    #passwordEditId,
+    #usernameEditId {
         display: none;
     }
 </style>
 
-<!-- <form class="form-horizontal" action="" method="post">
-                    <div class="card">
-						<div class="card-header">
-							<h3 class="card-title">Edit User</h3>
-						</div>
-				        <div class="card-body">
-                               <div class="form-group">
-											<label class="control-label">Username: </label>
-											<div class="col-sm-12">
-												<input type="text" name="username" class="form-control" value="<?php
-                                                                                                                echo $row['username'];
-                                                                                                                ?>" required>
-											</div>
-										</div>
-                                        <hr>
-                                        <div class="form-group">
-											<label class="control-label">New Password: </label>
-											<div class="col-sm-12">
-												<input type="text" name="password" class="form-control">
-											</div>
-										</div>
-                                        <i>Fill this field only if you want to change the password.</i>
-                        </div>
-                        <div class="card-footer">
-							<button class="btn btn-flat btn-success" name="edit" type="submit">Save</button>
-							<button type="reset" class="btn btn-flat btn-default">Reset</button>
-				        </div>
-				     </div>
-</form>
-<!-- <?php
-        if (isset($_POST['edit'])) {
-            $table    = $prefix . 'users';
-            @$username = addslashes($_POST['username']);
-            @$password = $_POST['password'];
+<?php
 
-            $query = $mysqli->query("UPDATE `$table` SET username='$username' WHERE id='$id'");
-            if ($password != null) {
-                $password = hash('sha256', $_POST['password']);
-                $query = $mysqli->query("UPDATE `$table` SET username='$username', password='$password' WHERE id='$id'");
-            }
-            echo '<meta http-equiv="refresh" content="0;url=users.php">';
-        }
 
-        ?> -->
-<?php 
+
+
+// include("server.php");
+// if (isset($_GET['save-edit'])) {
+//     $table    = 'Users';
+//     $id =  $_SESSION['id-to-edit'];
+
+//     $username = addslashes($_POST['username']);
+//     // debug_to_console("username");
+
+//     // $password = $_POST['password'];
+
+
+//     $query = $connection->query("UPDATE Users SET username='$username' WHERE id='$id'");
+//     if ($connection->query($query) === TRUE) {
+//         echo "Record updated successfully";
+//     } else {
+//         echo "Error updating record: " . $conn->error;
+//     }
+//     // if ($password != null) {
+//     //     $password = hash('sha256', $_POST['password']);
+//     //     $query = $mysqli->query("UPDATE `$table` SET username='$username', password='$password' WHERE id='$id'");
+//     // }
+//     // echo '<meta http-equiv="refresh" content="0;url=users.php">';
+// }
 if (isset($_GET['cancel'])) {
- exit;
+    exit;
 }
 ?>
+
 <script>
     function show(elementId, buttonId) {
         // var htmlS
@@ -167,7 +153,7 @@ if (isset($_GET['cancel'])) {
         </div>
         <div class="card-body">
             <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                
+
                 <div class="form-group">
                     <!-- <label class="control-label">Username: </label> -->
                     <div class="col-sm-12">
@@ -185,7 +171,8 @@ if (isset($_GET['cancel'])) {
                         <td><label>Username: </label></td>
                         <td>
                             <!-- <input type="text" name="username" class="form-control" required> -->
-                            <input type="text" name="username" value=" <?php echo $_SESSION['username-to-edit'] ?>">
+                            <input type="text" name="username-update" value=" <?php echo $_SESSION['username-to-edit'] ?>">
+                            
                         </td>
 
                     </div>
@@ -207,31 +194,28 @@ if (isset($_GET['cancel'])) {
                     <!-- <label class="control-label">Email: </label> -->
                     <div class="col-sm-12">
                         <!-- <input type="email" name="email" class="form-control" required> -->
-                        <div id="passwordEditId" >
+                        <div id="passwordEditId">
 
                             <label>Password* </label>
 
                             <!-- <input type="text" name="username" class="form-control" required> -->
-                            <input type="password" name="username">
+                            <input type="password" name="password1">
 
 
 
                             <label>Password Confirmation* </label>
 
                             <!-- <input type="text" name="username" class="form-control" required> -->
-                            <input type="password" name="username" placeholder="" class="">
+                            <input type="password" name="password2" placeholder="" >
 
 
                         </div>
                     </div>
-
-
-
                 </div>
                 <label class="">user type</label>
-                <input class="" type="radio" id="admin" name="usertype" value="admin">
+                <input class="" type="radio" id="admin" name="usertype" value="admin" <?php echo ($_SESSION['type-to-edit'] == 'admin') ?  "checked" : "";  ?>>
                 <label class="" for="admin">Admin</label>
-                <input class="" type="radio" id="user" name="usertype" value="user">
+                <input class="" type="radio" id="user" name="usertype" value="user" <?php echo ($_SESSION['type-to-edit'] == 'user') ?  "checked" : "";  ?>>
                 <label class="" for="user">User</label><br>
         </div>
         <div class="card-footer panel-heading">
@@ -247,4 +231,3 @@ if (isset($_GET['cancel'])) {
 
 
 </div>
-

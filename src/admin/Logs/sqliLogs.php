@@ -112,6 +112,7 @@ if (isset($_GET['export'])) {
                                           <td>' . $row['description'] . '</td>
 										  <td>
 										  <a href="log-details.php?id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-tasks"></i> Details</a>
+                                          
 										  <a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger"><i class="fas fa-times"></i> Delete</a>
 										</td>
 										</tr>

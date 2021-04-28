@@ -111,9 +111,9 @@
             </div>
           </li>
         </div>
-        <div class="navbar-div">
+        <!-- <div class="navbar-div">
           <li><a href="<?php echo htmlspecialchars('../../admin/Logs/csrfLogs.php'); ?>">CSRF</a></li>
-        </div>
+        </div> -->
         <div class="navbar-div">
           <li><a href="<?php echo htmlspecialchars('../../dashboard.php'); ?>">About</a></li>
         </div>
