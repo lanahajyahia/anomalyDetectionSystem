@@ -1,6 +1,6 @@
 <?php
 //phpinfo();
-session_start();
+// session_start();
 
 $servername = htmlspecialchars("db");
 $username = htmlspecialchars("root");

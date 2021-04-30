@@ -99,7 +99,11 @@
 
 
 
-
+function console_log( $data ){
+    echo '<script>';
+    echo 'console.log('. json_encode( $data ) .')';
+    echo '</script>';
+  }
 // include("server.php");
 // if (isset($_GET['save-edit'])) {
 //     $table    = 'Users';
@@ -123,6 +127,10 @@
 //     // }
 //     // echo '<meta http-equiv="refresh" content="0;url=users.php">';
 // }
+if (isset($_POST['save-edit'])) {
+	console_log("here");
+	 echo "sd";
+}
 if (isset($_GET['cancel'])) {
     exit;
 }

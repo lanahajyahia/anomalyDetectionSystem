@@ -1,6 +1,8 @@
 <?php
+session_start();
 // require("../../core.php");
 require("../../server.php");
+
 require_once("../../exportData.php");
 
 $table = 'SQL_injections';
@@ -88,7 +90,7 @@ if (isset($_GET['export'])) {
                                     <th><i class="fas fa-desktop"></i> HTTP header</th>
                                     <th><i class="fas fa-cog"></i> HTTP method</th>
                                     <!-- <th><i class="fas fa-map"></i> injection</th> -->
-                                    <th><i class="fas fa-bomb"></i> Description</th>
+                                    <!-- <th><i class="fas fa-bomb"></i> Description</th> -->
                                     <!-- <th><i class="fas fa-cog"></i> Actions</th> -->
                                     <th><i class="fas fa-map"></i> Actions</th>
                                 </tr>
@@ -109,9 +111,8 @@ if (isset($_GET['export'])) {
                                           <td>' . $row['time'] . '</td>
 						                  <td>' . $row['http_url'] . '</td>
 										  <td>' . $row['http_method'] . '</td>
-                                          <td>' . $row['description'] . '</td>
 										  <td>
-										  <a href="log-details.php?id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-tasks"></i> Details</a>
+										  <a href="details.php?id=' . $row['id'] . '" target="_blank" class="btn btn-flat btn-primary"><i class="fas fa-tasks"></i> Details</a>
                                           
 										  <a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger"><i class="fas fa-times"></i> Delete</a>
 										</td>

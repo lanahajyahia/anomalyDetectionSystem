@@ -60,8 +60,14 @@
 
                         </div>
 
+                <!-- <div class="forgot-pass">
+                                        <a class="" href="login.html">Already have an account? Login!</a>
+                                    </div> -->
                     </form>
+                    
                 </div>
+            
+
             </div>
 </body>
 

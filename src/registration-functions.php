@@ -13,8 +13,8 @@ if (isset($_POST['add_user'])) {
 	register();
 }
 if (isset($_POST['save-edit'])) {
-	update_user_BY_admin();
-	// echo "sd";
+	// update_user_BY_admin();
+	 echo "sd";
 }
 // call the login() function if register_btn is clicked
 if (isset($_POST['login_btn'])) {
@@ -122,13 +122,14 @@ function isUserVerified()
 
 function update_user_BY_admin()
 {
+	echo "fds";
 	global $connection, $errors, $username;
 	$id = $_SESSION['id-to-edit'];
 	echo $id;
 	$username1 = $_POST['username-update'];
 	echo $username1;
 
-	$query = $connection->query("UPDATE Users SET username='$username1' WHERE id='$id'");
+	$query = $connection->query("UPDATE Users SET username='hhh' WHERE id=2");
 	if ($connection->query($query) === TRUE) {
 		echo "Record updated successfully";
 	} else {
