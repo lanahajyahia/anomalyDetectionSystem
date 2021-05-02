@@ -155,11 +155,11 @@ if (isset($_GET['cancel'])) {
 
 <div id="editUserDiv" class="col-md-3" style="padding-top: 3.8em;">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" id="editUserDivHeader">
             <h3 class="card-title">Edit User</h3>
         </div>
         <div class="card-body">
-            <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form class="form-horizontal" action="form-events/edituser-func.php" method="post">
 
                 <div class="form-group">
                     <!-- <label class="control-label">Username: </label> -->
@@ -224,11 +224,15 @@ if (isset($_GET['cancel'])) {
                 <label class="" for="admin">Admin</label>
                 <input class="" type="radio" id="user" name="usertype" value="user" <?php echo ($_SESSION['type-to-edit'] == 'user') ?  "checked" : "";  ?>>
                 <label class="" for="user">User</label><br>
+                <input type="hidden" name="save-edit" value="true">
+
+                <input type="submit" value="save">
+            </form>
         </div>
         <div class="card-footer panel-heading">
             <a href="?cancel" class="btn btn-success pull-right btn-danger" title="cancel"><i class="fas"></i> Cancel</a>
 
-            <a href="?save-edit" class="btn btn-success pull-right">Save</a>
+            <a class="btn btn-success pull-right">Save</a>
         </div>
         <!-- <div class="card-footer">
             <button class="btn btn-flat btn-primary" name="add_user" type="submit">Add</button>
@@ -263,9 +267,9 @@ if (isset($_GET['cancel'])) {
             pos2 = 0,
             pos3 = 0,
             pos4 = 0;
-        if (document.getElementById(elmnt.id + "header")) {
+        if (document.getElementById(elmnt.id + "Header")) {
             // if present, the header is where you move the DIV from:
-            document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+            document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
         } else {
             // otherwise, move the DIV from anywhere inside the DIV:
             elmnt.onmousedown = dragMouseDown;

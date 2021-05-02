@@ -8,6 +8,12 @@ $username = "";
 $email    = "";
 $errors   = array();
 
+// var_dump($_POST);
+// if (sizeof($_POST) > 0) {
+// 	echo "POST!";
+// 	die();
+// }
+
 // call the register() function if register_btn is clicked
 if (isset($_POST['add_user'])) {
 	register();
@@ -120,28 +126,7 @@ function isUserVerified()
 	}
 }
 
-function update_user_BY_admin()
-{
-	echo "fds";
-	global $connection, $errors, $username;
-	$id = $_SESSION['id-to-edit'];
-	echo $id;
-	$username1 = $_POST['username-update'];
-	echo $username1;
 
-	$query = $connection->query("UPDATE Users SET username='hhh' WHERE id=2");
-	if ($connection->query($query) === TRUE) {
-		echo "Record updated successfully";
-	} else {
-		echo "Error updating record: " . $connection->error;
-	}
-	// if ($password != null) {
-	//     $password = hash('sha256', $_POST['password']);
-	//     $query = $mysqli->query("UPDATE `$table` SET username='$username', password='$password' WHERE id='$id'");
-	// }
-	// echo '<meta http-equiv="refresh" content="0;url=users.php">';
-
-}
 // REGISTER USER
 function register()
 {
