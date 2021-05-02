@@ -45,9 +45,10 @@
     }
 
     input:checked+.slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
+        -webkit-transform: translateX(26px); 
+         -ms-transform: translateX(26px); 
+         transform: translateX(26px);
+        /* background-color: white; */
     }
 
     /* Rounded sliders */
@@ -60,20 +61,34 @@
     }
 
     #editUserDiv {
+        position: absolute;
+        z-index: 9;
+        left: 40%;
+        /* background-color: #f1f1f1; */
+        /* border: 1px solid #d3d3d3; */
+        text-align: center;
         vertical-align: middle;
+         /* margin-left: auto; */
+        /* margin-right: auto; */
+        /* 
         z-index: 2;
         position: absolute;
-        /* right: 50%; */
-        left: 40%;
+      
         margin: auto;
-        /* width: auto; */
         height: 100%;
 
-        margin-left: auto;
-        margin-right: auto;
+       
 
         width: auto;
+        padding: 10px; */
+    }
+
+    .card {
         padding: 10px;
+        cursor: move;
+        z-index: 10;
+        /* background-color: #2196F3; */
+        /* color: #fff; */
     }
 
     #wrapper {
@@ -99,11 +114,12 @@
 
 
 
-function console_log( $data ){
+function console_log($data)
+{
     echo '<script>';
-    echo 'console.log('. json_encode( $data ) .')';
+    echo 'console.log(' . json_encode($data) . ')';
     echo '</script>';
-  }
+}
 // include("server.php");
 // if (isset($_GET['save-edit'])) {
 //     $table    = 'Users';
@@ -128,30 +144,13 @@ function console_log( $data ){
 //     // echo '<meta http-equiv="refresh" content="0;url=users.php">';
 // }
 if (isset($_POST['save-edit'])) {
-	console_log("here");
-	 echo "sd";
+    console_log("here");
+    echo "sd";
 }
 if (isset($_GET['cancel'])) {
     exit;
 }
 ?>
-
-<script>
-    function show(elementId, buttonId) {
-        // var htmlS
-        document.getElementById(elementId).style.display = "block";
-        var button = document.getElementById(buttonId); // Assumes element with id='button'
-
-        button.onclick = function() {
-            var elementToShow = document.getElementById(elementId);
-            if (elementToShow.style.display !== 'none') {
-                elementToShow.style.display = 'none';
-            } else {
-                elementToShow.style.display = 'block';
-            }
-        };
-    }
-</script>
 
 
 <div id="editUserDiv" class="col-md-3" style="padding-top: 3.8em;">
@@ -180,7 +179,7 @@ if (isset($_GET['cancel'])) {
                         <td>
                             <!-- <input type="text" name="username" class="form-control" required> -->
                             <input type="text" name="username-update" value=" <?php echo $_SESSION['username-to-edit'] ?>">
-                            
+
                         </td>
 
                     </div>
@@ -214,7 +213,7 @@ if (isset($_GET['cancel'])) {
                             <label>Password Confirmation* </label>
 
                             <!-- <input type="text" name="username" class="form-control" required> -->
-                            <input type="password" name="password2" placeholder="" >
+                            <input type="password" name="password2" placeholder="">
 
 
                         </div>
@@ -239,3 +238,67 @@ if (isset($_GET['cancel'])) {
 
 
 </div>
+
+
+<script>
+    function show(elementId, buttonId) {
+        // var htmlS
+        document.getElementById(elementId).style.display = "block";
+        var button = document.getElementById(buttonId); // Assumes element with id='button'
+
+        button.onclick = function() {
+            var elementToShow = document.getElementById(elementId);
+            if (elementToShow.style.display !== 'none') {
+                elementToShow.style.display = 'none';
+            } else {
+                elementToShow.style.display = 'block';
+            }
+        };
+    }
+
+    dragElement(document.getElementById("editUserDiv"));
+
+    function dragElement(elmnt) {
+        var pos1 = 0,
+            pos2 = 0,
+            pos3 = 0,
+            pos4 = 0;
+        if (document.getElementById(elmnt.id + "header")) {
+            // if present, the header is where you move the DIV from:
+            document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+        } else {
+            // otherwise, move the DIV from anywhere inside the DIV:
+            elmnt.onmousedown = dragMouseDown;
+        }
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            // stop moving when mouse button is released:
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    }
+</script>

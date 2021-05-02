@@ -40,7 +40,7 @@ function get_attack_number($table, $type = null)
             </div>
 
             <!-- Content Row -->
-            <div class="row">
+            <div class="row" style="justify-content: center;">
                 <!-- SQLi -->
                 <div class="col-xl-3 col-md-6 mb-4">
                     <div class="card border-left-primary shadow h-100 py-2">
@@ -59,7 +59,7 @@ function get_attack_number($table, $type = null)
 
                                 <div class="col-auto">
 
-                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    <i class="fas fa-broom fa-2x text-gray-300"></i>
 
                                 </div>
                             </div>
@@ -83,7 +83,7 @@ function get_attack_number($table, $type = null)
                                         ?></div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    <i class="fas fa-car-crash fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,7 @@ function get_attack_number($table, $type = null)
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    <i class="fas fa-clinic-medical fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +123,7 @@ function get_attack_number($table, $type = null)
                 </div>
 
                 <!-- CSRF -->
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-3 col-md-6 mb-4" style="display:none">
                     <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
