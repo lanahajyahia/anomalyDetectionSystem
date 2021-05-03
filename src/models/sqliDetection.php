@@ -3,12 +3,18 @@
 // namespace sqli;
 
 require_once('sqlifilters.php');
-require('sendmail.php');
-require('server.php');
+require('../sendmail.php');
+require('../server.php');
 define("ATTACK_SUBJECT", "ATTENTION SQL injection attack alert!!");
 define("TABLE_NAME","SQL_injections");
 // class sqliDetection
 // {
+
+    $data = json_decode(file_get_contents('php://input'), true);
+var_dump($data);
+var_dump($_POST);
+echo "WE ARE HERE";
+die();
 
 function sqli_detect($string)
 {

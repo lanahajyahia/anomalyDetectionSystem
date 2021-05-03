@@ -35,6 +35,8 @@
 namespace sqli;
 
 include("models/sqliDetection.php");
+$data = json_decode(file_get_contents('php://input'), true);
+var_dump($data);
 // $detect = new sqliDetection();
 // $string_ = "id=1+and+ascii(lower(mid((select+pwd+from+users+limit+1,1),1,1)))=74";
 // $string_ = "https://insecure-website.com/products?category=Gifts'-- ";
