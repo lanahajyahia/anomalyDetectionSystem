@@ -32,11 +32,12 @@
 //   // echo "no injection " . $harmless_xss;
 // }
 
-namespace sqli;
+// namespace sqli;
 
-include("models/sqliDetection.php");
+// include("models/sqliDetection.php");
 $data = json_decode(file_get_contents('php://input'), true);
 var_dump($data);
+var_dump($_POST['data']);
 // $detect = new sqliDetection();
 // $string_ = "id=1+and+ascii(lower(mid((select+pwd+from+users+limit+1,1),1,1)))=74";
 // $string_ = "https://insecure-website.com/products?category=Gifts'-- ";
@@ -50,16 +51,16 @@ var_dump($data);
  $string_ = " ' GROUP BY columnnames having 1=1 -- ";
 // $string_ = " ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13";
  $ss = urldecode($string_);
-  echo $ss;
+//   echo $ss;
 
-var_dump(is_sqli($ss));
+// var_dump(is_sqli($ss));
    // echo preg_match("/(?:(sleep\\((\\s*)(\\d*)(\\s*)\\)|benchmark\\((.*)\\,(.*)\\)))/i",$string_);
    // echo $detect->get_sqli_description();
-?>
-   <!-- <script>
-function myFunction() {
-  var str = "-1+union+select+1,2,3,4,5,6,7,8,9,(SELECT+group_concat(table_name)+from+information_schema.tables+where+table_schema=database())"; 
-  var results = decodeURI(str);
-  var res = results.match(/(?:union\\s*(?:all|distinct|[(!@]*)\\s*[([]*\\s*select)|(?:\\w+\\s+like\\s+\\\")|(?:like\\s*\"\\%)|(?:\"\\s*like\\W*[\"\\d])|(?:\"\\s*(?:n?and|x?or|not |\\|\\||\\&\\&)\\s+[\\s\\w]+=\\s*\\w+\\s*having)|(?:\"\\s*\\*\\s*\\w+\\W+\")|(?:\"\\s*[^?\\w\\s=.,;)(]+\\s*[(@\"]*\\s*\\w+\\W+\\w)|(?:select\\s*[\\[\\]()\\s\\w\\.,\"-]+from)|(?:find_in_set\\s*\\()/i);
-}
-</script> -->
+
+//    <!-- <script>
+// function myFunction() {
+//   var str = "-1+union+select+1,2,3,4,5,6,7,8,9,(SELECT+group_concat(table_name)+from+information_schema.tables+where+table_schema=database())"; 
+//   var results = decodeURI(str);
+//   var res = results.match(/(?:union\\s*(?:all|distinct|[(!@]*)\\s*[([]*\\s*select)|(?:\\w+\\s+like\\s+\\\")|(?:like\\s*\"\\%)|(?:\"\\s*like\\W*[\"\\d])|(?:\"\\s*(?:n?and|x?or|not |\\|\\||\\&\\&)\\s+[\\s\\w]+=\\s*\\w+\\s*having)|(?:\"\\s*\\*\\s*\\w+\\W+\")|(?:\"\\s*[^?\\w\\s=.,;)(]+\\s*[(@\"]*\\s*\\w+\\W+\\w)|(?:select\\s*[\\[\\]()\\s\\w\\.,\"-]+from)|(?:find_in_set\\s*\\()/i);
+// }
+// </script> -->

@@ -6,15 +6,22 @@ require_once('sqlifilters.php');
 require('../sendmail.php');
 require('../server.php');
 define("ATTACK_SUBJECT", "ATTENTION SQL injection attack alert!!");
-define("TABLE_NAME","SQL_injections");
+define("TABLE_NAME", "SQL_injections");
 // class sqliDetection
 // {
 
-    $data = json_decode(file_get_contents('php://input'), true);
+$data = json_decode(file_get_contents('php://input'), true);
+// echo $data;
 var_dump($data);
 var_dump($_POST);
+var_dump($_GET);
+
 echo "WE ARE HERE";
-die();
+// die();
+
+if(isset($_POST['data'])) {
+    echo "hi";
+}
 
 function sqli_detect($string)
 {
@@ -44,14 +51,14 @@ function is_sqli($string)
     } else {
         $attack_description = implode("\r\n", $array_result);
         // session mail of user....
-        $date= date("Y-m-d");
-        $time= date("h:i:sa"); 
+        $date = date("Y-m-d");
+        $time = date("h:i:sa");
         $url_endoe = urlencode($string);
         $sql = "INSERT INTO SQL_injections (date, time, http_url,http_method,description,type)
         VALUES ('$date', '$time', '$url_endoe', 'GET','$attack_description','sqli')";
-        if($connection->query($sql) === TRUE){
+        if ($connection->query($sql) === TRUE) {
             echo "succed";
-        }else{
+        } else {
             echo "  fail     ";
         }
         // sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "Someone is trying to hack your website\n" . $attack_description);
