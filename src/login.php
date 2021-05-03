@@ -1,6 +1,8 @@
 <?php 
 session_start();
-include('registration-functions.php') ?>
+include('registration-functions.php'); ?>
+
+ 
 <!DOCTYPE html>
 <html>
 

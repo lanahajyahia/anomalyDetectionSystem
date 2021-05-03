@@ -64,23 +64,8 @@
         position: absolute;
         z-index: 9;
         left: 40%;
-        /* background-color: #f1f1f1; */
-        /* border: 1px solid #d3d3d3; */
         text-align: center;
         vertical-align: middle;
-         /* margin-left: auto; */
-        /* margin-right: auto; */
-        /* 
-        z-index: 2;
-        position: absolute;
-      
-        margin: auto;
-        height: 100%;
-
-       
-
-        width: auto;
-        padding: 10px; */
     }
 
     .card {
@@ -113,39 +98,17 @@
 <?php
 
 
-
+// include("form-events/edituser-func.php");
 function console_log($data)
 {
     echo '<script>';
     echo 'console.log(' . json_encode($data) . ')';
     echo '</script>';
 }
-// include("server.php");
-// if (isset($_GET['save-edit'])) {
-//     $table    = 'Users';
-//     $id =  $_SESSION['id-to-edit'];
 
-//     $username = addslashes($_POST['username']);
-//     // debug_to_console("username");
-
-//     // $password = $_POST['password'];
-
-
-//     $query = $connection->query("UPDATE Users SET username='$username' WHERE id='$id'");
-//     if ($connection->query($query) === TRUE) {
-//         echo "Record updated successfully";
-//     } else {
-//         echo "Error updating record: " . $conn->error;
-//     }
-//     // if ($password != null) {
-//     //     $password = hash('sha256', $_POST['password']);
-//     //     $query = $mysqli->query("UPDATE `$table` SET username='$username', password='$password' WHERE id='$id'");
-//     // }
-//     // echo '<meta http-equiv="refresh" content="0;url=users.php">';
-// }
 if (isset($_POST['save-edit'])) {
     console_log("here");
-    echo "sd";
+    // echo "sd";
 }
 if (isset($_GET['cancel'])) {
     exit;
@@ -160,8 +123,9 @@ if (isset($_GET['cancel'])) {
         </div>
         <div class="card-body">
             <form class="form-horizontal" action="form-events/edituser-func.php" method="post">
-
+             <?php echo display_error(); ?>
                 <div class="form-group">
+              
                     <!-- <label class="control-label">Username: </label> -->
                     <div class="col-sm-12">
                         <!-- <input type="text" name="username" class="form-control" required> -->
@@ -225,14 +189,14 @@ if (isset($_GET['cancel'])) {
                 <input class="" type="radio" id="user" name="usertype" value="user" <?php echo ($_SESSION['type-to-edit'] == 'user') ?  "checked" : "";  ?>>
                 <label class="" for="user">User</label><br>
                 <input type="hidden" name="save-edit" value="true">
-
-                <input type="submit" value="save">
+                <a href="?cancel" class="btn btn-success pull-right btn-danger" title="cancel"><i class="fas"></i> Cancel</a>
+                <input type="submit" value="save" class="btn btn-success pull-right">
             </form>
         </div>
         <div class="card-footer panel-heading">
-            <a href="?cancel" class="btn btn-success pull-right btn-danger" title="cancel"><i class="fas"></i> Cancel</a>
+          
 
-            <a class="btn btn-success pull-right">Save</a>
+            <!-- <a >Save</a> -->
         </div>
         <!-- <div class="card-footer">
             <button class="btn btn-flat btn-primary" name="add_user" type="submit">Add</button>
@@ -245,6 +209,8 @@ if (isset($_GET['cancel'])) {
 
 
 <script>
+    document.getElementById("isCheckedUsernameChangeBtn").checked = false;
+
     function show(elementId, buttonId) {
         // var htmlS
         document.getElementById(elementId).style.display = "block";

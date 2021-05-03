@@ -1,27 +1,44 @@
 <?php
-// session_start();
-// global $connection;
+session_start();
 require("../../server.php");
-// echo "fds";
-// global $connection, $errors, $username;
-$id = (int)$_SESSION['id-to-edit'];
-// echo var_dump($id);
-// echo $id;
-// var_dump($_POST);
-// die();
-$username = $_POST['username-update'];
-// echo $username;
 
-$query = "UPDATE Users SET username='$username' WHERE id=$id";
-if ($connection->query($query) === TRUE) {
-	header("Location: ../../admin/users.php");
-	// exit;
-	// echo "Record updated successfully";
-} else {
-	// echo "Error updating record: " . $connection->error;
+ $errors =array();
+$id = (int)$_SESSION['id-to-edit'];
+$username = e($_POST['username-update']);
+//  echo $username;
+// echo '<script>alert("Welcome to Geeks for Geeks")</script>';
+if (!empty($username)) {
+	if (is_numeric($username[0])) {
+		array_push($errors, "Username must start with a letter!");
+		// echo $errors;
+		// echo '<script>alert("Welcome to Geeks for Geeks")</script>';
+		// $_POST['username-update'] = null;
+		 header("Location: ../../admin/users.php?edit-id=$id");
+	} else {
+		$query = "UPDATE Users SET username='$username' WHERE id=$id";
+		if ($connection->query($query) === TRUE) {
+		header("Location: ../../admin/users.php");}
+	}
 }
-	// if ($password != null) {
-	//     $password = hash('sha256', $_POST['password']);
-	//     $query = $mysqli->query("UPDATE `$table` SET username='$username', password='$password' WHERE id='$id'");
-	// }
-	// echo '<meta http-equiv="refresh" content="0;url=users.php">';
+
+
+
+// escape string specail chars if any 
+function e($val)
+{
+	global $connection;
+	return mysqli_real_escape_string($connection, trim($val));
+}
+
+function display_error()
+{
+	global $errors;
+
+	if (count($errors) > 0) {
+		echo '<div class="error">';
+		foreach ($errors as $error) {
+			echo $error . '<br>';
+		}
+		echo '</div>';
+	}
+}

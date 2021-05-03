@@ -17,7 +17,7 @@ if (isset($_GET['edit-id'])) {
     $query = $connection->query("SELECT username, user_type,password FROM `$table` WHERE id='$id'");
     
     $row = mysqli_fetch_assoc($query);
-    echo $row['username'] . "id: " . $id;
+    // echo $row['username'] . "id: " . $id;
     $_SESSION['username-to-edit'] = $row['username'] ."";
     $_SESSION['type-to-edit'] = $row['user_type'] ."";
     $_SESSION['id-to-edit'] = $id;
