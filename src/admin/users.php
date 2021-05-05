@@ -45,7 +45,7 @@ if (isset($_GET['export'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Page - Users Table</title>
+    <title>Users Table</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -74,7 +74,7 @@ if (isset($_GET['export'])) {
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800" style="padding:10px;">System Accounts</h1>
+            <h1 class="h3 mb-2 text-gray-800" style="padding:10px;">System Users</h1>
             <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
