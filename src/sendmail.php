@@ -8,7 +8,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // which is included in the download:
 // https://github.com/sendgrid/sendgrid-php/releases
 
-define("API_KEY", "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");
+define("API_KEY", "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");
 define("SENDER_EMAIL", "hajyahial@gmail.com");
 function sendmail($sendto, $subject, $content)
 {
@@ -24,10 +24,10 @@ function sendmail($sendto, $subject, $content)
     $sendgrid = new \SendGrid(API_KEY);
     try {
         $response = $sendgrid->send($email);
-        print $response->statusCode() . "\n";
-        print_r($response->headers());
-        print $response->body() . "\n";
+        // print $response->statusCode() . "\n";
+        // print_r($response->headers());
+        // print $response->body() . "\n";
     } catch (Exception $e) {
-        echo 'Caught exception: ' . $e->getMessage() . "\n";
+        // echo 'Caught exception: ' . $e->getMessage() . "\n";
     }
 }

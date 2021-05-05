@@ -104,7 +104,7 @@
         </div>
         <div class="navbar-div">
           <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Cross site scripting</a>
+            <a href="javascript:void(0)" class="dropbtn">Cross-site scripting</a>
             <div class="dropdown-content1">
               <a href="<?php echo htmlspecialchars('../../admin/Logs/reflectedLogs.php'); ?>">Reflected</a>
               <a href="<?php echo htmlspecialchars('../../admin/Logs/storedLogs.php'); ?>">Stored</a>

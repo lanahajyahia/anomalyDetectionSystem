@@ -48,9 +48,9 @@ function get_attack_number($table, $type = null)
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         SQLi attacks</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <div class="h6 mb-0 text-gray-800">
                                         <?php
-                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("sqli"));
+                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("sqli")). " detected today";
                                         ?>
                                     </div>
 
@@ -76,9 +76,9 @@ function get_attack_number($table, $type = null)
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                         Reflected XSS attacks</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <div class="h6 mb-0  text-gray-800">
                                         <?php
-                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("reflected"));
+                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("reflected")). " detected today";
                                         ?></div>
                                 </div>
                                 <div class="col-auto">
@@ -101,9 +101,9 @@ function get_attack_number($table, $type = null)
                                     </div>
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-auto">
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                            <div class="h6 mb-0 mr-3 text-gray-800">
                                                 <?php
-                                                echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("stored"));
+                                                echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("stored")) . " detected today";
                                                 ?></div>
                                         </div>
                                         <div class="col">
@@ -144,73 +144,49 @@ function get_attack_number($table, $type = null)
 
             <!-- Content Row -->
 
-            <div class="row">
+            <div class="row" style="justify-content:center">
 
                 <!-- Area Chart -->
                 <div class="col-xl-8 col-lg-7">
                     <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Overall Injections</h6>
-                            <div class="dropdown no-arrow">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-header">Dropdown Header:</div>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <div class="chart-area">
-                                <canvas id="myAreaChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-                <!-- Pie Chart -->
-                <div class="col-xl-4 col-lg-5">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                            <div class="dropdown no-arrow">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-header">Dropdown Header:</div>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <div class="chart-pie pt-4 pb-2">
-                                <canvas id="myPieChart"></canvas>
-                            </div>
-                            <div class="mt-4 text-center small">
-                                <span class="mr-2">
-                                    <i class="fas fa-circle text-primary"></i> XSS
-                                </span>
-                                <span class="mr-2">
-                                    <i class="fas fa-circle text-success"></i> SQLi
-                                </span>
-                                <span class="mr-2">
-                                    <i class="fas fa-circle text-info"></i> CSRF
-                                </span>
-                            </div>
-                        </div>
+
+                        <canvas id="myChart" style="width:80%;"></canvas>
+
+                        <script>
+                            var xValues = ["Reflected XSS", "Stored XSS", "SQLi"];
+                            // var reflected = 
+                            // console.log(reflected);
+                            var yValues = [500, <?php echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("stored")); ?>, <?php echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("sqli")); ?>];
+                            var barColors = ["red", "green", "blue"];
+
+                            new Chart("myChart", {
+                                type: "bar",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        backgroundColor: barColors,
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: "Overall Attacks Detected"
+                                    }
+                                }
+                            });
+                        </script>
                     </div>
+
+                    <!-- Card Body -->
+
+
+
                 </div>
             </div>
 

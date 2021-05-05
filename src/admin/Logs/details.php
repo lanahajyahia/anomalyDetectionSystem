@@ -79,7 +79,6 @@
     details p {
         font-size: 0.95rem;
         margin: 0 0 1rem;
-        /* padding-top: 1rem; */
     }
 </style>
 <?php
@@ -90,56 +89,59 @@ $row = mysqli_fetch_assoc($sql);
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Attack Details</title>
+    <title>Attack Details</title>
 </head>
+
 <body>
-<section>
-    <h1>
-        Attack Details
-    </h1>
-    <details>
+    <div>
+        <section>
+            <h1>
+                Attack Details
+            </h1>
+            <details>
 
-        <summary>Type</summary>
-        <p>
-            <?php echo $row['type'];?>
-        </p>
-    </details>
-    <details>
+                <summary>Type</summary>
+                <p>
+                    <?php echo $row['type']; ?>
+                </p>
+            </details>
+            <details>
 
-        <summary>Date and Time</summary>
-        <p>
-        <?php echo $row['date'] ." ". $row['time'];?>
-        </p>
-    </details>
-    <details>
-        <summary>Method</summary>
-        <p>
-        <?php echo $row['http_method'];?>
-        </p>
-    </details>
-    <details>
-        <summary>URL
-        </summary>
-        <p>
-        <?php echo $row['http_url'];?>
-        </p>
-    </details>
-    <details>
-        <summary>Headers
-        </summary>
-        <p>
-        </p>
-    </details>
-    <details>
-        <summary>Description
-        </summary>
-        <p>
-        <?php echo $row['description'];?>
-        </p>
-    </details>
-</section>
-
+                <summary>Date and Time</summary>
+                <p>
+                    <?php echo $row['date'] . " " . $row['time']; ?>
+                </p>
+            </details>
+            <details>
+                <summary>Method</summary>
+                <p>
+                    <?php echo $row['http_method']; ?>
+                </p>
+            </details>
+            <details>
+                <summary>URL
+                </summary>
+                <p>
+                    <?php echo $row['http_url']; ?>
+                </p>
+            </details>
+            <details>
+                <summary>Headers
+                </summary>
+                <p>
+                </p>
+            </details>
+            <details>
+                <summary>Description
+                </summary>
+                <p>
+                    <?php echo $row['description']; ?>
+                </p>
+            </details>
+        </section>
+    </div>
 </body>
-</html>
 
+</html>

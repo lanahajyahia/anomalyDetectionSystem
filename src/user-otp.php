@@ -43,11 +43,11 @@ if ($email == false) {
                         }
                         ?>
                         <div class="input-group">
-                            <input class="form-control" type="number" name="otp" placeholder="Enter verification code" required>
+                            <input class="form-control" type="number" name="otp" placeholder="Enter verification code">
                         </div>
                         <div class="">
-                            <input style="background-color: #e4e6eb; color: #4b4f56; line-height: 33px; width: 17%;" class="btn" type="submit" name="resend" value="Resend">
-                            <input style="line-height: 33px; width: 17%;" class="btn" type="submit" name="check" value="Submit">
+                            <input style="background-color: #e4e6eb; color: #4b4f56; line-height: 33px; width: 17%;" class="btn" type="submit" name="resend" value="resend">
+                            <input style="line-height: 33px; width: 17%;" class="btn" type="submit" name="check" value="submit">
 
 
                         </div>

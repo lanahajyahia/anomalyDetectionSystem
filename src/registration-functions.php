@@ -8,19 +8,13 @@ $username = "";
 $email    = "";
 $errors   = array();
 
-// var_dump($_POST);
-// if (sizeof($_POST) > 0) {
-// 	echo "POST!";
-// 	die();
-// }
-
 // call the register() function if register_btn is clicked
 if (isset($_POST['add_user'])) {
 	register();
 }
 if (isset($_POST['save-edit'])) {
 	// update_user_BY_admin();
-	 echo "sd";
+	echo "sd";
 }
 // call the login() function if register_btn is clicked
 if (isset($_POST['login_btn'])) {
@@ -31,12 +25,12 @@ if (isset($_POST['login_btn'])) {
 if (isset($_POST['check'])) {
 	isUserVerified();
 }
-if (isset($_POST['check'])) {
-	isUserVerified();
-}
+
+// resend code for mail verification
 if (isset($_POST['resend'])) {
-	// sendmail($email,)
+	sendcodeagain();
 }
+
 // log user out if logout button clicked
 if (isset($_GET['logout'])) {
 	// remove all session variables
@@ -97,32 +91,58 @@ function login()
 		}
 	}
 }
+
+function sendcodeagain()
+{
+	global $connection, $errors, $email;
+
+	$email = $_SESSION['email'];
+	$code = rand(999999, 111111);
+	$query = "UPDATE Users SET code = $code WHERE email = '$email'";
+
+	$resend = mysqli_query($connection, $query);
+	if ($resend) {
+		$subject = "Resend Email Verification Code";
+		$message = "Your new verification code is $code";
+		sendmail($email, $subject, $message);
+		array_push($errors, "Please check your email Inbox");
+		// $_SESSION['success']  = "New user successfully created!!";
+	} else {
+		array_push($errors, "Failed while sending code click the resend button again!");
+	}
+}
+
 //if user click verification code submit button
 function isUserVerified()
 {
 	global $connection, $errors, $name;
 	$_SESSION['info'] = "";
 	$otp_code = mysqli_real_escape_string($connection, $_POST['otp']);
-	$check_code = "SELECT * FROM Users WHERE code = $otp_code";
-	$code_res = mysqli_query($connection, $check_code);
-	if (mysqli_num_rows($code_res) > 0) {
-		$fetch_data = mysqli_fetch_assoc($code_res);
-		$fetch_code = $fetch_data['code'];
-		$email = $fetch_data['email'];
-		$code = 0;
-		$status = 'verified';
-		$update_otp = "UPDATE Users SET code = $code, status = '$status' WHERE code = $fetch_code";
-		$update_res = mysqli_query($connection, $update_otp);
-		if ($update_res) {
-			$_SESSION['name'] = $name;
-			$_SESSION['email'] = $email;
-			header('location: admin/dashboard.php');
-			exit();
+	if (!empty($otp_code)) {
+		$check_code = "SELECT * FROM Users WHERE code = $otp_code";
+		$code_res = mysqli_query($connection, $check_code);
+		if (mysqli_num_rows($code_res) > 0) {
+			$fetch_data = mysqli_fetch_assoc($code_res);
+			$fetch_code = $fetch_data['code'];
+			$email = $fetch_data['email'];
+			// echo $email;
+			$code = 0;
+			$status = 'verified';
+			$update_otp = "UPDATE Users SET code = $code, status = '$status' WHERE email = '$email'";
+			$update_res = mysqli_query($connection, $update_otp);
+			if ($update_res) {
+				$_SESSION['name'] = $name;
+				$_SESSION['email'] = $email;
+				header('location: admin/dashboard.php');
+				exit();
+			} else {
+				$errors['otp-error'] = "Failed while updating code!";
+			}
 		} else {
-			$errors['otp-error'] = "Failed while updating code!";
+			$errors['otp-error'] = "You've entered incorrect code!";
 		}
 	} else {
-		$errors['otp-error'] = "You've entered incorrect code!";
+		$errors['otp-error'] = "Please enter the verification code!";
 	}
 }
 
