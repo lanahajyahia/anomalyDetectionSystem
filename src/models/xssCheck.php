@@ -20,7 +20,7 @@ use const HTML_ENTITIES;
  * @copyright   Copyright (c) 2015 - 2020, Lars Moelleken (https://moelleken.org/)
  * @license     http://opensource.org/licenses/MIT	MIT License
  */
-final class xssDetection
+final class xssCheck
 {
     const XSS_GT = 'gt';
 
@@ -395,6 +395,12 @@ final class xssDetection
      * @var bool|null
      */
     private $_xss_found;
+
+      /**
+     * @var bool|null
+     */
+    private $_xss_found1;
+
 
     /**
      * @var string
@@ -1834,7 +1840,7 @@ final class xssDetection
      */
     public function isXssFound()
     {
-        return $this->_xss_found;
+        return $this->_xss_found || $this->_xss_found1;
     }
 
     /**
@@ -2030,6 +2036,10 @@ final class xssDetection
         if (\is_array($str)) {
             foreach ($str as &$value) {
                 $value = $this->xss_clean($value);
+                if($this->_xss_found ===true){
+                    $this->_xss_found1 = true;
+                }
+                echo $value;
             }
 
             /** @var TXssCleanInput $str - hack for phpstan */

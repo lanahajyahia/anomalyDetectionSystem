@@ -1,5 +1,4 @@
 FROM php:7.4-apache
-LABEL maintainer="dev@chialab.io"
 
 # Download script to install PHP extensions and dependencies
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
@@ -57,4 +56,6 @@ RUN cd /opt \
     && composer1 global require hirak/prestissimo \
     # Remove installer files.
     && rm /opt/composer-setup.php /opt/composer-setup.sha384sum
+
+
 

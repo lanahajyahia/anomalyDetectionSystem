@@ -16,7 +16,7 @@
 // //    ';
 // // $harm_string = 'http://testsite.test/<script>alert("TEST");</script>';
 // // $harm_string = 'aba.myspecies.info/search/lana/<img src%3D"http%3A%2f%2furl.to.file.which%2fnot.exist" onerror%3Dalert(document.cookie)%3B>'; 
-// $harm_string = "aba.myspecies.info/search/site/%3CSCRIPT%20type%3D%22text%2Fjavascript%22%3E%20var%20adr%20%3D%20%27..%2Fevil.php%3Fcakemonster%3D%27%20%2B%20escape%28document.cookie%29%3B%20%3C%2FSCRIPT%3E";
+// $harm_string = '<body onBeforeUnload body onBeforeUnload="javascript:javascript:alert(1)"></body onBeforeUnload>';
 // // "<SCRIPT type='text/javascript'>var adr = '../evil.php?cakemonster=' + escape(document.cookie);</SCRIPT>";
 // //  echo urlencode("https://insecure-website.com/products?category=Gifts'+OR+1=1--");
 // // echo '</br>';
@@ -29,7 +29,7 @@
 // if ($xss_detection->isXssFound()) {
 //   echo "injection " . $harmless_xss;
 // } else {
-//   // echo "no injection " . $harmless_xss;
+//    echo "no injection " . $harmless_xss;
 // }
 
 // namespace sqli;
@@ -48,14 +48,14 @@
 // $string_ = '";waitfor delay "0:0:5"-- ';
 // $string_ = " ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8)";
 // $string_ = 'http://acunetix.php.example/wordpress/wp-content/plugins/demo_vul/endpoint.php?user=1+ORDER+BY+10';
- $string_ = 'http://aba.myspecies.info/search/site/ORDER%20BY%201%2CSLEEP%285%29%2CBENCHMARK%281000000%2CMD5%28%27A%27%29%29%2C4%2C5%2C6%2C7';
-// $string_ = " ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13";
- $ss = urldecode($string_);
-  echo $ss;
+//  $string_ = 'http://aba.myspecies.info/search/site/ORDER%20BY%201%2CSLEEP%285%29%2CBENCHMARK%281000000%2CMD5%28%27A%27%29%29%2C4%2C5%2C6%2C7';
+// $string_ = "<script>alert</script>";
+//  $ss = urldecode($string_);
+//   echo $ss;
 
-var_dump(is_sqli($ss));
+// var_dump(is_sqli($ss));
    // echo preg_match("/(?:(sleep\\((\\s*)(\\d*)(\\s*)\\)|benchmark\\((.*)\\,(.*)\\)))/i",$string_);
-   echo $detect->get_sqli_description();
+  //  echo $detect->get_sqli_description();
 
 //    <!-- <script>
 // function myFunction() {

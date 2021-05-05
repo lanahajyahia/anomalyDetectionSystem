@@ -4,7 +4,7 @@ session_start();
 require("../../server.php");
 require_once("../../exportData.php");
 
-$table = htmlspecialchars('XSS_injections');
+$table = htmlspecialchars('Detected_Attacks');
 $type = htmlspecialchars('reflected');
 
 

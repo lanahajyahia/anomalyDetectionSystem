@@ -3,8 +3,7 @@ session_start();
 include('includes/header.php');
 include('../server.php');
 
-define("XSS_TABLE", "XSS_injections");
-define("SQLI_TABLE", "SQL_injections");
+define("INJECTION_TABLE", "Detected_Attacks");
 
 
 function get_attack_number($table, $type = null)
@@ -51,7 +50,7 @@ function get_attack_number($table, $type = null)
                                         SQLi attacks</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                         <?php
-                                        echo get_attack_number(htmlspecialchars(SQLI_TABLE), htmlspecialchars("sqli"));
+                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("sqli"));
                                         ?>
                                     </div>
 
@@ -79,7 +78,7 @@ function get_attack_number($table, $type = null)
                                         Reflected XSS attacks</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                         <?php
-                                        echo get_attack_number(htmlspecialchars(XSS_TABLE), htmlspecialchars("reflected"));
+                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("reflected"));
                                         ?></div>
                                 </div>
                                 <div class="col-auto">
@@ -104,7 +103,7 @@ function get_attack_number($table, $type = null)
                                         <div class="col-auto">
                                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
                                                 <?php
-                                                echo get_attack_number(htmlspecialchars(XSS_TABLE), htmlspecialchars("stored"));
+                                                echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("stored"));
                                                 ?></div>
                                         </div>
                                         <div class="col">

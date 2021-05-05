@@ -19,8 +19,7 @@ if ($link->query($sql) === TRUE) {
   //echo "Database created successfully";
   $connection = new mysqli($servername, $username, $password, $dbname);
   createUsersTable();
-  createSQLiTable();
-  createXSSInjectionsTable();
+  createInjectionsTable();
 } else {
   // echo "Error creating database: " . $link->error;
   // if database exist connect to it
@@ -60,10 +59,10 @@ function createUsersTable()
     // echo "Error: " . $sql . "<br>" . mysqli_error($connection);
   }
 }
-function createXSSInjectionsTable()
+function createInjectionsTable()
 {
   global $connection;
-  $table_name = htmlspecialchars("XSS_injections");
+  $table_name = htmlspecialchars("Detected_Attacks");
   $sql_xss =  "CREATE TABLE $table_name (
     id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     date VARCHAR(30) NOT NULL,
@@ -75,25 +74,6 @@ function createXSSInjectionsTable()
     )";
   if ($connection->query($sql_xss) === TRUE) {
     //   echo "Table XSS  created successfully";
-  } else {
-    // echo "Error creating table: " . $connection->error;
-  }
-}
-function createSQLiTable()
-{
-  $table_name = htmlspecialchars("SQL_injections");
-  global $connection;
-  $sql_sqli =  "CREATE TABLE $table_name (
-    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    date VARCHAR(30) NOT NULL,
-    time VARCHAR(50) NOT NULL,
-    http_url VARCHAR(500) NOT NULL,
-    http_method VARCHAR(50) NOT NULL, -- get or post
-    description VARCHAR(250) NOT NULL, -- description of injection
-    type VARCHAR(50) NOT NULL -- reflected / dom / stored / sqli
-    )";
-  if ($connection->query($sql_sqli) === TRUE) {
-    // echo "Table SQL created successfully";
   } else {
     // echo "Error creating table: " . $connection->error;
   }

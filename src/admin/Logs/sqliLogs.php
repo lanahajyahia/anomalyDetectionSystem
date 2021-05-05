@@ -5,7 +5,7 @@ require("../../server.php");
 
 require_once("../../exportData.php");
 
-$table = 'SQL_injections';
+$table = 'Detected_Attacks';
 $type =  'sqli';
 if (isset($_GET['delete-id'])) {
     $id    = (int) $_GET["delete-id"];

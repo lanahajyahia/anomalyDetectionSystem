@@ -85,7 +85,7 @@
 <?php
 require("../../server.php");
 $id = $_GET['id'];
-$sql  = $connection->query("SELECT date, time, http_url, http_method, description ,type FROM SQL_injections WHERE id='$id'");
+$sql  = $connection->query("SELECT date, time, http_url, http_method, description ,type FROM Detected_Attacks WHERE id='$id'");
 $row = mysqli_fetch_assoc($sql);
 ?>
 <!DOCTYPE html>
