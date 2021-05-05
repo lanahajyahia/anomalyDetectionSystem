@@ -11,7 +11,7 @@ if ($email == false) {
 <head>
     <meta charset="UTF-8">
     <title>Code Verification</title>
-    <link rel="stylesheet" href="styles\register-style.css">
+    <link rel="stylesheet" href="admin/css/register-style.css">
 
 </head>
 

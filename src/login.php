@@ -8,7 +8,7 @@ include('registration-functions.php'); ?>
 
 <head>
 	<title>Log In</title>
-	<link rel="stylesheet" type="text/css" href="styles/register-style.css">
+	<link rel="stylesheet" type="text/css" href="admin/css/register-style.css">
 	<style>
 		.forgot-pass {
 			color: #7596c8;

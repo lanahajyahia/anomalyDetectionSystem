@@ -4,7 +4,7 @@
 
 <head>
     <title>Forgot Password</title>
-    <link rel="stylesheet" type="text/css" href="styles/register-style.css">
+    <link rel="stylesheet" type="text/css" href="admin/css/register-style.css">
     <style>
         .findaccount {
             font-size: 20px;
@@ -59,14 +59,10 @@
                             <button type="submit" class="btn" name="forgotpassword">Send</button>
 
                         </div>
-
-                <!-- <div class="forgot-pass">
-                                        <a class="" href="login.html">Already have an account? Login!</a>
-                                    </div> -->
                     </form>
-                    
+
                 </div>
-            
+
 
             </div>
 </body>
