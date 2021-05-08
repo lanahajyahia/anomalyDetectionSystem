@@ -12,9 +12,8 @@ $errors   = array();
 if (isset($_POST['add_user'])) {
 	register();
 }
-if (isset($_POST['save-edit'])) {
-	// update_user_BY_admin();
-	echo "sd";
+if (isset($_POST['save-edit-user'])) {
+	update_user_BY_admin();
 }
 // call the login() function if register_btn is clicked
 if (isset($_POST['login_btn'])) {
@@ -33,10 +32,62 @@ if (isset($_POST['resend'])) {
 
 // log user out if logout button clicked
 if (isset($_GET['logout'])) {
-	// remove all session variables
 	session_unset();
 	session_destroy(); // destroy the session
 	header("location: login.php");
+}
+function update_user_BY_admin()
+{
+	global $connection, $username, $errors;
+	$id = (int)$_SESSION['id-to-edit'];
+	$username = e($_POST['username-update']);
+	$pass1 = e($_POST['password1-save']);
+	$pass2 = e($_POST['password2-save']);
+	$type = $_POST['usertype'];
+	if (!empty($username) && $username != $_SESSION['username-to-edit']) {
+		if (is_numeric($username[0])) {
+			array_push($errors, "Username must start with a letter!");
+		} else if (strlen($username) < 3) {
+			array_push($errors, "Username must contain at least 3 letters!");
+		} else {
+			$query = "UPDATE Users SET username='$username' WHERE id=$id";
+			if ($connection->query($query) === TRUE) {
+				header("Location: ../../admin/users.php");
+			}
+		}
+	}
+	if (!empty($pass1)) {
+
+		// Validate password strength
+		$uppercase = preg_match('@[A-Z]@', $pass1);
+		$lowercase = preg_match('@[a-z]@', $pass1);
+		$number    = preg_match('@[0-9]@', $pass1);
+		$specialChars = preg_match('@[^\w]@', $pass1);
+
+		if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pass1) < 8) {
+			array_push($errors, "Password should be:");
+			array_push($errors, "*at least 8 characters in length");
+			array_push($errors, "*include at least one upper case letter");
+			array_push($errors, "*one number");
+			array_push($errors, "*one special character");
+		} else if ($pass1 != $pass2) {
+			array_push($errors, "The two passwords do not match");
+		} else {
+			$pass = md5($pass1);
+			$query = "UPDATE Users SET password='$pass' WHERE id=$id";
+			if ($connection->query($query) === TRUE) {
+				header("Location: ../../admin/users.php");
+			}
+		}
+	} else {
+		header("Location: ../../admin/users.php");
+	}
+	if ($type != $_SESSION['type-to-edit']) {
+		$query = "UPDATE Users SET user_type='$type' WHERE id=$id";
+		if ($connection->query($query) === TRUE) {
+			header("Location: ../../admin/users.php");
+		}
+	}
 }
 
 // LOGIN USER
@@ -106,7 +157,6 @@ function sendcodeagain()
 		$message = "Your new verification code is $code";
 		sendmail($email, $subject, $message);
 		array_push($errors, "Please check your email Inbox");
-		// $_SESSION['success']  = "New user successfully created!!";
 	} else {
 		array_push($errors, "Failed while sending code click the resend button again!");
 	}
@@ -256,7 +306,7 @@ function display_error()
 	global $errors;
 
 	if (count($errors) > 0) {
-		echo '<div class="error">';
+		echo '<div class="error" style="width: 100% !important;">';
 		foreach ($errors as $error) {
 			echo $error . '<br>';
 		}

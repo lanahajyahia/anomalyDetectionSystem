@@ -69,7 +69,7 @@ function createInjectionsTable()
     time VARCHAR(50) NOT NULL,
     http_url VARCHAR(500) NOT NULL,
     http_method VARCHAR(50) NOT NULL, -- get or post
-    description VARCHAR(250) NOT NULL, -- description of injection
+    description VARCHAR(500) NOT NULL, -- description of injection
     type VARCHAR(50) NOT NULL -- reflected / dom / stored / sqli
     )";
   if ($connection->query($sql_xss) === TRUE) {

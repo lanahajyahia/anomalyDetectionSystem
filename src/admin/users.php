@@ -15,15 +15,15 @@ if (isset($_GET['edit-id'])) {
     $id    = (int) $_GET["edit-id"];
     // echo "hi";
     $query = $connection->query("SELECT username, user_type,password FROM `$table` WHERE id='$id'");
-    
+
     $row = mysqli_fetch_assoc($query);
     // echo $row['username'] . "id: " . $id;
-    $_SESSION['username-to-edit'] = $row['username'] ."";
-    $_SESSION['type-to-edit'] = $row['user_type'] ."";
+    $_SESSION['username-to-edit'] = $row['username'] . "";
+    $_SESSION['type-to-edit'] = $row['user_type'] . "";
     $_SESSION['id-to-edit'] = $id;
 
 
-    require('edituser.php');
+    include('edituser.php');
     // session_abort();
 }
 if (isset($_GET['delete-all'])) {
@@ -114,7 +114,6 @@ if (isset($_GET['export'])) {
                                           <td> 
                                           <a href="?edit-id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-edit"></i> Edit</a> 
                                           <a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger"><i class="fas fa-trash"></i> Delete</a>
-
                                           </td>
 										  	
 										
@@ -196,6 +195,7 @@ if (isset($_GET['export'])) {
                     <button type="reset" class="btn btn-flat btn-default">Reset</button>
                 </div>
             </div>
+            </form>
 
 
         </div>
@@ -224,4 +224,4 @@ if (isset($_GET['export'])) {
 </html>
 <?php
 include('includes/scripts.php');
-include('includes/footer.php'); 
+include('includes/footer.php');

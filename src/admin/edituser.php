@@ -1,6 +1,6 @@
 <style>
     .switch {
-        position: relative;
+        position: absolute;
         display: inline-block;
         width: 55px;
         height: 28px;
@@ -45,10 +45,9 @@
     }
 
     input:checked+.slider:before {
-        -webkit-transform: translateX(26px); 
-         -ms-transform: translateX(26px); 
-         transform: translateX(26px);
-        /* background-color: white; */
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
     }
 
     /* Rounded sliders */
@@ -72,8 +71,6 @@
         padding: 10px;
         cursor: move;
         z-index: 10;
-        /* background-color: #2196F3; */
-        /* color: #fff; */
     }
 
     #wrapper {
@@ -81,9 +78,6 @@
         -webkit-filter: blur(8px);
     }
 
-    label {
-        top: -0.3em;
-    }
 
     * {
         box-sizing: border-box;
@@ -93,27 +87,17 @@
     #usernameEditId {
         display: none;
     }
+
+    .label-edit {
+        margin-right: 0.5em;
+    }
+
+    .form-group {
+        margin-left: -3em;
+        margin-bottom: 0 !important;
+        padding: 0.5em;
+    }
 </style>
-
-<?php
-
-
-// include("form-events/edituser-func.php");
-function console_log($data)
-{
-    echo '<script>';
-    echo 'console.log(' . json_encode($data) . ')';
-    echo '</script>';
-}
-
-if (isset($_POST['save-edit'])) {
-    console_log("here");
-    // echo "sd";
-}
-if (isset($_GET['cancel'])) {
-    exit;
-}
-?>
 
 
 <div id="editUserDiv" class="col-md-3" style="padding-top: 3.8em;">
@@ -122,37 +106,33 @@ if (isset($_GET['cancel'])) {
             <h3 class="card-title">Edit User</h3>
         </div>
         <div class="card-body">
-            <form class="form-horizontal" action="form-events/edituser-func.php" method="post">
-             <?php echo display_error(); ?>
+
+            <form class="form-horizontal" action="" method="post">
+                <p style="font-size=1em;"> <?php echo display_error(); ?> </p>
                 <div class="form-group">
-              
-                    <!-- <label class="control-label">Username: </label> -->
+
                     <div class="col-sm-12">
-                        <!-- <input type="text" name="username" class="form-control" required> -->
-                        <label> Change Username </label>
-
-
+                        <label class="label-edit"> Change Username </label>
                         <label class="switch">
                             <input id="isCheckedUsernameChangeBtn" type="checkbox" onclick="show('usernameEditId',this.id); ">
                             <span class="slider round"></span>
                         </label>
 
-                    </div>
+                    </div></div>
+                    <div>
                     <div id="usernameEditId">
-                        <td><label>Username: </label></td>
+                        <td><label>New Username: </label></td>
                         <td>
-                            <!-- <input type="text" name="username" class="form-control" required> -->
                             <input type="text" name="username-update" value=" <?php echo $_SESSION['username-to-edit'] ?>">
 
                         </td>
-
+</div>
                     </div>
-                </div>
+              
 
                 <div class="form-group">
-                    <!-- <label class="control-label">Username: </label> -->
                     <div class="col-sm-12">
-                        <label> Change Password </label>
+                        <label class="label-edit"> Change Password </label>
 
 
                         <label class="switch">
@@ -161,24 +141,13 @@ if (isset($_GET['cancel'])) {
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <!-- <label class="control-label">Email: </label> -->
+                <div class="">
                     <div class="col-sm-12">
-                        <!-- <input type="email" name="email" class="form-control" required> -->
                         <div id="passwordEditId">
 
-                            <label>Password* </label>
+                            <input placeholder="New Password*" type="password" name="password1-save">
 
-                            <!-- <input type="text" name="username" class="form-control" required> -->
-                            <input type="password" name="password1">
-
-
-
-                            <label>Password Confirmation* </label>
-
-                            <!-- <input type="text" name="username" class="form-control" required> -->
-                            <input type="password" name="password2" placeholder="">
-
+                            <input placeholder="Password Confirmation*" type="password" name="password2-save" placeholder="">
 
                         </div>
                     </div>
@@ -190,18 +159,14 @@ if (isset($_GET['cancel'])) {
                 <label class="" for="user">User</label><br>
                 <input type="hidden" name="save-edit" value="true">
                 <a href="?cancel" class="btn btn-success pull-right btn-danger" title="cancel"><i class="fas"></i> Cancel</a>
-                <input type="submit" value="save" class="btn btn-success pull-right">
-            </form>
-        </div>
-        <div class="card-footer panel-heading">
-          
+                <button type="submit" value="save" name="save-edit-user" class="btn btn-success pull-right">Save</button>
 
-            <!-- <a >Save</a> -->
         </div>
-        <!-- <div class="card-footer">
-            <button class="btn btn-flat btn-primary" name="add_user" type="submit">Add</button>
-            <button type="reset" class="btn btn-flat btn-default">Reset</button>
-        </div> -->
+        </form>
+        <div class="card-footer panel-heading">
+
+        </div>
+
     </div>
 
 
