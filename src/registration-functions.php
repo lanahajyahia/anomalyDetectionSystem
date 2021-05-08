@@ -58,25 +58,30 @@ function update_user_BY_admin()
 	}
 	if (!empty($pass1)) {
 
-		// Validate password strength
-		$uppercase = preg_match('@[A-Z]@', $pass1);
-		$lowercase = preg_match('@[a-z]@', $pass1);
-		$number    = preg_match('@[0-9]@', $pass1);
-		$specialChars = preg_match('@[^\w]@', $pass1);
-
-		if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pass1) < 8) {
-			array_push($errors, "Password should be:");
-			array_push($errors, "*at least 8 characters in length");
-			array_push($errors, "*include at least one upper case letter");
-			array_push($errors, "*one number");
-			array_push($errors, "*one special character");
-		} else if ($pass1 != $pass2) {
+		password_validation($pass1);
+		if ($pass1 != $pass2) {
 			array_push($errors, "The two passwords do not match");
 		} else {
 			$pass = md5($pass1);
-			$query = "UPDATE Users SET password='$pass' WHERE id=$id";
-			if ($connection->query($query) === TRUE) {
-				header("Location: ../../admin/users.php");
+			$sql   = "SELECT password,password2 FROM Users Where id=$id";
+			$result = $connection->query($sql);
+			if ($result->num_rows > 0) {
+				while ($row = $result->fetch_assoc()) {
+					if ($row['password'] == $pass || $row['password2'] == $pass) {
+						array_push($errors, "Try a diffrent password!");
+						echo $row['password'] . "  ";
+						echo $row['password2'];
+					} else {
+						$password_old = $row['password'];
+						// echo $password_old;
+						$query = "UPDATE Users SET password='$pass', password2='$password_old' WHERE id=$id";
+						if ($connection->query($query) === TRUE) {
+							header("Location: ../../admin/users.php");
+						} else {
+							echo $query;
+						}
+					}
+				}
 			}
 		}
 	} else {
@@ -125,14 +130,23 @@ function login()
 				if ($logged_in_user['status'] == 'notverified') {
 					header('location: user-otp.php');
 				} else {
-					header('location: admin/dashboard.php');
+					$query = "UPDATE Users SET last_activity=now() WHERE username='$username'";
+					if ($connection->query($query) === TRUE) {
+						header('location: admin/dashboard.php');
+					}
 				}
 			} else {
 				if ($logged_in_user['status'] == 'notverified') {
 					header('location: user-otp.php');
 				} else {
-					header('location: admin/dashboard.php');
+
+					$query = "UPDATE Users SET last_activity=now() WHERE username='$username'";
+					if ($connection->query($query) === TRUE) {
+						header('location: admin/dashboard.php');
+					}
 				}
+
+
 				$_SESSION['user'] = $logged_in_user;
 				$_SESSION['success']  = "You are now logged in";
 				$_SESSION['email'] = $logged_in_user['email'];
@@ -183,7 +197,10 @@ function isUserVerified()
 			if ($update_res) {
 				$_SESSION['name'] = $name;
 				$_SESSION['email'] = $email;
-				header('location: admin/dashboard.php');
+				$query = "UPDATE Users SET last_activity=now() WHERE email='$email'";
+				if ($connection->query($query) === TRUE) {
+					header('location: admin/dashboard.php');
+				}
 				exit();
 			} else {
 				$errors['otp-error'] = "Failed while updating code!";
@@ -238,19 +255,7 @@ function register()
 	if (empty($password_1)) {
 		array_push($errors, "Password is required");
 	} else {
-		// Validate password strength
-		$uppercase = preg_match('@[A-Z]@', $password_1);
-		$lowercase = preg_match('@[a-z]@', $password_1);
-		$number    = preg_match('@[0-9]@', $password_1);
-		$specialChars = preg_match('@[^\w]@', $password_1);
-
-		if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password_1) < 8) {
-			array_push($errors, "Password should be:");
-			array_push($errors, "*at least 8 characters in length");
-			array_push($errors, "*include at least one upper case letter");
-			array_push($errors, "*one number");
-			array_push($errors, "*one special character");
-		}
+		password_validation($password_1);
 	}
 	if ($password_1 != $password_2) {
 		array_push($errors, "The two passwords do not match");
@@ -283,7 +288,7 @@ function register()
 					  VALUES('$username', '$email','$fullname', '$user_type', '$password','$code','$status')";
 			$data_check = mysqli_query($connection, $query);
 			if ($data_check) {
-				$subject = "Email Verification Code";
+				$subject = "Welcome to Anomaly Detection System";
 				$message = "Your verification code is $code";
 				sendmail($email, $subject, $message);
 				$_SESSION['success']  = "New user successfully created!!";
@@ -294,6 +299,24 @@ function register()
 	}
 }
 
+
+function password_validation($password_1)
+{
+	global $errors;
+	// Validate password strength
+	$uppercase = preg_match('@[A-Z]@', $password_1);
+	$lowercase = preg_match('@[a-z]@', $password_1);
+	$number    = preg_match('@[0-9]@', $password_1);
+	$specialChars = preg_match('@[^\w]@', $password_1);
+
+	if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password_1) < 8) {
+		array_push($errors, "Password should be:");
+		array_push($errors, "*at least 8 characters in length");
+		array_push($errors, "*include at least one upper case letter");
+		array_push($errors, "*one number");
+		array_push($errors, "*one special character");
+	}
+}
 // escape string specail chars if any 
 function e($val)
 {
@@ -311,24 +334,5 @@ function display_error()
 			echo $error . '<br>';
 		}
 		echo '</div>';
-	}
-}
-
-
-function isLoggedIn()
-{
-	if (isset($_SESSION['user'])) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function isAdmin()
-{
-	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin') {
-		return true;
-	} else {
-		return false;
 	}
 }

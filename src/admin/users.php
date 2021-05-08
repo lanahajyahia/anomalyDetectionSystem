@@ -94,6 +94,7 @@ if (isset($_GET['export'])) {
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Registration date</th>
+                                    <th>Last Login</th>
                                     <th>Role</th>
                                     <th>Actions</th>
                                 </tr>
@@ -102,7 +103,7 @@ if (isset($_GET['export'])) {
                             <tbody>
                                 <?php
 
-                                $sql   = $connection->query("SELECT id, email, username, reg_date ,user_type FROM `$table`");
+                                $sql   = $connection->query("SELECT id, email, username, reg_date, last_activity, user_type FROM `$table`");
                                 while ($row = mysqli_fetch_assoc($sql)) {
                                     echo '
 										<tr class=odd>
@@ -110,6 +111,7 @@ if (isset($_GET['export'])) {
 						                  <td>' . $row['username'] . '</td>
                                           <td>' . $row['email'] . '</td>
                                           <td>' . $row['reg_date'] . '</td>	
+                                          <td>' . $row['last_activity'] . '</td>
                                           <td>' . $row['user_type'] . '</td>
                                           <td> 
                                           <a href="?edit-id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-edit"></i> Edit</a> 
@@ -146,41 +148,30 @@ if (isset($_GET['export'])) {
                     <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <p style="font-size=1em"> <?php echo display_error(); ?> </p>
                         <div class="form-group">
-                            <!-- <label class="control-label">Username: </label> -->
                             <div class="col-sm-12">
-                                <!-- <input type="text" name="username" class="form-control" required> -->
                                 <input type="text" name="fullname" placeholder="Full Name" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <!-- <label class="control-label">Username: </label> -->
                             <div class="col-sm-12">
-                                <!-- <input type="text" name="username" class="form-control" required> -->
                                 <input type="text" name="username" placeholder="Username" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label class="control-label">Email: </label> -->
                             <div class="col-sm-12">
-                                <!-- <input type="email" name="email" class="form-control" required> -->
                                 <input type="email" name="email" placeholder="Email" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <!-- <label class="control-label">Password: </label> -->
                             <div class="col-sm-12">
-                                <!-- <input type="password" name="password" > -->
                                 <input type="password" placeholder="Password" name="password_1" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label class="control-label">Password 2: </label> -->
                             <div class="col-sm-12">
                                 <input type="password" placeholder="Confirm password" name="password_2" class="form-control" required>
-
-                                <!-- <input type="password2" name="password2" class="form-control" required> -->
                             </div>
 
                         </div>
