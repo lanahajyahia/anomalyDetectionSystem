@@ -137,15 +137,15 @@ function get_filters()
             'description' => 'finds html breaking injections including whitespace attacks',
             'tag' => 'xss',
             'impact' => '4',
-        ),
+         ),
 
-        array(
-            'id' => '2',
-            'rule' => '(?:"+.*[<=]\\s*"[^"]+")|(?:"\\s*\\w+\\s*=)|(?:>\\w=\\/)|(?:#.+\\)["\\s]*>)|(?:"\\s*(?:src|style|on\\w+)\\s*=\\s*")|(?:[^"]?"[,;\\s]+\\w*[\\[\\(])',
-            'description' => 'finds attribute breaking injections including whitespace attacks',
-            'tag' => 'xss',
-            'impact' => '4'
-        ),
+        // array(
+        //     'id' => '2',
+        //     'rule' => '(?:"+.*[<=]\\s*"[^"]+")|(?:"\\s*\\w+\\s*=)|(?:>\\w=\\/)|(?:#.+\\)["\\s]*>)|(?:"\\s*(?:src|style|on\\w+)\\s*=\\s*")|(?:[^"]?"[,;\\s]+\\w*[\\[\\(])',
+        //     'description' => 'finds attribute breaking injections including whitespace attacks',
+        //     'tag' => 'xss',
+        //     'impact' => '4'
+        // ),
         array(
             'id' => '3',
             'rule' => '(?:^>[\\w\\s]*<\\/?\\w{2,}>)',
@@ -221,14 +221,6 @@ function get_filters()
             'tag' => 'xss',
             'impact' => '6'
         ),
-        // array(
-        //     'id' => '16',
-        //     'rule' => '([^*\\s\\w,.\\/?+-]\\s*)?(?<![a-mo-z]\\s)(?<![a-z\\/_@])(\\s*return\\s*)?(?:alert|inputbox|showmod(?:al|eless)dialog|showhelp|infinity|isnan|isnull|iterator|msgbox|executeglobal|expression|prompt|write(?:ln)?|confirm|dialog|urn|(?:un)?eval|exec|execscript|tostring|status|execute|window|unescape|navigate|jquery|getscript|extend|prototype)(?(1)[^\\w%"]|(?:\\s*[^@\\s\\w%",.:\\/+\\-]))',
-        //     'description' => 'Detects possible includes and typical script methods',
-        //     'tag' => 'xss',
-        //     'impact' => '5',
-        // ),
-
         array(
             'id' => '17',
             'rule' => '([^*:\\s\\w,.\\/?+-]\\s*)?(?<![a-z]\\s)(?<![a-z\\/_@])(\\s*return\\s*)?(?:hash|name|href|navigateandfind|source|pathname|close|constructor|port|protocol|assign|replace|back|forward|document|ownerdocument|window|top|this|self|parent|frames|_?content|date|cookie|innerhtml|innertext|csstext+?|outerhtml|print|moveby|resizeto|createstylesheet|stylesheets)(?(1)[^\\w%"]|(?:\\s*[^@\\/\\s\\w%.+\\-]))',
@@ -259,14 +251,7 @@ function get_filters()
             'description' => 'Detects JavaScript language constructs',
             'tag' => 'xss',
             'impact' => '4'
-        // ),
-        // array(
-        //     'id' => '21',
-        //     'rule' => '(?:,\\s*(?:alert|showmodaldialog|eval)\\s*,)|(?::\\s*eval\\s*[^\\s])|([^:\\s\\w,.\\/?+-]\\s*)?(?<![a-z\\/_@])(\\s*return\\s*)?(?:(?:document\\s*\\.)?(?:.+\\/)?(?:alert|eval|msgbox|showmod(?:al|eless)dialog|showhelp|prompt|write(?:ln)?|confirm|dialog|open))\\s*(?:[^.a-z\\s\\-]|(?:\\s*[^\\s\\w,.@\\/+-]))|(?:java[\\s\\/]*\\.[\\s\\/]*lang)|(?:\\w\\s*=\\s*new\\s+\\w+)|(?:&\\s*\\w+\\s*\\)[^,])|(?:\\+[\\W\\d]*new\\s+\\w+[\\W\\d]*\\+)|(?:document\\.\\w)',
-        //     'description' => 'Detects very basic XSS probings',
-        //     'tag' => 'xss',
-        //     'impact' => '3',
-         ),
+        ),
         array(
             'id' => '22',
             'rule' => '(?:=\\s*(?:top|this|window|content|self|frames|_content))|(?:\\/\\s*[gimx]*\\s*[)}])|(?:[^\\s]\\s*=\\s*script)|(?:\\.\\s*constructor)|(?:default\\s+xml\\s+namespace\\s*=)|(?:\\/\\s*\\+[^+]+\\s*\\+\\s*\\/)',
@@ -364,15 +349,16 @@ function get_filters()
             'rule' => '(?:\\<base\\s+)|(?:<!(?:element|entity|\\[CDATA))',
             'description' => 'Detects base href injections and XML entity injections',
             'tag' => 'xss',
-            'impact' => '5'
-        ),
-        array(
-            'id' => '38',
-            'rule' => '(?:\\<[\\/]?(?:[i]?frame|applet|isindex|marquee|keygen|script|audio|video|input|button|textarea|style|base|body|meta|link|object|embed|param|plaintext|xm\\w+|image|im(?:g|port)))',
-            'description' => 'Detects possibly malicious html elements including some attributes',
-            'tag' => 'xss',
-            'impact' => '4'
-        ),
+            'impact' => '5')
+        // ),
+        // array(
+        //     'id' => '38',
+        //     'rule' => '(?:\<[\/]?(?:[i]?frame|applet|isindex|marquee|keygen|script|audio|video|input|button|textarea|style|base|body|meta|link|object|embed|param|plaintext|xm\\w+|image|im(?:g|port)))',
+        //     'description' => 'Detects possibly malicious html elements including some attributes',
+        //     'tag' => 'xss',
+        //     'impact' => '1'
+        // )
+        ,
 
         array(
             'id' => '39',
@@ -380,13 +366,6 @@ function get_filters()
             'description' => 'Detects nullbytes and other dangerous characters',
             'tag' => 'xss',
             'impact' => '5'
-        ),
-        array(
-            'id' => '67',
-            'rule' => '(?:\\({2,}\\+{2,}:{2,})|(?:\\({2,}\\+{2,}:+)|(?:\\({3,}\\++:{2,})|(?:\\$\\[!!!\\])',
-            'description' => 'Detects unknown attack vectors based on PHPIDS Centrifuge detection',
-            'tag' => 'xss',
-            'impact' => '7'
         ),
         array(
             'id' => '68',

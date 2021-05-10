@@ -5,12 +5,12 @@ require_once('filters.php');
 $patt = "((,*)((NULL,*)|(CHAR(\d+)\+*)|(UNION ALL SELECT \d,*))( |#|--)*)";
 $patt1 = "(UNION ALL SELECT \d,*)( |#|--)*)";
 //  $string = "SELECT * FROM books where NAME LIKE '%why' UNION (SELECT 2, COLUMN_NAME, 3 FROM information_schema.columns WHERE TABLE_NAME = 'users'); -- %'";
- $string = 'gjhghf';
+ $string = "<IMG SRC=x ondragend=\"alert(String.fromCharCode(88,83,83))\"> ";
 
 $filters = get_filters();
 $results_array = [];
 $reep = $string;
-echo urldecode($string);
+echo htmlentities($string);
 foreach ($filters as $filter) {
   $pattern = $filter['rule'];
   $pattern = "/" . $pattern . "/i";

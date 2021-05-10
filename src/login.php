@@ -1,8 +1,8 @@
-<?php 
+<?php
 session_start();
-include('registration-functions.php'); ?>
+include('registration-functions.php');
 
- 
+?>
 <!DOCTYPE html>
 <html>
 
@@ -43,6 +43,12 @@ include('registration-functions.php'); ?>
 				<div class="input-group">
 					<button type="submit" class="btn" name="login_btn">Log In</button>
 				</div>
+				<div class="elem-group">
+					
+					<img src="captcha.php" alt="CAPTCHA" class="captcha-image"><i class="fas fa-redo refresh-captcha"></i>
+					<br>
+					<input type="text" id="captcha" name="captcha_challenge" pattern="[A-Z]{6}">
+				</div>
 				<p>
 					<a class="forgot-pass" href="forgotpassword.php">Forgot Password?</a>
 				</p>
@@ -52,3 +58,10 @@ include('registration-functions.php'); ?>
 </body>
 
 </html>
+ <script>
+ var refreshButton = document.querySelector(".refresh-captcha");
+refreshButton.onclick = function() {
+  document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now();
+}
+ 
+ </script>
