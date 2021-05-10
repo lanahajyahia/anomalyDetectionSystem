@@ -1,3 +1,15 @@
+ 
+ <!-- <style>
+     footer{
+    /* position: fixed;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    padding-bottom: ;} */
+
+
+ </style> -->
  <!-- Footer -->
  <footer class="sticky-footer bg-white">
                 <div class="container my-auto">

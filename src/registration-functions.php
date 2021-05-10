@@ -98,9 +98,9 @@ function update_user_BY_admin()
 // LOGIN USER
 function login()
 {
+
 	global $connection, $username, $errors;
 
-	// grap form values
 	$username = e($_POST['username']);
 	$password = e($_POST['password']);
 
@@ -112,11 +112,19 @@ function login()
 		array_push($errors, "Password is required");
 	}
 
+	if ($_SESSION["captcha-show"] > 2) {
+		$captcha = e($_POST['captcha_challenge']);
+		if (empty($captcha)) {
+			array_push($errors, "Fill the Authentication characters");
+		} else if ($captcha !=  $_SESSION['captcha_text']) {
+			array_push($errors, "Authentication code is wrong");
+		}
+	}
 	// attempt login if no errors on form
 	if (count($errors) == 0) {
 		$password = md5($password);
 
-		$query = "SELECT * FROM Users WHERE username='$username' or email='$username' AND password='$password' LIMIT 1";
+		$query = "SELECT * FROM Users WHERE (username='$username' or email='$username') AND password='$password' LIMIT 1";
 		$results = mysqli_query($connection, $query);
 
 		if (mysqli_num_rows($results) == 1) { // user found
@@ -125,7 +133,6 @@ function login()
 			if ($logged_in_user['user_type'] == 'admin') {
 				$_SESSION['user'] = $logged_in_user;
 				$_SESSION['email'] = $logged_in_user['email'];
-
 				$_SESSION['success']  = "You are now logged in";
 				if ($logged_in_user['status'] == 'notverified') {
 					header('location: user-otp.php');
@@ -139,7 +146,6 @@ function login()
 				if ($logged_in_user['status'] == 'notverified') {
 					header('location: user-otp.php');
 				} else {
-
 					$query = "UPDATE Users SET last_activity=now() WHERE username='$username'";
 					if ($connection->query($query) === TRUE) {
 						header('location: admin/dashboard.php');
@@ -153,6 +159,7 @@ function login()
 			}
 		} else {
 			array_push($errors, "Wrong username/password combination");
+			$_SESSION["captcha-show"] += 1;
 		}
 	}
 }

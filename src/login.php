@@ -2,13 +2,25 @@
 session_start();
 include('registration-functions.php');
 
+if ($_SESSION["captcha-show"] > 2) {
+	// unset($_SESSION["captcha-show"]);
+	echo '<style type="text/css">
+	.elem-group {
+		display: block !important;
+	}
+	</style>';
+}
+
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
 	<title>Log In</title>
 	<link rel="stylesheet" type="text/css" href="admin/css/register-style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 	<style>
 		.forgot-pass {
 			color: #7596c8;
@@ -24,10 +36,10 @@ include('registration-functions.php');
 	<div class="_8esk">
 		<div class="_8esl">
 			<div class="_8ice">
-				<h1>
+				<h1 style="font-family: 'Trebuchet MS', sans-serif;">
 					Anomaly Detection System</h1>
 			</div>
-			<h2 class="_8eso">Secure your web applications from XSS and SQL injections.</h2>
+			<h2 style="font-family: 'Trebuchet MS', sans-serif;"class="login-text">Secure your web applications from Cross-site scripting and SQL injections.</h2>
 		</div>
 		<div class="formdiv">
 			<form method="post" action="login.php">
@@ -40,28 +52,31 @@ include('registration-functions.php');
 				<div class="input-group">
 					<input type="password" name="password" placeholder="Password">
 				</div>
+				<div class="elem-group" style="display: none">
+
+					<img src="captcha.php" alt="CAPTCHA" class="captcha-image"><i class="fa fa-refresh fa_custom fa-2x"></i>
+					<br>
+					<input type="text" id="captcha" name="captcha_challenge" pattern="[A-Z1-9]{6}">
+				</div>
 				<div class="input-group">
 					<button type="submit" class="btn" name="login_btn">Log In</button>
 				</div>
-				<div class="elem-group">
-					
-					<img src="captcha.php" alt="CAPTCHA" class="captcha-image"><i class="fas fa-redo refresh-captcha"></i>
-					<br>
-					<input type="text" id="captcha" name="captcha_challenge" pattern="[A-Z]{6}">
-				</div>
+
 				<p>
 					<a class="forgot-pass" href="forgotpassword.php">Forgot Password?</a>
 				</p>
 			</form>
 		</div>
 	</div>
-</body>
+
+<?php
+    include('admin/includes/scripts.php');
+    include('admin/includes/footer.php'); ?>
 
 </html>
- <script>
- var refreshButton = document.querySelector(".refresh-captcha");
-refreshButton.onclick = function() {
-  document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now();
-}
- 
- </script>
+<script>
+	var refreshButton = document.querySelector(".fa-refresh");
+	refreshButton.onclick = function() {
+		document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now();
+	}
+</script>

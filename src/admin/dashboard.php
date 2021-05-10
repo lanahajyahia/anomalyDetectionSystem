@@ -3,6 +3,7 @@ session_start();
 include('includes/header.php');
 include('../server.php');
 
+unset($_SESSION["captcha-show"]);
 define("INJECTION_TABLE", "Detected_Attacks");
 
 
@@ -50,7 +51,7 @@ function get_attack_number($table, $type = null)
                                         SQLi attacks</div>
                                     <div class="h6 mb-0 text-gray-800">
                                         <?php
-                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("sqli")). " detected today";
+                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("sqli")) . " detected today";
                                         ?>
                                     </div>
 
@@ -78,7 +79,7 @@ function get_attack_number($table, $type = null)
                                         Reflected XSS attacks</div>
                                     <div class="h6 mb-0  text-gray-800">
                                         <?php
-                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("reflected")). " detected today";
+                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("reflected")) . " detected today";
                                         ?></div>
                                 </div>
                                 <div class="col-auto">
