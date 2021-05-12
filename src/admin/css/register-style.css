@@ -1,13 +1,8 @@
- /* * { margin: 0px; padding: 0px; } */
- 
  .login {
-     /* font-size: 120%; */
-     background: #F8F8FF;
-     margin: auto;
-     width: 100%;
-     text-align: center;
-     /* padding-bottom: 112px; */
-     /* padding-top: 72px; */
+     background: #F8F8FF !important;
+     margin: auto !important;
+     width: 100% !important;
+     text-align: center !important;
  }
  
  button {
@@ -16,41 +11,36 @@
  
  .register,
  .create-user {
-     /* font-size: 120%; */
-     background: #F8F8FF;
-     margin: auto;
-     width: 50%;
-     text-align: center;
-     /* padding-bottom: 112px; */
-     /* padding-top: 72px; */
+     background: #F8F8FF !important;
+     margin: auto !important;
+     width: 50% !important;
+     text-align: center !important;
  }
  
  .header {
-     width: 40%;
-     margin: 50px auto 0px;
-     color: white;
+     width: 40% !important;
+     margin: 50px auto 0px !important;
+     color: white !important;
      background: #1877f2 !important;
-     text-align: center;
-     border: 1px solid #B0C4DE;
-     border-bottom: none;
-     border-radius: 10px 10px 0px 0px;
-     padding: 20px;
+     text-align: center !important;
+     border: 1px solid #B0C4DE !important;
+     border-bottom: none !important;
+     border-radius: 10px 10px 0px 0px !important;
+     padding: 20px !important;
  }
  
  .formdiv {
-     /* padding-bottom: 24px;
-    padding-top: 10px; */
      display: inline-block !important;
-     vertical-align: top;
+     vertical-align: top !important;
      align-items: center !important;
-     background-color: #fff;
-     border: none;
-     border-radius: 8px;
-     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-     box-sizing: border-box;
-     margin: 40px 0 0;
-     padding: 20px 20px 28px;
-     width: 396px;
+     background-color: #fff !important;
+     border: none !important;
+     border-radius: 8px !important;
+     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%) !important;
+     box-sizing: border-box !important;
+     margin: 40px 0 0 !important;
+     padding: 20px 20px 28px !important;
+     width: 396px !important;
  }
  
  .input-group {
@@ -107,14 +97,15 @@
  }
  
  .error {
-     width: 92%;
-     margin: 0px auto;
-     padding: 10px;
-     border: 1px solid #a94442;
-     color: #a94442;
-     background: #f2dede;
-     border-radius: 5px;
-     text-align: left;
+     width: 92% !important;
+     margin: 0px auto !important;
+     padding: 10px !important;
+     border: 1px solid #a94442 !important;
+     color: #a94442 !important;
+     background: #f2dede !important;
+     border-radius: 5px !important;
+     text-align: left !important;
+     font-size: 10px !important;
  }
  
  .success {

@@ -1,15 +1,15 @@
 <?php
 // session_start();
 include('registration-functions.php');
-
 if (isset($_SESSION["captcha-show"])) {
-	if ($_SESSION["captcha-show"] > 2){
-	// unset($_SESSION["captcha-show"]);
-	echo '<style type="text/css">
+	if ($_SESSION["captcha-show"] > 2) {
+		// unset($_SESSION["captcha-show"]);
+		echo '<style type="text/css">
 	.elem-group {
 		display: block !important;
 	}
-	</style>';}
+	</style>';
+	}
 }
 
 ?>
@@ -19,6 +19,8 @@ if (isset($_SESSION["captcha-show"])) {
 
 <head>
 	<title>Log In</title>
+	<!-- <link href="admin/css/sb-admin-2.min.css" rel="stylesheet"> -->
+
 	<link rel="stylesheet" type="text/css" href="admin/css/register-style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -30,6 +32,28 @@ if (isset($_SESSION["captcha-show"])) {
 			line-height: 16px;
 			text-decoration: none;
 		}
+
+		footer.sticky-footer {
+			padding: 2rem 0;
+			flex-shrink: 0
+		}
+
+		.bg-white {
+			background-color: #fff !important
+		}
+
+		.my-auto {
+			margin-bottom: auto !important
+		}
+
+		.my-auto {
+			margin-top: auto !important
+		}
+
+		footer.sticky-footer .copyright {
+			line-height: 1;
+			font-size: .8rem
+		}
 	</style>
 </head>
 
@@ -40,7 +64,7 @@ if (isset($_SESSION["captcha-show"])) {
 				<h1 style="font-family: 'Trebuchet MS', sans-serif;">
 					Anomaly Detection System</h1>
 			</div>
-			<h2 style="font-family: 'Trebuchet MS', sans-serif;"class="login-text">Secure your web applications from Cross-site scripting and SQL injections.</h2>
+			<h2 style="font-family: 'Trebuchet MS', sans-serif;" class="login-text">Secure your web applications from Cross-site scripting and SQL injections.</h2>
 		</div>
 		<div class="formdiv">
 			<form method="post" action="login.php">
@@ -70,9 +94,9 @@ if (isset($_SESSION["captcha-show"])) {
 		</div>
 	</div>
 
-<?php
-    include('admin/includes/scripts.php');
-    include('admin/includes/footer.php'); ?>
+	<?php
+	include('admin/includes/scripts.php');
+	include('admin/includes/footer.php'); ?>
 
 </html>
 <script>

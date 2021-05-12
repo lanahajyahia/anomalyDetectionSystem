@@ -86,9 +86,8 @@ function update_user_BY_admin()
 				}
 			}
 		}
-	} else {
-		header("Location: ../../admin/users.php");
 	}
+
 	if ($type != $_SESSION['type-to-edit']) {
 		$query = "UPDATE Users SET user_type='$type' WHERE id=$id";
 		if ($connection->query($query) === TRUE) {
@@ -340,7 +339,7 @@ function display_error()
 	global $errors;
 
 	if (count($errors) > 0) {
-		echo '<div class="error" style="width: 100% !important;">';
+		echo '<div class="error" >';
 		foreach ($errors as $error) {
 			echo $error . '<br>';
 		}
