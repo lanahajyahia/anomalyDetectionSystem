@@ -1,14 +1,15 @@
 <?php
-session_start();
+// session_start();
 include('registration-functions.php');
 
-if ($_SESSION["captcha-show"] > 2) {
+if (isset($_SESSION["captcha-show"])) {
+	if ($_SESSION["captcha-show"] > 2){
 	// unset($_SESSION["captcha-show"]);
 	echo '<style type="text/css">
 	.elem-group {
 		display: block !important;
 	}
-	</style>';
+	</style>';}
 }
 
 ?>

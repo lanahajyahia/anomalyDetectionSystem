@@ -5,7 +5,7 @@ require("../../server.php");
 require_once("../../exportData.php");
 
 $table = htmlspecialchars('Detected_Attacks');
-$type = htmlspecialchars('stored');
+$type = htmlspecialchars('xss stored');
 
 
 if (isset($_GET['delete-id'])) {
@@ -42,6 +42,9 @@ if (isset($_GET['export'])) {
 
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <style>
         ul {
             background-color: transparent !important;
@@ -73,20 +76,19 @@ if (isset($_GET['export'])) {
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Stored XSS</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Stored XSS, where the malicious script comes from the website's database.</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th><i class="fas fa-list-ol"></i> ID</th>
-                                    <th><i class="fas fa-calendar"></i> Date</th>
-                                    <th><i class="fas fa-globe"></i> Time</th>
-                                    <th><i class="fas fa-desktop"></i> HTTP header</th>
+                                <th><i class="far fa-calendar-alt"></i> Date</th>
+                                    <th><i class="far fa-clock"></i> Time</th>
+                                    <th><i class="fas fa-desktop"></i> HTTP url</th>
                                     <th><i class="fas fa-cog"></i> HTTP method</th>
                                     <!-- <th><i class="fas fa-map"></i> injection</th> -->
-                                    <th><i class="fas fa-bomb"></i> Description</th>
+                                    <!-- <th><i class="fas fa-bomb"></i> Description</th> -->
                                     <!-- <th><i class="fas fa-cog"></i> Actions</th> -->
                                     <th><i class="fas fa-map"></i> Actions</th>
                                 </tr>
@@ -94,7 +96,7 @@ if (isset($_GET['export'])) {
                             <tbody>
                                 <?php
 
-                                $sql   = $connection->query("SELECT id, date, time, http_url, http_method, description FROM `$table` WHERE type='$type'");
+                                $sql   = $connection->query("SELECT id, date, time, hostname, http_method, description FROM `$table` WHERE type='$type'");
                                 if ($sql->num_rows == 0) {
                                     $_SESSION['empty-table-stored'] = 'empty';
                                 } else {
@@ -102,13 +104,15 @@ if (isset($_GET['export'])) {
                                     while ($row = mysqli_fetch_assoc($sql)) {
                                         echo '
 										<tr>
-                                          <td>' . $row['id'] . '</td>
 						                  <td>' . $row['date'] . '</td>
                                           <td>' . $row['time'] . '</td>
-						                  <td>' . $row['http_url'] . '</td>
+						                  <td>' . $row['hostname'] . '</td>
 										  <td>' . $row['http_method'] . '</td>
-                                          <td>' . $row['description'] . '</td>
-								
+                                          <td>
+										  <a href="details.php?id=' . $row['id'] . '" target="_blank" class="btn btn-flat btn-primary"><i class="fas fa-tasks"></i> Details</a>
+                                          
+										  <a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger"><i class="fas fa-times"></i> Delete</a>
+										</td>
 										</tr>
     ';
                                     }

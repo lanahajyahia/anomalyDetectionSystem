@@ -18,9 +18,12 @@ function attack_detect($string)
     $results_array = [];
     foreach ($attack_patterns as $filter) {
         $pattern = $filter['rule'];
-        $is_found_decoded = preg_match("/" . $pattern . "/i", htmlentities(urldecode($string)));
+        $is_found_decoded = preg_match("/" . $pattern . "/i", urldecode($string));
         if ($is_found_decoded == 1) {
             $attack_type = $filter['tag'];
+            if($attack_type === 'xss'){
+                $attack_type  = $attack_type . " stored";
+            }
             $results_array[] =  $filter['description'];
         }
     }
@@ -32,21 +35,26 @@ function is_attack($data)
     global $connection, $attack_type;
     $array_result = attack_detect($data['url']);
     if ($array_result == null) {
+        // echo "null";
         return false;
     } else {
         $attack_description = implode("\r\n", $array_result);
         $date = date("Y-m-d");
         $time = date("h:i:sa");
-        $url_decode = htmlentities(urldecode($data['url']));
+        $url_decode = htmlspecialchars($data['url']);
+        $headers = json_encode($data['headers']);
         $method = $data['method'];
-        $sql = "INSERT INTO Detected_Attacks(date, time, http_url,http_method,description,type)
-        VALUES ('$date', '$time', '$url_decode', '$method','$attack_description','$attack_type')";
+        $hostname = "http://" . $data['host'];
+        $path = htmlspecialchars(urldecode($data['path']));
+        // $http_url = $data[''];
+        $sql = "INSERT INTO Detected_Attacks(date, time, hostname,path,headers,http_method,description,type)
+        VALUES ('$date', '$time', '$hostname','$path','$headers', '$method','$attack_description','$attack_type')";
         if ($connection->query($sql) === TRUE) {
-            echo "succed";
+            echo "succed " . $url_decode . " $attack_type" . " headers: " .  var_dump($headers);
         } else {
-            echo "  fail     " . $url_decode . " $attack_type";
+            echo "  fail     " . $connection->error . "  " . $hostname . " $attack_type" . " headers: " .  var_dump($headers);
         }
-        // sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "A description of attack attemps the hacker been trying:\n\n" . $attack_description);
+        //sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "A description of attack attemps the hacker been trying:\n\n" . $attack_description);
         return true;
     }
 }

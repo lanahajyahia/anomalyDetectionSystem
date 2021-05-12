@@ -59,7 +59,7 @@ function get_attack_number($table, $type = null)
 
                                 <div class="col-auto">
 
-                                    <i class="fas fa-broom fa-2x text-gray-300"></i>
+                                    <i class="fas fa-exclamation-triangle"style='font-size:36px'></i>
 
                                 </div>
                             </div>
@@ -83,7 +83,7 @@ function get_attack_number($table, $type = null)
                                         ?></div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-car-crash fa-2x text-gray-300"></i>
+                                    <i class='fas fa-skull-crossbones' style='font-size:36px'></i>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,7 @@ function get_attack_number($table, $type = null)
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-clinic-medical fa-2x text-gray-300"></i>
+                                    <i class='fas fa-radiation-alt' style='font-size:36px'></i>
                                 </div>
                             </div>
                         </div>

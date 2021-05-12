@@ -5,16 +5,18 @@ require_once('filters.php');
 $patt = "((,*)((NULL,*)|(CHAR(\d+)\+*)|(UNION ALL SELECT \d,*))( |#|--)*)";
 $patt1 = "(UNION ALL SELECT \d,*)( |#|--)*)";
 //  $string = "SELECT * FROM books where NAME LIKE '%why' UNION (SELECT 2, COLUMN_NAME, 3 FROM information_schema.columns WHERE TABLE_NAME = 'users'); -- %'";
- $string = "<IMG SRC=x ondragend=\"alert(String.fromCharCode(88,83,83))\"> ";
+ $string = "http://aba.myspecies.info/search/site/%3CTABLE%3E%3CTD%20BACKGROUND=%22javascript:alert('XSS')%22%3E";
 
 $filters = get_filters();
 $results_array = [];
 $reep = $string;
-echo htmlentities($string);
+echo htmlentities(urldecode($string));
 foreach ($filters as $filter) {
   $pattern = $filter['rule'];
   $pattern = "/" . $pattern . "/i";
-  $is_found_decoded = preg_match_all( $pattern  , urldecode($string));
+  $str = htmlentities(urldecode($string));
+  $is_found_decoded = preg_match_all( $pattern  , $str);
+  // echo htmlentities(urldecode($string));
   // echo $is_found_decoded . "<br>";
   // $is_found_encoded = preg_match("/" . $pattern . "/i", $string);
   // preg_replace($pattern, "replaced", urldecode($reep));

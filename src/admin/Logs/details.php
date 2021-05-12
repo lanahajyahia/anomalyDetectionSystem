@@ -77,6 +77,7 @@
     }
 
     details p {
+        width: 100%;
         font-size: 0.95rem;
         margin: 0 0 1rem;
     }
@@ -84,7 +85,7 @@
 <?php
 require("../../server.php");
 $id = $_GET['id'];
-$sql  = $connection->query("SELECT date, time, http_url, http_method, description ,type FROM Detected_Attacks WHERE id='$id'");
+$sql  = $connection->query("SELECT date, time, hostname,path,headers, http_method, description ,type FROM Detected_Attacks WHERE id='$id'");
 $row = mysqli_fetch_assoc($sql);
 ?>
 <!DOCTYPE html>
@@ -92,13 +93,17 @@ $row = mysqli_fetch_assoc($sql);
 
 <head>
     <title>Attack Details</title>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 
 <body>
     <div>
         <section>
             <h1>
-                Attack Details
+                Attack Details <i class='fas fa-user-secret' style='font-size:48px;color:red'></i>
+
             </h1>
             <details>
 
@@ -123,14 +128,24 @@ $row = mysqli_fetch_assoc($sql);
             <details>
                 <summary>URL
                 </summary>
+                <div>
+                    <p>
+                        <?php echo $row['hostname']; ?>
+                    </p>
+                </div>
+            </details>
+            <details>
+                <summary>Path
+                </summary>
                 <p>
-                    <?php echo $row['http_url']; ?>
+                    <?php echo $row['path']; ?>
                 </p>
             </details>
             <details>
                 <summary>Headers
                 </summary>
                 <p>
+                    <?php echo $row['headers']; ?>
                 </p>
             </details>
             <details>

@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+	session_start();
+}
 include("server.php");
 include("sendmail.php");
 
@@ -112,12 +114,14 @@ function login()
 		array_push($errors, "Password is required");
 	}
 
-	if ($_SESSION["captcha-show"] > 2) {
-		$captcha = e($_POST['captcha_challenge']);
-		if (empty($captcha)) {
-			array_push($errors, "Fill the Authentication characters");
-		} else if ($captcha !=  $_SESSION['captcha_text']) {
-			array_push($errors, "Authentication code is wrong");
+	if (isset($_SESSION["captcha-show"])) {
+		if ($_SESSION["captcha-show"] > 2) {
+			$captcha = e($_POST['captcha_challenge']);
+			if (empty($captcha)) {
+				array_push($errors, "Fill the Authentication characters");
+			} else if ($captcha !=  $_SESSION['captcha_text']) {
+				array_push($errors, "Authentication code is wrong");
+			}
 		}
 	}
 	// attempt login if no errors on form

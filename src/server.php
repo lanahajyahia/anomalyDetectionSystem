@@ -44,7 +44,7 @@ function createUsersTable()
     code mediumint(50) NOT NULL,
     status text NOT NULL,
     last_activity VARCHAR(30) DEFAULT '0000-00-00 00:00:00' NOT NULL,
-    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
   if ($connection->query($sql_user) === TRUE) {
     // echo "Table USERS created successfully";
@@ -69,7 +69,10 @@ function createInjectionsTable()
     id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     date VARCHAR(30) NOT NULL,
     time VARCHAR(50) NOT NULL,
-    http_url VARCHAR(500) NOT NULL,
+    hostname VARCHAR(300) NOT NULL,
+    path VARCHAR(500) NOT NULL,
+    headers VARCHAR(1000) NOT NULL,
+    query VARCHAR(500),
     http_method VARCHAR(50) NOT NULL, -- get or post
     description VARCHAR(500) NOT NULL, -- description of injection
     type VARCHAR(50) NOT NULL -- reflected / dom / stored / sqli

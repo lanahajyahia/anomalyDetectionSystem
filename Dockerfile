@@ -1,7 +1,16 @@
-FROM php:7.4-apache
+FROM php:8-apache
 
 # Download script to install PHP extensions and dependencies
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+
+# RUN apt-get update
+# RUN apt-get install -y ssl-cert
+# RUN a2enmod ssl && a2enmod rewrite
+# RUN mkdir -p /etc/apache2/ssl
+# RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+# COPY .ssl/*.pem /etc/apache2/ssl
+# COPY ./apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+# RUN a2ensite default-ssl.conf
 
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
 
@@ -56,6 +65,8 @@ RUN cd /opt \
     && composer1 global require hirak/prestissimo \
     # Remove installer files.
     && rm /opt/composer-setup.php /opt/composer-setup.sha384sum
+
+
 
 
 
