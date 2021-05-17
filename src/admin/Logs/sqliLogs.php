@@ -12,7 +12,7 @@ if (isset($_GET['delete-id'])) {
     $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");
 }
 if (isset($_GET['delete-all'])) {
-    $query = $connection->query("DELETE FROM `$table`");
+    $query = $connection->query("DELETE FROM `$table` WHERE type='$type'");
 }
 if (isset($_GET['export'])) {
     exportAttack($table, $type);
@@ -118,7 +118,7 @@ if (isset($_GET['export'])) {
                 </div>
             </div>
             <div class="panel-heading">
-                <a href="delete-all.php" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
+                <a href="?delete-all" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
 
                 <?php if ($_SESSION['empty-table-sqli'] == 'empty') : ?>
                     <a href="" class="btn btn-success pull-right" style="pointer-events: none;">Export to excel</a>

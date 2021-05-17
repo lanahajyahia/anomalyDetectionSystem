@@ -5,7 +5,7 @@ require("../../server.php");
 require_once("../../exportData.php");
 
 $table = htmlspecialchars('Detected_Attacks');
-$type = htmlspecialchars('reflected');
+$type = htmlspecialchars('xss reflected');
 
 
 
@@ -14,7 +14,7 @@ if (isset($_GET['delete-id'])) {
     $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");
 }
 if (isset($_GET['delete-all'])) {
-    $query = $connection->query("DELETE FROM `$table`");
+    $query = $connection->query("DELETE FROM `$table` WHERE type='$type'");
 }
 if (isset($_GET['export'])) {
     exportAttack($table, $type);
@@ -109,7 +109,7 @@ if (isset($_GET['export'])) {
 						                  <td>' . $row['hostname'] . '</td>
 										  <td>' . $row['http_method'] . '</td>
                                           <td> 
-                                          <a href="?edit-id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-edit"></i> Details</a> 
+										  <a href="details.php?id=' . $row['id'] . '" target="_blank" class="btn btn-flat btn-primary"><i class="fas fa-tasks"></i> Details</a>
                                           <a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger"><i class="fas fa-trash"></i> Delete</a>
 
                                           </td>
@@ -125,7 +125,7 @@ if (isset($_GET['export'])) {
                 </div>
             </div>
             <div class="panel-heading">
-                <a href="delete-all.php" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
+                <a href="?delete-all" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
                 <?php if ($_SESSION['empty-table-reflected'] == 'empty') : ?>
                     <a href="" class="btn btn-success pull-right" style="pointer-events: none;">Export to excel</a>
                 <?php else : ?>
