@@ -8,26 +8,25 @@ require_once("../exportData.php");
 
 $table = 'Users';
 if (isset($_GET['delete-id'])) {
+  
     $id    = (int) $_GET["delete-id"];
-    $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");
+    $_SESSION['id-to-delete'] = $id;
+    // header("Location: delete_confirmbox.php");
+    include("delete_confirmbox.php");
+    // $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");
 }
 if (isset($_GET['edit-id'])) {
     $id    = (int) $_GET["edit-id"];
-    // echo "hi";
     $query = $connection->query("SELECT username, user_type,password FROM `$table` WHERE id='$id'");
-
     $row = mysqli_fetch_assoc($query);
-    // echo $row['username'] . "id: " . $id;
     $_SESSION['username-to-edit'] = $row['username'] . "";
     $_SESSION['type-to-edit'] = $row['user_type'] . "";
     $_SESSION['id-to-edit'] = $id;
-
-
     include('edituser.php');
-    // session_abort();
 }
 if (isset($_GET['delete-all'])) {
-    $query = $connection->query("DELETE FROM `$table`");
+    // <script>confirm("Are you sure you want to delete this user?")</script>
+     $query = $connection->query("DELETE FROM `$table` WHERE id<>1");
 }
 if (isset($_GET['export'])) {
     exportUsers();
@@ -91,7 +90,6 @@ if (isset($_GET['export'])) {
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
 
                                     <th>Username</th>
                                     <th>Email</th>
@@ -107,9 +105,26 @@ if (isset($_GET['export'])) {
 
                                 $sql   = $connection->query("SELECT id, email, username, reg_date, last_activity, user_type FROM `$table`");
                                 while ($row = mysqli_fetch_assoc($sql)) {
-                                    echo '
+                                    if ($row['id'] == 1) {
+                                        echo '
 										<tr class=odd>
-                                          <td>' . $row['id'] . '</td>
+						                  <td>' . $row['username'] . '</td>
+                                          <td>' . $row['email'] . '</td>
+                                          <td>' . $row['reg_date'] . '</td>	
+                                          <td>' . $row['last_activity'] . '</td>
+                                          <td>' . $row['user_type'] . '</td>
+                                          <td> 
+                                          <a href="?edit-id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-edit"></i> Edit</a> 
+                                          </td>
+										  	
+										
+						
+										</tr>
+';
+                                    } else {
+
+                                        echo '
+										<tr class=odd>
 						                  <td>' . $row['username'] . '</td>
                                           <td>' . $row['email'] . '</td>
                                           <td>' . $row['reg_date'] . '</td>	
@@ -124,6 +139,7 @@ if (isset($_GET['export'])) {
 						
 										</tr>
 ';
+                                    }
                                 }
                                 ?>
 

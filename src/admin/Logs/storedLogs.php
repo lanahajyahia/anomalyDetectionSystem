@@ -68,7 +68,7 @@ if (isset($_GET['export'])) {
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800" style="padding:10px;">Stored-cross site scripting logs</h1>
+            <h1 class="h3 mb-2 text-gray-800" style="padding:10px;">Stored Cross-site Scripting Logs</h1>
             <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
@@ -102,6 +102,7 @@ if (isset($_GET['export'])) {
                                 } else {
                                     $_SESSION['empty-table-stored'] = 'not';
                                     while ($row = mysqli_fetch_assoc($sql)) {
+                                        
                                         echo '
 										<tr>
 						                  <td>' . $row['date'] . '</td>

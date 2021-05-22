@@ -118,17 +118,18 @@
                             <span class="slider round"></span>
                         </label>
 
-                    </div></div>
-                    <div>
+                    </div>
+                </div>
+                <div>
                     <div id="usernameEditId">
                         <td><label>New Username: </label></td>
                         <td>
                             <input type="text" name="username-update" value=" <?php echo $_SESSION['username-to-edit'] ?>">
 
                         </td>
-</div>
                     </div>
-              
+                </div>
+
 
                 <div class="form-group">
                     <div class="col-sm-12">

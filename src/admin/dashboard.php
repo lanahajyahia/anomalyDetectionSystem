@@ -10,7 +10,8 @@ define("INJECTION_TABLE", "Detected_Attacks");
 function get_attack_number($table, $type = null)
 {
     global $connection;
-    $result = $connection->query("SELECT * FROM $table WHERE type='$type'");
+    $date = date("Y-m-d");
+    $result = $connection->query("SELECT * FROM $table WHERE type='$type' AND date='$date'");
     /* determine number of rows result set */
     $row_cnt = $result->num_rows;
     if ($row_cnt != 0) {
@@ -59,7 +60,7 @@ function get_attack_number($table, $type = null)
 
                                 <div class="col-auto">
 
-                                    <i class="fas fa-exclamation-triangle"style='font-size:36px'></i>
+                                    <i class="fas fa-exclamation-triangle" style='font-size:36px'></i>
 
                                 </div>
                             </div>
@@ -79,7 +80,7 @@ function get_attack_number($table, $type = null)
                                         Reflected XSS attacks</div>
                                     <div class="h6 mb-0  text-gray-800">
                                         <?php
-                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("reflected")) . " detected today";
+                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("xss reflected")) . " detected today";
                                         ?></div>
                                 </div>
                                 <div class="col-auto">

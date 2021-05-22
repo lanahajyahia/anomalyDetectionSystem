@@ -162,7 +162,11 @@ function login()
 			}
 		} else {
 			array_push($errors, "Wrong username/password combination");
-			$_SESSION["captcha-show"] += 1;
+			if (isset($_SESSION["captcha-show"])) {
+				$_SESSION["captcha-show"] += 1;
+			} else {
+				$_SESSION["captcha-show"] = 1;
+			}
 		}
 	}
 }
@@ -282,11 +286,11 @@ function register()
 		$result_username = mysqli_query($connection, $isUsername_exist);
 		$data_username = mysqli_fetch_array($result_username, MYSQLI_NUM);
 
-		if ($data_email[0] > 1 && $data_username[0] > 1) {
+		if ($data_username != null && $data_email != null) {
 			array_push($errors, "A user with this email & username already exists!");
-		} else if ($data_email[0] > 1) {
+		} else if ($data_email != null) {
 			array_push($errors, "A user with this email already exists!");
-		} else if ($data_username[0] > 1) {
+		} else if ($data_username != null) {
 			array_push($errors, "A user with this username already exists!");
 		} else {
 
