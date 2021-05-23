@@ -1,73 +1,66 @@
-<!-- <div id="">
-    <table id="tblEditUser">
-        <tr>
-            <td><label> Change Username </label></td>
-            <td>
-
-                <label class="switch">
-                    <input id="isCheckedUsernameChangeBtn" type="checkbox" onclick="show('usernameEditId',this.id); ">
-                    <span class="slider round"></span>
-                </label>
-
-            </td>
-
-
-        </tr>
-
-        <tr id="usernameEditId" style="display:none">
-            <td><label>Username: </label></td>
-            <td>
-                <!-- <input type="text" name="username" class="form-control" required> -->
-                <input type="text" name="username" placeholder="" class="" value=" <?php echo $_SESSION['username-to-edit'] ?>">
-            </td>
-
-        </tr>
-
-        <tr>
-            <td><label> Change Password </label></td>
-            <td>
-
-                <label class="switch">
-                    <input id="isCheckedPasswordchangeBtn" type="checkbox" onclick="show('passwordEditId',this.id);">
-                    <span class="slider round"></span>
-                </label>
-
-            </td>
+<?php include("server.php");
+$table = 'Detected_Attacks';
+function get_attacks($month1, $month2, $type = null)
+{
+    global $connection, $table;
+    $count_amount = 0;
+    $sql = "SELECT date FROM $table WHERE type='$type'";
+    $result = $connection->query($sql);
+    /* determine number of rows result set */
+    if (!empty($result) && $result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            $month_str = $row['date'];
+            if (substr($month_str, 5, 2) == $month1 || substr($month_str, 5, 2) == $month2) {
+                // echo substr($month_str, 5, 2) ;
+                $count_amount++;
+            }
+        }
+    }
+    return $count_amount;
+    // $row_cnt = $result->num_rows;
+    // if ($row_cnt != 0) {
+    //     return $row_cnt;
+    // } else {
+    //     return 0;
+    // }
+}
 
 
-        </tr>
+?>
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-        <tr id="passwordEditId" style="display:none !important">
+<body>
+    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    <p> red - xss reflected , green - sqli , blue - xss stored </p> 
 
-            <td><label>Password* </label></td>
-            <td>
-                <!-- <input type="text" name="username" class="form-control" required> -->
-                <input type="password" name="username" placeholder="" class="">
-            </td>
+    <script>
+        var xValues = ['Jan & Feb', 'Mar & Apr', 'May & Jun', 'Jul & Aug', 'Sep & Oct', 'Nov & Dec'];
 
-
-            <td><label>Password Confirmation* </label></td>
-            <td>
-                <!-- <input type="text" name="username" class="form-control" required> -->
-                <input type="password" name="username" placeholder="" class="">
-            </td>
-
-        </tr>
-        <tr>
-            <td> <label>User type:</label>
-                <input class="input-usertype" type="radio" id="admin" name="usertype" value="admin">
-                <label class="label-usertype" for="admin">Admin</label>
-                <input class="input-usertype" type="radio" id="user" name="usertype" value="user">
-                <label class="label-usertype" for="user">User</label><br>
-            </td>
-        </tr>
-
-        <td>
-            <div class="panel-heading">
-                <a href="?cancel" class="btn btn-success pull-right btn-danger" title="cancel"><i class="fas fa-trash"></i> Cancel</a>
-
-                <a href="?save-edit" class="btn btn-success pull-right">Save</a>
-            </div>
-        </td>
-    </table>
-</div> -->
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    data: [<?php echo get_attacks("01","02", "xss reflected"); ?>, <?php echo get_attacks("03","04", "xss reflected"); ?>, <?php echo get_attacks("05","06", "xss reflected"); ?>, <?php echo get_attacks("07","08", "xss reflected"); ?>, <?php echo get_attacks("09","10", "xss reflected"); ?>, <?php echo get_attacks("11","12", "xss reflected"); ?>],
+                    borderColor: "red",
+                    fill: false
+                }, {
+                    data: [<?php echo get_attacks("01","02", "sqli"); ?>, <?php echo get_attacks("03","04", "sqli"); ?>, <?php echo get_attacks("05","06", "sqli"); ?>, <?php echo get_attacks("07","08", "sqli"); ?>, <?php echo get_attacks("09","10", "sqli"); ?>, <?php echo get_attacks("11","12", "sqli"); ?>],
+                    borderColor: "green",
+                    fill: false
+                }, {
+                    data: [<?php echo get_attacks("01","02", "xss stored"); ?>, <?php echo get_attacks("03","04", "xss stored"); ?>, <?php echo get_attacks("05","06", "xss stored"); ?>, <?php echo get_attacks("07","08", "xss stored"); ?>, <?php echo get_attacks("09","10", "xss stored"); ?>, <?php echo get_attacks("11","12", "xss stored"); ?>],
+                    borderColor: "blue",
+                    fill: false
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                }
+            }
+        });
+    </script>

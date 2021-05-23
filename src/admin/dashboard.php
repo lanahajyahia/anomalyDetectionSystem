@@ -4,18 +4,42 @@ include('includes/header.php');
 include('../server.php');
 
 unset($_SESSION["captcha-show"]);
-define("INJECTION_TABLE", "Detected_Attacks");
 
-
-function get_attack_number($table, $type = null)
+$table = "Detected_Attacks";
+function get_attacks($month1, $month2, $type = null)
 {
-    global $connection;
-    $date = date("Y-m-d");
-    $result = $connection->query("SELECT * FROM $table WHERE type='$type' AND date='$date'");
+    global $connection, $table;
+    $count_amount = 0;
+    $sql = "SELECT date FROM $table WHERE type='$type'";
+    $result = $connection->query($sql);
     /* determine number of rows result set */
-    $row_cnt = $result->num_rows;
-    if ($row_cnt != 0) {
-        return $row_cnt;
+    if (!empty($result) && $result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            $month_str = $row['date'];
+            if (substr($month_str, 5, 2) == $month1 || substr($month_str, 5, 2) == $month2) {
+                // echo substr($month_str, 5, 2) ;
+                $count_amount++;
+            }
+        }
+    }
+    return $count_amount;
+    // $row_cnt = $result->num_rows;
+    // if ($row_cnt != 0) {
+    //     return $row_cnt;
+    // } else {
+    //     return 0;
+    // }
+}
+function get_attack_number_today($type)
+{
+    global $connection, $table;
+    $date = date("Y-m-d");
+    $query = "SELECT * FROM '$table' WHERE type='$type' AND date='$date'";
+    $result = $connection->query($query);
+    /* determine number of rows result set */
+    if (!empty($result) && $result->num_rows > 0) {
+        return $result->num_rows;
     } else {
         return 0;
     }
@@ -52,7 +76,7 @@ function get_attack_number($table, $type = null)
                                         SQLi attacks</div>
                                     <div class="h6 mb-0 text-gray-800">
                                         <?php
-                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("sqli")) . " detected today";
+                                        echo get_attack_number_today(htmlspecialchars("sqli")) . " detected today";
                                         ?>
                                     </div>
 
@@ -80,7 +104,7 @@ function get_attack_number($table, $type = null)
                                         Reflected XSS attacks</div>
                                     <div class="h6 mb-0  text-gray-800">
                                         <?php
-                                        echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("xss reflected")) . " detected today";
+                                        echo get_attack_number_today(htmlspecialchars("xss reflected")) . " detected today";
                                         ?></div>
                                 </div>
                                 <div class="col-auto">
@@ -105,7 +129,7 @@ function get_attack_number($table, $type = null)
                                         <div class="col-auto">
                                             <div class="h6 mb-0 mr-3 text-gray-800">
                                                 <?php
-                                                echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("stored")) . " detected today";
+                                                echo get_attack_number_today(htmlspecialchars("stored")) . " detected today";
                                                 ?></div>
                                         </div>
                                         <div class="col">
@@ -150,52 +174,46 @@ function get_attack_number($table, $type = null)
 
                 <!-- Area Chart -->
                 <div class="col-xl-8 col-lg-7">
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4" style="align-items:center;">
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
+                        <body>
+                            <canvas id="myChart" style="width:80%;max-width:800%"></canvas>
+                            <p> red - xss reflected , green - sqli , blue - xss stored </p>
 
-                        <canvas id="myChart" style="width:80%;"></canvas>
+                            <script>
+                                var xValues = ['Jan & Feb', 'Mar & Apr', 'May & Jun', 'Jul & Aug', 'Sep & Oct', 'Nov & Dec'];
 
-                        <script>
-                            var xValues = ["Reflected XSS", "Stored XSS", "SQLi"];
-                            // var reflected = 
-                            // console.log(reflected);
-                            var yValues = [500, <?php echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("stored")); ?>, <?php echo get_attack_number(htmlspecialchars(INJECTION_TABLE), htmlspecialchars("sqli")); ?>];
-                            var barColors = ["red", "green", "blue"];
-
-                            new Chart("myChart", {
-                                type: "bar",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                        backgroundColor: barColors,
-                                        data: yValues
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
+                                new Chart("myChart", {
+                                    type: "line",
+                                    data: {
+                                        labels: xValues,
+                                        datasets: [{
+                                            data: [<?php echo get_attacks("01", "02", "xss reflected"); ?>, <?php echo get_attacks("03", "04", "xss reflected"); ?>, <?php echo get_attacks("05", "06", "xss reflected"); ?>, <?php echo get_attacks("07", "08", "xss reflected"); ?>, <?php echo get_attacks("09", "10", "xss reflected"); ?>, <?php echo get_attacks("11", "12", "xss reflected"); ?>],
+                                            borderColor: "red",
+                                            fill: false
+                                        }, {
+                                            data: [<?php echo get_attacks("01", "02", "sqli"); ?>, <?php echo get_attacks("03", "04", "sqli"); ?>, <?php echo get_attacks("05", "06", "sqli"); ?>, <?php echo get_attacks("07", "08", "sqli"); ?>, <?php echo get_attacks("09", "10", "sqli"); ?>, <?php echo get_attacks("11", "12", "sqli"); ?>],
+                                            borderColor: "green",
+                                            fill: false
+                                        }, {
+                                            data: [<?php echo get_attacks("01", "02", "xss stored"); ?>, <?php echo get_attacks("03", "04", "xss stored"); ?>, <?php echo get_attacks("05", "06", "xss stored"); ?>, <?php echo get_attacks("07", "08", "xss stored"); ?>, <?php echo get_attacks("09", "10", "xss stored"); ?>, <?php echo get_attacks("11", "12", "xss stored"); ?>],
+                                            borderColor: "blue",
+                                            fill: false
+                                        }]
                                     },
-                                    title: {
-                                        display: true,
-                                        text: "Overall Attacks Detected"
+                                    options: {
+                                        legend: {
+                                            display: false
+                                        }
                                     }
-                                }
-                            });
-                        </script>
+                                });
+                            </script>
                     </div>
 
                     <!-- Card Body -->
-
-
-
                 </div>
             </div>
-
-
-
-
-
 
         </div>
         <!-- /.container-fluid -->
