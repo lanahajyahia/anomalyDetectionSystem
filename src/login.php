@@ -64,7 +64,7 @@ if (isset($_SESSION["captcha-show"])) {
 				<h1 style="font-family: 'Trebuchet MS', sans-serif;">
 					Anomaly Detection System</h1>
 			</div>
-			<h2 style="font-family: 'Trebuchet MS', sans-serif;" class="login-text">Secure your web applications from Cross-site scripting and SQL injections.</h2>
+			<h2 style="font-family: 'Trebuchet MS', sans-serif;" class="login-text">Secure and monitor your web applications against Cross-site scripting and SQL injections.</h2>
 		</div>
 		<div class="formdiv">
 			<form method="post" action="login.php">
@@ -93,6 +93,7 @@ if (isset($_SESSION["captcha-show"])) {
 			</form>
 		</div>
 	</div>
+</body>
 
 	<?php
 	include('admin/includes/scripts.php');

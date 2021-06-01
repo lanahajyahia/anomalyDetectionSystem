@@ -78,7 +78,7 @@ function is_attack($data)
         }
         $attack_description = $attack_description1 . "\r\n" . $attack_description2;
 
-        sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "A description of attack attempts the attacker been trying:\n\n" . $attack_description);
+        // sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "A description of attack attempts the attacker been trying:\n\n" . $attack_description);
 
 
         return true;

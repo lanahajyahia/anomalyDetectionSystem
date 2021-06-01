@@ -34,9 +34,10 @@ function get_attacks($month1, $month2, $type = null)
 function get_attack_number_today($type)
 {
     global $connection, $table;
-    $date = date("Y-m-d");
-    $query = "SELECT * FROM '$table' WHERE type='$type' AND date='$date'";
-    $result = $connection->query($query);
+    $date = date("Y-m-d") . "";
+    // echo $date;
+    $sql = "SELECT * FROM $table WHERE type='$type' and date='$date'";
+    $result = $connection->query($sql);
     /* determine number of rows result set */
     if (!empty($result) && $result->num_rows > 0) {
         return $result->num_rows;

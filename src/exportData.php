@@ -17,13 +17,13 @@ function exportAttack($table_name, $type)
     $f = fopen('php://memory', 'w');
 
     //set column headers
-    $fields = array('ID', 'Date', 'Time', 'HTTP URL', 'method', 'description');
+    $fields = array('ID', 'Date', 'Time', 'HTTP URL', 'path', 'method', 'description');
     fputcsv($f, $fields, $delimiter);
 
     //output each row of the data, format line as csv and write to file pointer
     while ($row = $query->fetch_assoc()) {
       //  $status = ($row['status'] == '1')?'Active':'Inactive';
-      $lineData = array($row['id'], $row['date'], $row['time'], $row['http_url'], $row['http_method'], $row['description']);
+      $lineData = array($row['id'], $row['date'], $row['time'], $row['hostname'], $row['path'], $row['http_method'], $row['description']);
       fputcsv($f, $lineData, $delimiter);
     }
 
