@@ -5,14 +5,14 @@ function get_filters()
     return array(
         array(
             "id" => "1",
-            "rule" => "((UNION ALL SELECT (\d,*)+(|\s|#|--)+))|((UNION ALL SELECT 'INJ'\|\|'ECT'\|\|'XXX'(,*\d,*)*(|\s|#|--)+))",
+            "rule" => "((UNION(\s)*ALL(\s)*SELECT(\s)*(\d(\s)*,*(\s)*)+(|\s|#|--)+))|((UNION(\s)*ALL(\s)*SELECT(\s)*'(\s)*INJ(\s)*'(\s)*\|(\s)*\|(\s)*'(\s)*ECT(\s)*'(\s)*\|(\s)*\|(\s)*'(\s)*XXX(\s)*'((\s)*,*(\s)*\d(\s)*,*(\s)*)*(|\s|#|--)+))",
             "description" => "Union select ALL SQLi detected, trying to access column values from a database table",
             "tag" => "sqli"
-            
+
         ),
         array(
             "id" => "2",
-            "rule" => "((( OR | HAVING | AND | AS INJECTX WHERE | WHERE )([\w\W]+=[\w\W]+)(| |--|#))| ORDER BY [\w\W]+)",
+            "rule" => "(((\s)*OR(\s)*|(\s)*HAVING(\s)*|(\s)*AND(\s)*|(\s)*AS(\s)*INJECTX(\s)*WHERE(\s)*|(\s)*WHERE(\s)*)([\w\W]+=[\w\W]+)(|(\s)*|--|#))|(\s)*ORDER(\s)*BY(\s)*[\w\W]*(\s)*sleep(\s)*\((\s)*\d+(\s)*\)",
             "description" => "Error based SQLi Detected",
             "tag" => "sqli"
         ),
@@ -64,12 +64,12 @@ function get_filters()
             "description" => "Detects SQL benchmark and sleep injection attempts including conditional queries",
             "tag" => "sqli"
         ),
-        array(
-            "id" => "11",
-            "rule" => "(?:create\s+function\s+\w+\s+returns)|(?:(|;)\s*(?:select|create|rename|truncate|load|alter|delete|update|insert|desc)\s*[\[(]?\w{2,})",
-            "description" => "Detects MySQL UDF injection and other data/structure manipulation attempts",
-            "tag" => "sqli"
-        ),
+        // array(
+        //     "id" => "11",
+        //     "rule" => "(?:create\s+function\s+\w+\s+returns)|(?:(|;)\s*(?:select|create|rename|truncate|load|alter|delete|update|insert|desc)\s*[\[(]?\w{2,})",
+        //     "description" => "Detects MySQL UDF injection and other data/structure manipulation attempts",
+        //     "tag" => "sqli"
+        // ),
         array(
             "id" => "12",
             "rule" => "(?:alter\\s*\\w+.*character\\s+set\\s+\\w+)|(\";\\s*waitfor\\s+time\\s+\")|(?:\";.*:\\s*goto)",
@@ -103,19 +103,19 @@ function get_filters()
         ),
         array(
             "id" => "17",
-            "rule" => "(?:(sleep\((\s*)(\d*)(\s*)\)|benchmark\((.*)\,(.*)\))|(waitfor delay '0:0:))",
-            "description" => "Detects blind sqli tests using sleep() or benchmark(). time based sql injection",
+            "rule" => "(?:(sleep(\s)*\((\s*)(\d*)(\s*)\)|benchmark(\s)*\((.*)\,(.*)\))|(waitfor delay '0:0:))|((\s)*\%20(\s)*waitfor(\s)*\%20(\s)*delay(\s)*\%20(\s)*(\'0:0:.*)?)",
+            "description" => "Detects blind sqli attempts using sleep() or benchmark(). Time-based SQL injection",
             "tag" => "sqli"
         ),
         array(
             "id" => "18",
-            "rule" => "((union)*(.*)select )((@@version)|(\* FROM v\$version)|(version\(\)))",
+            "rule" => "((union)*(.*)select(\s)*)((@@version)|(\*(\s)*FROM(\s)*v\$version)|(version\(\)))",
             "description" => "Detected input Querying the database type and version",
             "tag" => "sqli"
         ),
         array(
             "id" => "19",
-            "rule" => "UNION SELECT (NULL)+(,*)",
+            "rule" => "UNION(\s)*(ALL)?(\s)*SELECT(\s)*((\s)*(NULL)+(\s)*(,*))+",
             "description" => "Detected UNION select null from table",
             "tag" => "sqli"
         ),
@@ -314,7 +314,7 @@ function get_filters()
         //     'tag' => 'xss',
         //     'impact' => '1'
         // )
-        ,array(
+        , array(
             'id' => '44',
             'rule' => '(?:\\\\x[01fe][\\db-ce-f])|(?:%[01fe][\\db-ce-f])|(?:&#[01fe][\\db-ce-f])|(?:\\\\[01fe][\\db-ce-f])|(?:&#x[01fe][\\db-ce-f])',
             'description' => 'Detects nullbytes and other dangerous characters',
@@ -338,6 +338,25 @@ function get_filters()
             'rule' => '(?:[\\s\\d\\/"]+(?:on\\w+|style|poster|background)=[$"\\w])|(?:-type\\s*:\\s*multipart)',
             'description' => 'finds malicious attribute injection attempts and MHTML attacks',
             'tag' => 'xss'
+        ),
+        array(
+            'id' => '48',
+            'rule' => '(|\"|\'| )(\s)*((\s)*\+*(\s)*if(\s)*\((\s)*benchmark\((\s)*\d+(\s)*,(\s)*md5\((\s)*\d+(\s)*\)\)\,((NULL(\s)*)+(\s)*,*)+(\s)*\))(\s)*',
+            'description' => 'if statement with benchmark method detected, Blind MySQL INSERT injection',
+            'tag' => 'sqli'
+        ),
+        array(
+            'id' => '49',
+            'rule' => 'select(\s)*[\w\W]+(\s)*,*(\s)*FROM(\s)*[\w\W]+(\s)*where(\s)*[\w\W]+(\s)*\=(\s)*.',
+            'description' => 'standard SQL query manipulation attempt',
+            'tag' => 'sqli'
+        ),
+        
+        array(
+            'id' => '50',
+            'rule' => '(UNION(\s)*(ALL)?(\s)*SELECT(\s)*((\s)*\@\@VERSION(\s)*,(\s)*USER\(\)(\s)*,(\s)*SLEEP\((\s)*\d*(\s)*\)(\s)*))|(UNION(\s)*(ALL)?(\s)*SELECT(\s)*((\s)*\@\@VERSION(\s)*,(\s)*SLEEP\((\s)*\d*(\s)*\)(\s)*),(\s)*USER\(\)(\s)*)',
+            'description' => 'Detected Union select query attempt with user() sleep() @@version and more',
+            'tag' => 'sqli'
         )
     );
 }
