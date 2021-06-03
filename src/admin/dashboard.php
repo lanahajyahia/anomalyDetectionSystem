@@ -7,6 +7,18 @@ require_once("../exportData.php");
 unset($_SESSION["captcha-show"]);
 
 $table = "Detected_Attacks";
+function get_total_attacks($type = null)
+{
+    global $connection, $table;
+    $sql = "SELECT * FROM $table WHERE type='$type'";
+    $result = $connection->query($sql);
+    /* determine number of rows result set */
+    if (!empty($result) && $result->num_rows > 0) {
+        return $result->num_rows;
+    } else {
+        return 0;
+    }
+}
 function get_attacks($month1, $month2, $type = null)
 {
     global $connection, $table;
@@ -160,51 +172,86 @@ if (isset($_GET['export'])) {
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
                         <!-- <body> -->
-                            <canvas id="myChart" style="width:80%;max-width:800%"></canvas>
-                            <p> red - xss reflected , green - sqli , blue - xss stored </p>
+                        <canvas id="myChart"></canvas>
+                        <p> red - xss reflected , green - sqli , blue - xss stored </p>
+
+                        <script>
+                            var xValues = ['Jan & Feb', 'Mar & Apr', 'May & Jun', 'Jul & Aug', 'Sep & Oct', 'Nov & Dec'];
+
+                            new Chart("myChart", {
+                                type: "line",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        data: [<?php echo get_attacks("01", "02", "xss reflected"); ?>, <?php echo get_attacks("03", "04", "xss reflected"); ?>, <?php echo get_attacks("05", "06", "xss reflected"); ?>, <?php echo get_attacks("07", "08", "xss reflected"); ?>, <?php echo get_attacks("09", "10", "xss reflected"); ?>, <?php echo get_attacks("11", "12", "xss reflected"); ?>],
+                                        borderColor: "red",
+                                        fill: false
+                                    }, {
+                                        data: [<?php echo get_attacks("01", "02", "sqli"); ?>, <?php echo get_attacks("03", "04", "sqli"); ?>, <?php echo get_attacks("05", "06", "sqli"); ?>, <?php echo get_attacks("07", "08", "sqli"); ?>, <?php echo get_attacks("09", "10", "sqli"); ?>, <?php echo get_attacks("11", "12", "sqli"); ?>],
+                                        borderColor: "green",
+                                        fill: false
+                                    }, {
+                                        data: [<?php echo get_attacks("01", "02", "xss stored"); ?>, <?php echo get_attacks("03", "04", "xss stored"); ?>, <?php echo get_attacks("05", "06", "xss stored"); ?>, <?php echo get_attacks("07", "08", "xss stored"); ?>, <?php echo get_attacks("09", "10", "xss stored"); ?>, <?php echo get_attacks("11", "12", "xss stored"); ?>],
+                                        borderColor: "blue",
+                                        fill: false
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+                <!-- Pie Chart -->
+                <div class="col-xl-4 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+                            <canvas id="myChart1" style="width:100%;max-width:600px;height: 300px;"></canvas>
 
                             <script>
-                                var xValues = ['Jan & Feb', 'Mar & Apr', 'May & Jun', 'Jul & Aug', 'Sep & Oct', 'Nov & Dec'];
+                                var xValues = ["SQLI", "STORED", "REFLECTED"];
+                                var yValues = [<?php echo get_total_attacks("sqli"); ?>, <?php echo get_total_attacks("xss stored"); ?>, <?php echo get_total_attacks("xss reflected"); ?>];
+                                var barColors = [
+                                    "#00aba9",
+                                    "#2b5797",
+                                    "#e8c3b9"
 
-                                new Chart("myChart", {
-                                    type: "line",
+                                ];
+
+                                new Chart("myChart1", {
+                                    type: "pie",
                                     data: {
                                         labels: xValues,
                                         datasets: [{
-                                            data: [<?php echo get_attacks("01", "02", "xss reflected"); ?>, <?php echo get_attacks("03", "04", "xss reflected"); ?>, <?php echo get_attacks("05", "06", "xss reflected"); ?>, <?php echo get_attacks("07", "08", "xss reflected"); ?>, <?php echo get_attacks("09", "10", "xss reflected"); ?>, <?php echo get_attacks("11", "12", "xss reflected"); ?>],
-                                            borderColor: "red",
-                                            fill: false
-                                        }, {
-                                            data: [<?php echo get_attacks("01", "02", "sqli"); ?>, <?php echo get_attacks("03", "04", "sqli"); ?>, <?php echo get_attacks("05", "06", "sqli"); ?>, <?php echo get_attacks("07", "08", "sqli"); ?>, <?php echo get_attacks("09", "10", "sqli"); ?>, <?php echo get_attacks("11", "12", "sqli"); ?>],
-                                            borderColor: "green",
-                                            fill: false
-                                        }, {
-                                            data: [<?php echo get_attacks("01", "02", "xss stored"); ?>, <?php echo get_attacks("03", "04", "xss stored"); ?>, <?php echo get_attacks("05", "06", "xss stored"); ?>, <?php echo get_attacks("07", "08", "xss stored"); ?>, <?php echo get_attacks("09", "10", "xss stored"); ?>, <?php echo get_attacks("11", "12", "xss stored"); ?>],
-                                            borderColor: "blue",
-                                            fill: false
+                                            backgroundColor: barColors,
+                                            data: yValues
                                         }]
                                     },
                                     options: {
-                                        legend: {
-                                            display: false
+                                        title: {
+                                            display: true,
+                                            text: "Total amount of attacks"
                                         }
                                     }
                                 });
                             </script>
+
+                        </div>
+                        <!-- Card Body -->
+
                     </div>
-
-                    <!-- Card Body -->
                 </div>
-            </div>
-            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
 
 
-        </div>
-        <!-- /.container-fluid -->
+                <!-- End of Main Content -->
 
-    </div>
-    <!-- End of Main Content -->
-
-    <?php
-    include('includes/scripts.php');
-    include('includes/footer.php'); ?>
+                <?php
+                include('includes/scripts.php');
+                include('includes/footer.php'); ?>

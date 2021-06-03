@@ -95,9 +95,7 @@ if (isset($_SESSION["captcha-show"])) {
 	</div>
 </body>
 
-	<?php
-	include('admin/includes/scripts.php');
-	include('admin/includes/footer.php'); ?>
+
 
 </html>
 <script>
