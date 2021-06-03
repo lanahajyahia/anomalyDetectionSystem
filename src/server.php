@@ -1,6 +1,4 @@
 <?php
-//phpinfo();
-// session_start();
 
 $servername = htmlspecialchars("db");
 $username = htmlspecialchars("root");
@@ -21,12 +19,10 @@ if ($link->query($sql) === TRUE) {
   createUsersTable();
   createInjectionsTable();
 } else {
-  // echo "Error creating database: " . $link->error;
   // if database exist connect to it
   $connection = new mysqli($servername, $username, $password, $dbname);
 }
 
-//mysql_close($link);
 
 // functions for table creation
 function createUsersTable()
@@ -47,10 +43,7 @@ function createUsersTable()
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
   if ($connection->query($sql_user) === TRUE) {
-    // echo "Table USERS created successfully";
-
   } else {
-    //echo "Error creating table: " . $connection->error;
   }
   $pass = md5('admin');
   $sql = "INSERT INTO $table_name (username, email, fullname, user_type, password,code,status) 

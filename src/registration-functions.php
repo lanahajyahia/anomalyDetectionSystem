@@ -70,9 +70,7 @@ function update_user_BY_admin()
 			if ($result->num_rows > 0) {
 				while ($row = $result->fetch_assoc()) {
 					if ($row['password'] == $pass || $row['password2'] == $pass) {
-						array_push($errors, "Try a diffrent password!");
-						echo $row['password'] . "  ";
-						echo $row['password2'];
+						array_push($errors, "Please choose a password that you haven't used before.");
 					} else {
 						$password_old = $row['password'];
 						// echo $password_old;
@@ -80,7 +78,7 @@ function update_user_BY_admin()
 						if ($connection->query($query) === TRUE) {
 							header("Location: ../../admin/users.php");
 						} else {
-							echo $query;
+							// echo $query;
 						}
 					}
 				}

@@ -83,7 +83,7 @@ if (isset($_GET['export'])) {
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">All Users</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Admins only have permission to access user's table</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

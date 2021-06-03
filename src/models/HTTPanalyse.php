@@ -54,12 +54,16 @@ function is_attack($data)
         $method = $data['method'];
         $hostname = "http://" . $data['host'];
         $path = htmlspecialchars(urldecode($data['path']));
+        $_path = mysqli_real_escape_string($connection,$path);
+        $_headers = mysqli_real_escape_string($connection,$headers);
+
+       
 
         if ($array_result_url != null) {
             $attack_description1 = implode("\r\n", $array_result_url);
 
             $sql = "INSERT INTO Detected_Attacks(date, time, hostname,path,headers,http_method,description,type)
-        VALUES ('$date', '$time', '$hostname','$path','$headers', '$method','$attack_description1','$attack_type_url')";
+        VALUES ('$date', '$time', '$hostname','$_path','$_headers', '$method','$attack_description1','$attack_type_url')";
             if ($connection->query($sql) === TRUE) {
                 echo "added to db\r\ndate and time: " . $date . " " . $time . "\r\nurl: " . $url_decode . "\r\nattack type: $attack_type_url" . "\r\ndescription: " .  $attack_description1;
             } else {
@@ -69,7 +73,7 @@ function is_attack($data)
         if ($array_result_headers != null) {
             $attack_description2 = implode("\r\n", $array_result_headers);
             $sql = "INSERT INTO Detected_Attacks(date, time, hostname,path,headers,http_method,description,type)
-        VALUES ('$date', '$time', '$hostname','$path','$headers', '$method','$attack_description2','$attack_type_headers')";
+        VALUES ('$date', '$time', '$hostname','$_path','$_headers', '$method','$attack_description2','$attack_type_headers')";
             if ($connection->query($sql) === TRUE) {
                 echo "\r\nadded to db\r\ndate and time: " . $date . " " . $time . "<br>headers: " . urldecode($headers) . "\nattack type: xss stored" . "\r\ndescription: " .  $attack_description2;
             } else {
