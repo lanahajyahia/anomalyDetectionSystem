@@ -1,6 +1,4 @@
 <?php
-// require("../core.php");
-// require("../server.php"); 
 session_start();
 include("../registration-functions.php");
 require_once("../exportData.php");
@@ -24,10 +22,7 @@ if (isset($_GET['edit-id'])) {
     $_SESSION['id-to-edit'] = $id;
     include('edituser.php');
 }
-if (isset($_GET['delete-all'])) {
-    // <script>confirm("Are you sure you want to delete this user?")</script>
-     $query = $connection->query("DELETE FROM `$table` WHERE id<>1");
-}
+
 if (isset($_GET['export'])) {
     exportUsers();
     exit;
@@ -149,7 +144,6 @@ if (isset($_GET['export'])) {
                 </div>
             </div>
             <div class="panel-heading">
-                <a href="?delete-all" class="btn btn-success pull-right btn-danger" title="Delete all logs"><i class="fas fa-trash"></i> Delete All</a>
 
                 <a href="?export" class="btn btn-success pull-right">Export to excel</a>
             </div>

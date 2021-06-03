@@ -2,6 +2,7 @@
 session_start();
 include('includes/header.php');
 include('../server.php');
+require_once("../exportData.php");
 
 unset($_SESSION["captcha-show"]);
 
@@ -24,12 +25,6 @@ function get_attacks($month1, $month2, $type = null)
         }
     }
     return $count_amount;
-    // $row_cnt = $result->num_rows;
-    // if ($row_cnt != 0) {
-    //     return $row_cnt;
-    // } else {
-    //     return 0;
-    // }
 }
 function get_attack_number_today($type)
 {
@@ -44,6 +39,10 @@ function get_attack_number_today($type)
     } else {
         return 0;
     }
+}
+if (isset($_GET['export'])) {
+    exportAttack($table);
+    exit();
 }
 ?>
 <!-- Content Wrapper -->
@@ -62,7 +61,7 @@ function get_attack_number_today($type)
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800" style="padding-top: 1em; padding-left: 0.5em;">Dashboard</h1>
-                <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+                <a href="?export" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate report for all attacks</a>
             </div>
 
             <!-- Content Row -->
@@ -148,37 +147,19 @@ function get_attack_number_today($type)
                     </div>
                 </div>
 
-                <!-- CSRF -->
-                <div class="col-xl-3 col-md-6 mb-4" style="display:none">
-                    <div class="card border-left-warning shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                        CSRF attacks</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="<?php echo htmlspecialchars('Logs\csrfLogs.php'); ?>" class="small-box-footer" style="align-self: center;">View All Logs </i></a>
 
-                    </div>
-                </div>
             </div>
 
             <!-- Content Row -->
 
-            <div class="row" style="justify-content:center">
+            <div class="row">
 
                 <!-- Area Chart -->
                 <div class="col-xl-8 col-lg-7">
                     <div class="card shadow mb-4" style="align-items:center;">
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-                        <body>
+                        <!-- <body> -->
                             <canvas id="myChart" style="width:80%;max-width:800%"></canvas>
                             <p> red - xss reflected , green - sqli , blue - xss stored </p>
 
@@ -215,6 +196,8 @@ function get_attack_number_today($type)
                     <!-- Card Body -->
                 </div>
             </div>
+            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
+
 
         </div>
         <!-- /.container-fluid -->

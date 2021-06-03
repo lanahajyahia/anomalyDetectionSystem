@@ -1,6 +1,5 @@
 <?php
 session_start();
-// require("../../core.php");
 require("../../server.php");
 require_once("../../exportData.php");
 
