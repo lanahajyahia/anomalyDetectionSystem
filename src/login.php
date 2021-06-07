@@ -19,38 +19,6 @@ if (isset($_SESSION["captcha-show"])) {
 	<title>Log In</title>
 	<link rel="stylesheet" type="text/css" href="admin/css/register-style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-	<style>
-		.forgot-pass {
-			color: #7596c8;
-			font-family: 'Roboto-Regular', 'Helvetica', 'sans-serif';
-			font-size: 14px;
-			line-height: 16px;
-			text-decoration: none;
-		}
-
-		footer.sticky-footer {
-			padding: 2rem 0;
-			flex-shrink: 0
-		}
-
-		.bg-white {
-			background-color: #fff !important
-		}
-
-		.my-auto {
-			margin-bottom: auto !important
-		}
-
-		.my-auto {
-			margin-top: auto !important
-		}
-
-		footer.sticky-footer .copyright {
-			line-height: 1;
-			font-size: .8rem
-		}
-	</style>
 </head>
 
 <body class="login">
@@ -83,9 +51,6 @@ if (isset($_SESSION["captcha-show"])) {
 					<button type="submit" class="btn" name="login_btn">Log In</button>
 				</div>
 
-				<p>
-					<a class="forgot-pass" href="forgotpassword.php">Forgot Password?</a>
-				</p>
 			</form>
 		</div>
 	</div>

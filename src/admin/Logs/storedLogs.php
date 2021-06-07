@@ -1,6 +1,5 @@
 <?php
 session_start();
-// require("../../core.php");
 require("../../server.php");
 require_once("../../exportData.php");
 
@@ -34,7 +33,7 @@ if (isset($_GET['export'])) {
     <title><?php echo htmlspecialchars('Stored XSS'); ?></title>
 
     <!-- Custom fonts for this template -->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -77,7 +76,7 @@ if (isset($_GET['export'])) {
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Stored XSS, where the malicious script comes from the website's database or untrusted source and includes that script within its later HTTP responses in an unsafe way.</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Stored XSS, where the malicious script comes from untrusted source and it's included within the later HTTP responses in an unsafe way.</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
