@@ -7,7 +7,6 @@ require_once("../sendmail.php");
 require_once('filters.php');
 
 define("ATTACK_SUBJECT", "ATTENTION SOMEONE IS TRYING TO ATTACK YOUR WEBSITE!!");
-define("TABLE_NAME", "Injections");
 
 $data = json_decode(file_get_contents('php://input'), true);
 $attack_patterns = get_filters();
@@ -18,7 +17,7 @@ $attack_type_headers = null;
 
 function getAttackType($type)
 {
-    if ($type == 'response') {
+    if ($type == 'request') {
         return 'reflected';
     }
     return 'stored';
@@ -56,7 +55,6 @@ function is_attack($data)
 
     if ($array_result_url == null && $array_result_headers == null) {
         echo "no attack detected function reteruned false\r\n" . urldecode(json_encode($data['url']));
-        return false;
     } else {
         $date = date("Y-m-d");
         $time = date("h:i:sa");
@@ -67,8 +65,6 @@ function is_attack($data)
         $path = htmlspecialchars(urldecode($data['path']));
         $_path = mysqli_real_escape_string($connection, $path);
         $_headers = mysqli_real_escape_string($connection, $headers);
-
-
 
         if ($array_result_url != null) {
             $attack_description1 = implode("\r\n", $array_result_url);
@@ -93,9 +89,6 @@ function is_attack($data)
         }
         $attack_description = $attack_description1 . "\r\n" . $attack_description2;
 
-        // sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "A description of attack attempts the attacker been trying:\n\n" . $attack_description);
-
-
-        return true;
+        sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "website where attack detected: " . $hostname . "\nA description of attack attempts the attacker been trying:\n" . $attack_description);
     }
 }

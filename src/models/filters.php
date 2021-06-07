@@ -11,6 +11,13 @@ function get_filters()
 
         ),
         array(
+            "id" => "111",
+            "rule" => "((UNION(\s)*SELECT(\s)*ALL(\s)*(\d(\s)*,*(\s)*)+(|\s|#|--)+))|((UNION(\s)*SELECT(\s)*ALL(\s)*'(\s)*INJ(\s)*'(\s)*\|(\s)*\|(\s)*'(\s)*ECT(\s)*'(\s)*\|(\s)*\|(\s)*'(\s)*XXX(\s)*'((\s)*,*(\s)*\d(\s)*,*(\s)*)*(|\s|#|--)+))",
+            "description" => "Union select ALL SQLi detected, trying to access column values from a database table.",
+            "tag" => "sqli"
+
+        ),
+        array(
             "id" => "2",
             "rule" => "(\s)*ORDER(\s)*BY(\s)*[\w\W]*(\s)*sleep(\s)*\((\s)*\d+(\s)*\)",
             "description" => "Error based SQLi Detected, order by sleep.",
