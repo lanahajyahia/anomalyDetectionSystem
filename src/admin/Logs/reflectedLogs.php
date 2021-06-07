@@ -6,8 +6,6 @@ require_once("../../exportData.php");
 $table = htmlspecialchars('Detected_Attacks');
 $type = htmlspecialchars('xss reflected');
 
-
-
 if (isset($_GET['delete-id'])) {
     $id    = (int) $_GET["delete-id"];
     $query = $connection->query("DELETE FROM `$table` WHERE id='$id'");

@@ -1,9 +1,7 @@
 <?php
-// session_start();
 include('registration-functions.php');
 if (isset($_SESSION["captcha-show"])) {
 	if ($_SESSION["captcha-show"] > 2) {
-		// unset($_SESSION["captcha-show"]);
 		echo '<style type="text/css">
 	.elem-group {
 		display: block !important;
@@ -19,8 +17,6 @@ if (isset($_SESSION["captcha-show"])) {
 
 <head>
 	<title>Log In</title>
-	<!-- <link href="admin/css/sb-admin-2.min.css" rel="stylesheet"> -->
-
 	<link rel="stylesheet" type="text/css" href="admin/css/register-style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 

@@ -1,4 +1,7 @@
 <?php
+
+use SendGrid\Response;
+
 require_once("../server.php");
 require_once("../sendmail.php");
 require_once('filters.php');
@@ -13,6 +16,14 @@ is_attack($data);
 $attack_type_url = null;
 $attack_type_headers = null;
 
+function getAttackType($type)
+{
+    if ($type == 'response') {
+        return 'reflected';
+    }
+    return 'stored';
+}
+
 
 function attack_detect($data, $attack_num)
 {
@@ -24,7 +35,7 @@ function attack_detect($data, $attack_num)
         if ($is_found_decoded == 1) {
             $attack_type = $filter['tag'];
             if ($attack_type === 'xss') {
-                $attack_type  = $attack_type . " reflected";
+                $attack_type  = $attack_type . " " .  getAttackType($data['checkType']);
             }
             if ($attack_num === 1) {
                 $attack_type_url =   $attack_type;
@@ -54,10 +65,10 @@ function is_attack($data)
         $method = $data['method'];
         $hostname = "http://" . $data['host'];
         $path = htmlspecialchars(urldecode($data['path']));
-        $_path = mysqli_real_escape_string($connection,$path);
-        $_headers = mysqli_real_escape_string($connection,$headers);
+        $_path = mysqli_real_escape_string($connection, $path);
+        $_headers = mysqli_real_escape_string($connection, $headers);
 
-       
+
 
         if ($array_result_url != null) {
             $attack_description1 = implode("\r\n", $array_result_url);

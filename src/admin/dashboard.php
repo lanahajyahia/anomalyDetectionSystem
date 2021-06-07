@@ -248,10 +248,11 @@ if (isset($_GET['export'])) {
 
                     </div>
                 </div>
+            </div>
 
 
-                <!-- End of Main Content -->
+            <!-- End of Main Content -->
 
-                <?php
-                include('includes/scripts.php');
-                include('includes/footer.php'); ?>
+            <?php
+            include('includes/scripts.php');
+            include('includes/footer.php'); ?>
