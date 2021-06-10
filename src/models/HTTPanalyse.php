@@ -12,8 +12,8 @@ $data = json_decode(file_get_contents('php://input'), true);
 $attack_patterns = get_filters();
 is_attack($data);
 
-$attack_type_url = null;
-$attack_type_headers = null;
+$attack_type_url = "";
+$attack_type_headers = "";
 
 function getAttackType($type)
 {
@@ -34,7 +34,8 @@ function attack_detect($data, $attack_num)
         if ($is_found_decoded == 1) {
             $attack_type = $filter['tag'];
             if ($attack_type === 'xss') {
-                $attack_type  = $attack_type . " " .  getAttackType($data['checkType']);
+                $attack_type = "xss reflected";
+                // $attack_type  = $attack_type . " " .  getAttackType($data['checkType']);
             }
             if ($attack_num === 1) {
                 $attack_type_url =   $attack_type;
@@ -87,8 +88,18 @@ function is_attack($data)
                 echo "fail     " . $connection->error . "  " . $hostname . " $attack_type_headers" . " headers: " .  var_dump($headers);
             }
         }
+        if ($attack_type_headers  == $attack_type_url) {
+            $attack_type = $attack_type_headers;
+        } else if ($attack_type_headers  == "" && $attack_type_url  != "") {
+            $attack_type = $attack_type_url;
+        } else if ($attack_type_headers  != "" && $attack_type_url  == "") {
+            $attack_type = $attack_type_headers;
+        } else {
+            $attack_type = $attack_type_headers . " & " . $attack_type_url;
+        }
+
         $attack_description = $attack_description1 . "\r\n" . $attack_description2;
 
-        sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT, "website where attack detected: " . $hostname . "\nA description of attack attempts the attacker been trying:\n" . $attack_description);
+        sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT,  strtoupper($attack_type) . " was detected in website:\n" . $hostname . "\nA description of attack attempts the attacker been trying:\n" . $attack_description);
     }
 }
