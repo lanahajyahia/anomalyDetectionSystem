@@ -69,9 +69,6 @@ if (isset($_GET['export'])) {
             <!-- Page Heading -->
             <h1 class="h3 mb-2 text-gray-800" style="padding:10px;">Stored Cross-site Scripting Logs <i class='fas fa-radiation-alt' style='font-size:36px'></i>
             </h1>
-            <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">

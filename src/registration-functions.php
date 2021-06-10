@@ -73,12 +73,10 @@ function update_user_BY_admin()
 						array_push($errors, "Please choose a password that you haven't used before.");
 					} else {
 						$password_old = $row['password'];
-						// echo $password_old;
 						$query = "UPDATE Users SET password='$pass', password2='$password_old' WHERE id=$id";
 						if ($connection->query($query) === TRUE) {
 							header("Location: ../../admin/users.php");
 						} else {
-							// echo $query;
 						}
 					}
 				}

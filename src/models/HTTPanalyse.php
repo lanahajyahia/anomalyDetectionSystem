@@ -15,15 +15,6 @@ is_attack($data);
 $attack_type_url = "";
 $attack_type_headers = "";
 
-function getAttackType($type)
-{
-    if ($type == 'request') {
-        return 'reflected';
-    }
-    return 'stored';
-}
-
-
 function attack_detect($data, $attack_num)
 {
     global $attack_patterns, $attack_type_url, $attack_type_headers;
@@ -35,7 +26,6 @@ function attack_detect($data, $attack_num)
             $attack_type = $filter['tag'];
             if ($attack_type === 'xss') {
                 $attack_type = "xss reflected";
-                // $attack_type  = $attack_type . " " .  getAttackType($data['checkType']);
             }
             if ($attack_num === 1) {
                 $attack_type_url =   $attack_type;

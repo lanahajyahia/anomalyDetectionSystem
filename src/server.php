@@ -68,11 +68,9 @@ function createInjectionsTable()
     query VARCHAR(500),
     http_method VARCHAR(50) NOT NULL, -- get or post
     description VARCHAR(500) NOT NULL, -- description of injection
-    type VARCHAR(50) NOT NULL -- reflected / dom / stored / sqli
+    type VARCHAR(50) NOT NULL -- reflected / sqli
     )";
   if ($connection->query($sql_xss) === TRUE) {
-    //   echo "Table XSS  created successfully";
   } else {
-    // echo "Error creating table: " . $connection->error;
   }
 }

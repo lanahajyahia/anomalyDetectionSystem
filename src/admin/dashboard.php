@@ -31,7 +31,6 @@ function get_attacks($month1, $month2, $type = null)
         while ($row = $result->fetch_assoc()) {
             $month_str = $row['date'];
             if (substr($month_str, 5, 2) == $month1 || substr($month_str, 5, 2) == $month2) {
-                // echo substr($month_str, 5, 2) ;
                 $count_amount++;
             }
         }
@@ -42,7 +41,6 @@ function get_attack_number_today($type)
 {
     global $connection, $table;
     $date = date("Y-m-d") . "";
-    // echo $date;
     $sql = "SELECT * FROM $table WHERE type='$type' and date='$date'";
     $result = $connection->query($sql);
     /* determine number of rows result set */
