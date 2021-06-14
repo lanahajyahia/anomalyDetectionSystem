@@ -85,7 +85,7 @@
 <?php
 require("../../server.php");
 $id = $_GET['id'];
-$sql  = $connection->query("SELECT date, time, hostname,path,headers, http_method, description ,type FROM Detected_Attacks WHERE id='$id'");
+$sql  = $connection->query("SELECT date, time, hostname,path,headers, http_method, description ,type,body FROM Detected_Attacks WHERE id='$id'");
 $row = mysqli_fetch_assoc($sql);
 ?>
 <!DOCTYPE html>
@@ -139,6 +139,17 @@ $row = mysqli_fetch_assoc($sql);
                 </summary>
                 <p>
                     <?php echo $row['path']; ?>
+                </p>
+            </details>
+            <details>
+                <summary>Body
+                </summary>
+                <p>
+                    <?php if ($row['body'] == null) {
+                        echo "This request doesn't contain a body ";
+                    } else {
+                        echo $row['body'];
+                    } ?>
                 </p>
             </details>
             <details>

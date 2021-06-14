@@ -26,7 +26,7 @@ function get_filters()
         
         array(
             "id" => "2",
-            "rule" => "(\s*OR\s*|\s*HAVING\s*|\s*AND\s*|\s*AS\s*INJECTX\s*WHERE\s*|\s*WHERE\s*)((\s*1\s*=\s*1\s*)|(\s*1\s*=\s*0\s*)|(\s*0\s*=\s*1\s*)|(\s*x\s*=\s*x\s*)|(\s*x\s*=\s*y\s*))",
+            "rule" => "(\s*OR\s*|\s*HAVING\s*|\s*AND\s*|\s*AS\s*INJECTX\s*WHERE\s*|\s*WHERE\s*)(((\'|\"|\s*)1(\'|\"|\s*)=(\'|\"|\s*)1(\'|\"|\s*))|((\'|\"|\s*)1(\'|\"|\s*)=(\'|\"|\s*)*0(\'|\"|\s*))|((\'|\"|\s*)0(\'|\"|\s*)=(\'|\"|\s*)1(\'|\"|\s*))|((\'|\"|\s*)x(\'|\"|\s*)=(\'|\"|\s*)x(\'|\"|\s*))|((\'|\"|\s*)x(\'|\"|\s*)=(\'|\"|\s*)y(\'|\"|\s*)))",
             "description" => "Error based SQLi Detected, sql query that includes: OR, HAVING, WHERE, AND and more. ",
             "tag" => "sqli"
         ),
@@ -174,12 +174,12 @@ function get_filters()
             'tag' => 'xss'
         ),
 
-        array(
-            'id' => '25',
-            'rule' => '(?:[=(].+\\?.+:)|(?:with\\([^)]*\\)\\))|(?:\\.\\s*source\\W)',
-            'description' => 'Detects JavaScript with(), ternary operators and XML predicate attacks.',
-            'tag' => 'xss'
-        ),
+        // array(
+        //     'id' => '25',
+        //     'rule' => '(?:[=(].+\\?.+:)|(?:with\\([^)]*\\)\\))|(?:\\.\\s*source\\W)',
+        //     'description' => 'Detects JavaScript with(), ternary operators and XML predicate attacks.',
+        //     'tag' => 'xss'
+        // ),
         array(
             'id' => '26',
             'rule' => '(?:\\\\u00[a-f0-9]{2})|(?:\\\\x0*[a-f0-9]{2})|(?:\\\\\\d{2,3})',
