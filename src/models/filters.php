@@ -23,7 +23,7 @@ function get_filters()
             "description" => "Error based SQLi Detected, order by sleep.",
             "tag" => "sqli"
         ),
-        
+
         array(
             "id" => "2",
             "rule" => "(\s*OR\s*|\s*HAVING\s*|\s*AND\s*|\s*AS\s*INJECTX\s*WHERE\s*|\s*WHERE\s*)(((\'|\"|\s*)1(\'|\"|\s*)=(\'|\"|\s*)1(\'|\"|\s*))|((\'|\"|\s*)1(\'|\"|\s*)=(\'|\"|\s*)*0(\'|\"|\s*))|((\'|\"|\s*)0(\'|\"|\s*)=(\'|\"|\s*)1(\'|\"|\s*))|((\'|\"|\s*)x(\'|\"|\s*)=(\'|\"|\s*)x(\'|\"|\s*))|((\'|\"|\s*)x(\'|\"|\s*)=(\'|\"|\s*)y(\'|\"|\s*)))",
@@ -78,12 +78,6 @@ function get_filters()
             "description" => "Detects SQL benchmark and sleep injection attempts including conditional queries.",
             "tag" => "sqli"
         ),
-        // array(
-        //     "id" => "11",
-        //     "rule" => "(?:create\s+function\s+\w+\s+returns)|(?:(|;)\s*(?:select|create|rename|truncate|load|alter|delete|update|insert|desc)\s*[\[(]?\w{2,})",
-        //     "description" => "Detects MySQL UDF injection and other data/structure manipulation attempts.",
-        //     "tag" => "sqli"
-        // ),
         array(
             "id" => "12",
             "rule" => "(?:alter\\s*\\w+.*character\\s+set\\s+\\w+)|(\";\\s*waitfor\\s+time\\s+\")|(?:\";.*:\\s*goto)",
@@ -140,14 +134,6 @@ function get_filters()
             'description' => 'finds html breaking injections including whitespace attacks.',
             'tag' => 'xss'
         ),
-
-        // array(
-        //     'id' => '2',
-        //     'rule' => '(?:"+.*[<=]\\s*"[^"]+")|(?:"\\s*\\w+\\s*=)|(?:>\\w=\\/)|(?:#.+\\)["\\s]*>)|(?:"\\s*(?:src|style|on\\w+)\\s*=\\s*")|(?:[^"]?"[,;\\s]+\\w*[\\[\\(])',
-        //     'description' => 'finds attribute breaking injections including whitespace attacks',
-        //     'tag' => 'xss',
-        //     'impact' => '4'
-        // ),
         array(
             'id' => '21',
             'rule' => '(?:^>[\\w\\s]*<\\/?\\w{2,}>)',
@@ -173,13 +159,6 @@ function get_filters()
             'description' => 'Detects self contained xss via with(), common loops and regex to string conversion.',
             'tag' => 'xss'
         ),
-
-        // array(
-        //     'id' => '25',
-        //     'rule' => '(?:[=(].+\\?.+:)|(?:with\\([^)]*\\)\\))|(?:\\.\\s*source\\W)',
-        //     'description' => 'Detects JavaScript with(), ternary operators and XML predicate attacks.',
-        //     'tag' => 'xss'
-        // ),
         array(
             'id' => '26',
             'rule' => '(?:\\\\u00[a-f0-9]{2})|(?:\\\\x0*[a-f0-9]{2})|(?:\\\\\\d{2,3})',
@@ -205,14 +184,6 @@ function get_filters()
             'description' => 'Detects JavaScript DOM/miscellaneous properties and methods.',
             'tag' => 'xss'
         ),
-        // array(
-        //     'id' => '17',
-        //     'rule' => '([^*:\\s\\w,.\\/?+-]\\s*)?(?<![a-z]\\s)(?<![a-z\\/_@])(\\s*return\\s*)?(?:hash|name|href|navigateandfind|source|pathname|close|constructor|port|protocol|assign|replace|back|forward|document|ownerdocument|window|top|this|self|parent|frames|_?content|date|cookie|innerhtml|innertext|csstext+?|outerhtml|print|moveby|resizeto|createstylesheet|stylesheets)(?(1)[^\\w%"]|(?:\\s*[^@\\/\\s\\w%.+\\-]))',
-        //     'description' => 'Detects JavaScript object properties and methods.',
-        //     'tag' => 'xss',
-        //     'impact' => '4',
-        // ),
-
         array(
             'id' => '30',
             'rule' => '([^*:\\s\\w,.\\/?+-]\\s*)?(?<![a-z]\\s)(?<![a-z\\/_@\\-\\|])(\\s*return\\s*)?(?:join|pop|push|reverse|reduce|concat|map|shift|sp?lice|sort|unshift)(?(1)[^\\w%"]|(?:\\s*[^@\\s\\w%,.+\\-]))',
@@ -239,13 +210,6 @@ function get_filters()
             'description' => 'Detects advanced XSS probings via Script(), RexExp, constructors and XML namespaces.',
             'tag' => 'xss'
         ),
-        // array(
-        //     'id' => '23',
-        //     'rule' => '(?:\\.\\s*\\w+\\W*=)|(?:\\W\\s*(?:location|document)\\s*\\W[^({[;]+[({[;])|(?:\\(\\w+\\?[:\\w]+\\))|(?:\\w{2,}\\s*=\\s*\\d+[^&\\w]\\w+)|(?:\\]\\s*\\(\\s*\\w+)',
-        //     'description' => 'Detects JavaScript location/document property access and window access obfuscation.',
-        //     'tag' => 'xss',
-        //     'impact' => '5'
-        // ),
         array(
             'id' => '34',
             'rule' => '(?:[".]script\\s*\\()|(?:\\$\\$?\\s*\\(\\s*[\\w"])|(?:\\/[\\w\\s]+\\/\\.)|(?:=\\s*\\/\\w+\\/\\s*\\.)|(?:(?:this|window|top|parent|frames|self|content)\\[\\s*[(,"]*\\s*[\\w\\$])|(?:,\\s*new\\s+\\w+\\s*[,;)])',
@@ -258,13 +222,6 @@ function get_filters()
             'description' => 'Detects obfuscated JavaScript script injections.',
             'tag' => 'xss'
         ),
-        // array(
-        //     'id' => '26',
-        //     'rule' => '(?:[^:\s\w]+\s*[^\w\/](href|protocol|host|hostname|pathname|hash|port|cookie)[^\w])',
-        //     'description' => 'Detects JavaScript cookie stealing and redirection attempts.',
-        //     'tag' => 'xss',
-        //     'impact' => '4'
-        // ),
         array(
             'id' => '36',
             'rule' => '(?:(?:vbs|vbscript|data):.*[,+])|(?:\\w+\\s*=\\W*(?!https?)\\w+:)|(jar:\\w+:)|(=\\s*"?\\s*vbs(?:ript)?:)|(language\\s*=\\s?"?\\s*vbs(?:ript)?)|on\\w+\\s*=\\*\\w+\\-"?',
@@ -319,16 +276,7 @@ function get_filters()
             'rule' => '(?:\\<base\\s+)|(?:<!(?:element|entity|\\[CDATA))',
             'description' => 'Detects base href injections and XML entity injections.',
             'tag' => 'xss'
-        )
-        // ),
-        // array(
-        //     'id' => '38',
-        //     'rule' => '(?:\<[\/]?(?:[i]?frame|applet|isindex|marquee|keygen|script|audio|video|input|button|textarea|style|base|body|meta|link|object|embed|param|plaintext|xm\\w+|image|im(?:g|port)))',
-        //     'description' => 'Detects possibly malicious html elements including some attributes',
-        //     'tag' => 'xss',
-        //     'impact' => '1'
-        // )
-        , array(
+        ), array(
             'id' => '44',
             'rule' => '(?:\\\\x[01fe][\\db-ce-f])|(?:%[01fe][\\db-ce-f])|(?:&#[01fe][\\db-ce-f])|(?:\\\\[01fe][\\db-ce-f])|(?:&#x[01fe][\\db-ce-f])',
             'description' => 'Detects nullbytes and other dangerous characters.',
@@ -365,7 +313,7 @@ function get_filters()
             'description' => 'standard SQL query manipulation injection attempt.',
             'tag' => 'sqli'
         ),
-        
+
         array(
             'id' => '50',
             'rule' => '(UNION(\s)*(ALL)?(\s)*SELECT(\s)*((\s)*\@\@VERSION(\s)*,(\s)*USER\(\)(\s)*,(\s)*SLEEP\((\s)*\d*(\s)*\)(\s)*))|(UNION(\s)*(ALL)?(\s)*SELECT(\s)*((\s)*\@\@VERSION(\s)*,(\s)*SLEEP\((\s)*\d*(\s)*\)(\s)*),(\s)*USER\(\)(\s)*)',

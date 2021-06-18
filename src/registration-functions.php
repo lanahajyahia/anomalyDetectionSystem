@@ -46,19 +46,25 @@ function update_user_BY_admin()
 	$pass1 = e($_POST['password1-save']);
 	$pass2 = e($_POST['password2-save']);
 	$type = $_POST['usertype'];
+	$can_update_username = 0;
+	$can_update_password = 0;
 	if (!empty($username) && $username != $_SESSION['username-to-edit']) {
 		if (is_numeric($username[0])) {
 			array_push($errors, "Username must start with a letter!");
 		} else if (strlen($username) < 3) {
 			array_push($errors, "Username must contain at least 3 letters!");
 		} else {
-			$query = "UPDATE Users SET username='$username' WHERE id=$id";
-			if ($connection->query($query) === TRUE) {
-				header("Location: ../../admin/users.php");
+			$isUsername_exist = "SELECT * FROM Users WHERE username = '$username'";
+			$result_username = mysqli_query($connection, $isUsername_exist);
+			$data_username = mysqli_fetch_array($result_username, MYSQLI_NUM);
+
+			if ($data_username != null) {
+				array_push($errors, "A user with this username already exists!");
 			}
 		}
 	}
 	if (!empty($pass1)) {
+		$can_update_password = 1;
 
 		password_validation($pass1);
 		if ($pass1 != $pass2) {
@@ -71,24 +77,25 @@ function update_user_BY_admin()
 				while ($row = $result->fetch_assoc()) {
 					if ($row['password'] == $pass || $row['password2'] == $pass) {
 						array_push($errors, "Please choose a password that you haven't used before.");
-					} else {
-						$password_old = $row['password'];
-						$query = "UPDATE Users SET password='$pass', password2='$password_old' WHERE id=$id";
-						if ($connection->query($query) === TRUE) {
-							header("Location: ../../admin/users.php");
-						} else {
-						}
 					}
 				}
 			}
 		}
 	}
-
-	if ($type != $_SESSION['type-to-edit']) {
-		$query = "UPDATE Users SET user_type='$type' WHERE id=$id";
-		if ($connection->query($query) === TRUE) {
-			header("Location: ../../admin/users.php");
+	if (count($errors) == 0) {
+		if ($can_update_password == 1) {
+			$password_old = $row['password'];
+			$query_pass = "UPDATE Users SET password='$pass', password2='$password_old' WHERE id=$id";
+			if ($connection->query($query_pass) === TRUE) {
+			}
 		}
+		$query_username = "UPDATE Users SET username='$username' WHERE id=$id";
+		if ($connection->query($query_username) === TRUE) {
+		}
+		if ($type != $_SESSION['type-to-edit']) {
+			$query = "UPDATE Users SET user_type='$type' WHERE id=$id";
+		}
+		header("Location: ../../admin/users.php");
 	}
 }
 
@@ -199,7 +206,6 @@ function isUserVerified()
 			$fetch_data = mysqli_fetch_assoc($code_res);
 			$fetch_code = $fetch_data['code'];
 			$email = $fetch_data['email'];
-			// echo $email;
 			$code = 0;
 			$status = 'verified';
 			$update_otp = "UPDATE Users SET code = $code, status = '$status' WHERE email = '$email'";
@@ -237,7 +243,11 @@ function register()
 	$email       =  e($_POST['email']);
 	$password_1  =  e($_POST['password_1']);
 	$password_2  =  e($_POST['password_2']);
-	$user_type   =  $_POST['usertype'];
+	if (isset($_POST['usertype'])) {
+		$user_type   = $_POST['usertype'];
+	} else {
+		$user_type = null;
+	}
 
 	// form validation: ensure that the form is correctly filled
 	if (empty($fullname)) {
@@ -253,6 +263,9 @@ function register()
 	} else {
 		if (preg_match('/^[a-zA-Z0-9]+$/', $username) == 0) {
 			array_push($errors, "Username must start with a letter!");
+		}
+		if (strlen($username) < 3) {
+			array_push($errors, "Username must have at least 3 characters");
 		}
 	}
 	if (empty($email)) {

@@ -94,7 +94,7 @@ if (isset($_GET['export'])) {
 
                                 $sql   = $connection->query("SELECT id, email, username, reg_date, last_activity, user_type FROM `$table`");
                                 while ($row = mysqli_fetch_assoc($sql)) {
-                                    if ($row['id'] == 1) {
+                                    if ($row['id'] == 1 || $_SESSION['user']['username'] == $row['username']) {
                                         echo '
 										<tr class=odd>
 						                  <td>' . $row['username'] . '</td>
@@ -103,7 +103,7 @@ if (isset($_GET['export'])) {
                                           <td>' . $row['last_activity'] . '</td>
                                           <td>' . $row['user_type'] . '</td>
                                           <td> 
-                                          <a href="?edit-id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-edit"></i> Edit</a> 
+                                          <a href="?edit-id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-edit"></i>Edit</a> 
                                           </td>
 										  	
 										
@@ -120,8 +120,8 @@ if (isset($_GET['export'])) {
                                           <td>' . $row['last_activity'] . '</td>
                                           <td>' . $row['user_type'] . '</td>
                                           <td> 
-                                          <a href="?edit-id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-edit"></i> Edit</a> 
-                                          <a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                                          <a href="?edit-id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-edit"></i>Edit</a> 
+                                          <a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger"><i class="fas fa-trash"></i>Delete</a>
                                           </td>
 										  	
 										
