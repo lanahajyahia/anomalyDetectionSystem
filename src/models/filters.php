@@ -204,24 +204,24 @@ function get_filters()
             'description' => 'Detects JavaScript language constructs.',
             'tag' => 'xss'
         ),
-        array(
-            'id' => '33',
-            'rule' => '(?:=\s*(?:top|this|window|content|self|frames|_content))|(?:\/\s*[gimx]*\s*[)}])|(?:default\s+xml\s+namespace\s*=)|(?:\/\s*\+[^+]+\s*\+\s*\/)',
-            'description' => 'Detects advanced XSS probings via Script(), RexExp, constructors and XML namespaces.',
-            'tag' => 'xss'
-        ),
+        // array(
+        //     'id' => '33',
+        //     'rule' => '(?:=\s*(?:top|this|window|content|self|frames|_content))|(?:\/\s*[gimx]*\s*[)}])|(?:default\s+xml\s+namespace\s*=)|(?:\/\s*\+[^+]+\s*\+\s*\/)',
+        //     'description' => 'Detects advanced XSS probings via Script(), RexExp, constructors and XML namespaces.',
+        //     'tag' => 'xss'
+        // ),
         array(
             'id' => '34',
             'rule' => '(?:[".]script\\s*\\()|(?:\\$\\$?\\s*\\(\\s*[\\w"])|(?:\\/[\\w\\s]+\\/\\.)|(?:=\\s*\\/\\w+\\/\\s*\\.)|(?:(?:this|window|top|parent|frames|self|content)\\[\\s*[(,"]*\\s*[\\w\\$])|(?:,\\s*new\\s+\\w+\\s*[,;)])',
             'description' => 'Detects basic obfuscated JavaScript script injections.',
             'tag' => 'xss'
         ),
-        array(
-            'id' => '35',
-            'rule' => '(?:=\\s*[$\\w]\\s*[\\(\\[])|(?:\\(\\s*(?:this|top|window|self|parent|_?content)\\s*\\))|(?:src\\s*=s*(?:\\w+:|\\/\\/))|(?:\\w+\\[("\\w+"|\\w+\\|\\|))|(?:[\\d\\W]\\|\\|[\\d\\W]|\\W=\\w+,)|(?:\\/\\s*\\+\\s*[a-z"])|(?:=\\s*\\$[^([]*\\()|(?:=\\s*\\(\\s*")',
-            'description' => 'Detects obfuscated JavaScript script injections.',
-            'tag' => 'xss'
-        ),
+        // array(
+        //     'id' => '35',
+        //     'rule' => '(?:=\\s*[$\\w]\\s*[\\(\\[])|(?:\\(\\s*(?:this|top|window|self|parent|_?content)\\s*\\))|(?:src\\s*=s*(?:\\w+:|\\/\\/))|(?:\\w+\\[("\\w+"|\\w+\\|\\|))|(?:[\\d\\W]\\|\\|[\\d\\W]|\\W=\\w+,)|(?:\\/\\s*\\+\\s*[a-z"])|(?:=\\s*\\$[^([]*\\()|(?:=\\s*\\(\\s*")',
+        //     'description' => 'Detects obfuscated JavaScript script injections.',
+        //     'tag' => 'xss'
+        // ),
         array(
             'id' => '36',
             'rule' => '(?:(?:vbs|vbscript|data):.*[,+])|(?:\\w+\\s*=\\W*(?!https?)\\w+:)|(jar:\\w+:)|(=\\s*"?\\s*vbs(?:ript)?:)|(language\\s*=\\s?"?\\s*vbs(?:ript)?)|on\\w+\\s*=\\*\\w+\\-"?',
@@ -239,14 +239,15 @@ function get_filters()
             'id' => '37',
             'rule' => '(?:binding\\s?=|moz-binding|behavior\\s?=)|(?:[\\s\\/]style\\s*=\\s*[-\\\\])',
             'description' => 'Detects bindings and behavior injections.',
-            'tag' => 'xss'
-        ),
-        array(
-            'id' => '38',
-            'rule' => '(?:=\\s*\\w+\\s*\\+\\s*")|(?:\\+=\\s*\\(\\s")|(?:!+\\s*[\\d.,]+\\w?\\d*\\s*\\?)|(?:=\\s*\\[s*\\])|(?:"\\s*\\+\\s*")|(?:[^\\s]\\[\\s*\\d+\\s*\\]\\s*[;+])|(?:"\\s*[&|]+\\s*")|(?:\\/\\s*\\?\\s*")|(?:\\/\\s*\\)\\s*\\[)|(?:\\d\\?.+:\\d)|(?:]\\s*\\[\\W*\\w)|(?:[^\\s]\\s*=\\s*\\/)',
-            'description' => 'Detects common XSS concatenation patterns 1/2.',
-            'tag' => 'xss'
-        ),
+            'tag' => 'xss')
+        // ),
+        // array(
+        //     'id' => '38',
+        //     'rule' => '(?:=\s*\w+\s*\+\s*")|(?:\+=\s*\(\s")|(?:!+\s*[\d.,]+\w?\d*\s*\?)|(?:=\s*\[s*\\])|(?:"\s*\+\s*")|(?:[^\s]\[\s*\d+\s*\]\s*[;+])|(?:"\s*[&|]+\s*")|(?:\s*\?\s*")|(?:\s*)\s*\[|(?:\d\?.+:\d)|(?:]\s*\[\W*\w)|(?:[^\s]\s*=\s*)',
+        //     'description' => 'Detects common XSS concatenation patterns 1/2.',
+        //     'tag' => 'xss'
+        // )
+        ,
         array(
             'id' => '39',
             'rule' => '(?:=\\s*\\d*\\.\\d*\\?\\d*\\.\\d*)|(?:[|&]{2,}\\s*")|(?:!\\d+\\.\\d*\\?")|(?:\\/:[\\w.]+,)|(?:=[\\d\\W\\s]*\\[[^]]+\\])|(?:\\?\\w+:\\w+)',
@@ -259,12 +260,12 @@ function get_filters()
             'description' => 'Detects possible event handlers.',
             'tag' => 'xss'
         ),
-        array(
-            'id' => '41',
-            'rule' => '(?:\<\w*:?(\s|\/)(?:[^\>]*)t(?!rong))|(?:\<scri)|(<\w+:\w+)',
-            'description' => 'Detects obfuscated script tags and XML wrapped HTML.',
-            'tag' => 'xss'
-        ),
+        // array(
+        //     'id' => '41',
+        //     'rule' => '(?:\<\w*:?(\s|\/)(?:[^\>]*)t(?!rong))|(?:\<scri)|(<\w+:\w+)',
+        //     'description' => 'Detects obfuscated script tags and XML wrapped HTML.',
+        //     'tag' => 'xss'
+        // ),
         array(
             'id' => '42',
             'rule' => '(?:\\<\\/\\w+\\s\\w+)|(?:@(?:cc_on|set)[\\s@,"=])',

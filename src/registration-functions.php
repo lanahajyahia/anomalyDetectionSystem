@@ -94,6 +94,8 @@ function update_user_BY_admin()
 		}
 		if ($type != $_SESSION['type-to-edit']) {
 			$query = "UPDATE Users SET user_type='$type' WHERE id=$id";
+			if ($connection->query($query) === TRUE) {
+			}
 		}
 		header("Location: ../../admin/users.php");
 	}

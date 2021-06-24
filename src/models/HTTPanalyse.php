@@ -90,13 +90,6 @@ function is_attack($data)
         }
         if ($array_result_headers != null) {
             $attack_description2 = implode("\r\n", $array_result_headers);
-            $sql = "INSERT INTO Detected_Attacks(date, time, hostname,path,headers,http_method,description,type,body)
-        VALUES ('$date', '$time', '$hostname','$_path','$_headers', '$method','$attack_description2','$attack_type_headers','$_body')";
-            if ($connection->query($sql) === TRUE) {
-                echo "\r\nadded to db\r\ndate and time: " . $date . " " . $time . "<br>headers: " . urldecode($_headers) . "\nattack type: xss stored" . "\r\ndescription: " .  $attack_description2;
-            } else {
-                echo "fail     " . $connection->error . "  " . $hostname . " $attack_type_headers" . " headers: " .  var_dump($_headers);
-            }
         }
         if ($attack_type_headers  != "") {
 
@@ -112,6 +105,6 @@ function is_attack($data)
 
         $attack_description = $attack_description1 . "\r\n" . $attack_description2 . "\r\n" . $attack_description3;
 
-        sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT,  $attack_type . "\nA description of attack attempts the attacker been trying:\n" . $attack_description);
+        // sendmail("anomalydetectionregister@gmail.com", ATTACK_SUBJECT,  $attack_type . "\nA description of attack attempts the attacker been trying:\n" . $attack_description);
     }
 }
