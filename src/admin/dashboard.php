@@ -32,6 +32,8 @@ function get_attacks($month1, $month2, $type = null)
             $month_str = $row['date'];
             if (substr($month_str, 5, 2) == $month1 || substr($month_str, 5, 2) == $month2) {
                 $count_amount++;
+            }else if (substr($month_str, 3,2) == $month1 || substr($month_str, 3,2) == $month2) {
+                $count_amount++;
             }
         }
     }
@@ -40,7 +42,7 @@ function get_attacks($month1, $month2, $type = null)
 function get_attack_number_today($type)
 {
     global $connection, $table;
-    $date = date("Y-m-d") . "";
+    $date = date("d-m-Y") . "";
     $sql = "SELECT * FROM $table WHERE type='$type' and date='$date'";
     $result = $connection->query($sql);
     /* determine number of rows result set */
@@ -70,7 +72,7 @@ if (isset($_GET['export'])) {
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800" style="padding-top: 1em; padding-left: 0.5em;">Dashboard <?php echo  date("Y-m-d"); ?></h1>
+                <h1 class="h3 mb-0 text-gray-800" style="padding-top: 1em; padding-left: 0.5em;">Dashboard <?php echo date("d-m-Y"); ?></h1>
                 <a href="?export" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate report for all attacks</a>
             </div>
 

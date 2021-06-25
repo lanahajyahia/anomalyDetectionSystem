@@ -30,6 +30,14 @@ function get_filters()
             "description" => "Error based SQLi Detected, sql query that includes: OR, HAVING, WHERE, AND and more. ",
             "tag" => "sqli"
         ),
+        
+
+        array(
+            "id" => "22",
+            "rule" => "(\'|\"|\s*)(\)|\s*)\s*or\s*(\(|\s*)((\'|\"|\s*)(\s*\d+\s*)(\'|\"|\s*)\s*=\s*(\'|\"|\s*)\s*\d+\s*(\'|\"|\s*))",
+            "description" => "SQL Injection Auth Bypass Detected.",
+            "tag" => "sqli"
+        ),
         array(
             "id" => "3",
             "rule" => "(?:\)\s*when\s*\d+\s*then)|(?:\"\s*(?:#|--|{))|(?:\/\*!\s?\d+)|(?:char\s*\(\s*\d)|(?:(?:(n?and|x?or|not)\s+|&\&)\s*\w+\()",
@@ -300,6 +308,14 @@ function get_filters()
             'id' => '47',
             'rule' => '(?:[\\s\\d\\/"]+(?:on\\w+|style|poster|background)=[$"\\w])|(?:-type\\s*:\\s*multipart)',
             'description' => 'finds malicious attribute injection attempts and MHTML attacks.',
+            'tag' => 'xss'
+        )
+        ,
+
+        array(
+            'id' => '477',
+            'rule' => '\<\s*s\s*c\s*r\s*i\s*p\s*t\s*\>\s*a\s*l\s*e\s*r\s*t\s*\(.+\)\s*\<\s*(\/|\%2f)\s*s\s*c\s*r\s*i\s*p\s*t\s*\>',
+            'description' => 'finds basic xss script alert.',
             'tag' => 'xss'
         ),
         array(

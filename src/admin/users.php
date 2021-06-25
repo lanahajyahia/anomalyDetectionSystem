@@ -121,7 +121,7 @@ if (isset($_GET['export'])) {
                                           <td>' . $row['user_type'] . '</td>
                                           <td> 
                                           <a href="?edit-id=' . $row['id'] . '" class="btn btn-flat btn-primary"><i class="fas fa-edit"></i>Edit</a> 
-                                          <a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger"><i class="fas fa-trash"></i>Delete</a>
+                                          <a href="?delete-id=' . $row['id'] . '" class="btn btn-flat btn-danger" style="display: inline-flex;"><i class="fas fa-trash" aria-hidden="true"></i>Delete</a>
                                           </td>
 										  	
 										

@@ -80,6 +80,7 @@
         width: 100%;
         font-size: 0.95rem;
         margin: 0 0 1rem;
+        line-break: anywhere;
     }
 </style>
 <?php
@@ -138,17 +139,17 @@ $row = mysqli_fetch_assoc($sql);
                 <summary>Path
                 </summary>
                 <p>
-                    <?php echo $row['path']; ?>
+                    <?php echo  ($row['path']); ?>
                 </p>
             </details>
             <details>
                 <summary>Body
                 </summary>
                 <p>
-                    <?php if ($row['body'] == null) {
+                    <?php if (($row['body']) == null) {
                         echo "This request doesn't contain a body ";
                     } else {
-                        echo $row['body'];
+                        echo ($row['body']);
                     } ?>
                 </p>
             </details>
@@ -156,7 +157,7 @@ $row = mysqli_fetch_assoc($sql);
                 <summary>Headers
                 </summary>
                 <p>
-                    <?php echo $row['headers']; ?>
+                    <?php echo ($row['headers']); ?>
                 </p>
             </details>
             <details>

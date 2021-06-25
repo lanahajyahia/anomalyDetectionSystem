@@ -53,7 +53,8 @@ function is_attack($data)
     if ($array_result_url == null && $array_result_headers == null &&  $array_result_body == null) {
         echo "no attack detected function reteruned false\r\n" . urldecode(json_encode($data['url']));
     } else {
-        $date = date("Y-m-d");
+        date_default_timezone_set('Asia/Jerusalem');
+        $date = date("d-m-Y");
         $time = date("h:i:sa");
         $url_decode = htmlspecialchars($data['url']);
         $headers = htmlspecialchars(urldecode(json_encode($data['headers'])));

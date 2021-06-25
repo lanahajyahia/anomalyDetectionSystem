@@ -1,4 +1,5 @@
 <?php
+ date_default_timezone_set('Asia/Jerusalem');
 if (!isset($_SESSION)) {
 	session_start();
 }
@@ -145,7 +146,10 @@ function login()
 				if ($logged_in_user['status'] == 'notverified') {
 					header('location: user-otp.php');
 				} else {
-					$query = "UPDATE Users SET last_activity=now() WHERE username='$username'";
+					$date = date("d-m-Y");
+					$time = date("h:i:sa");
+					$last_login = $date . " " . $time;
+					$query = "UPDATE Users SET last_activity='$last_login' WHERE username='$username'";
 					if ($connection->query($query) === TRUE) {
 						header('location: admin/dashboard.php');
 					}
