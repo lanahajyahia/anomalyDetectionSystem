@@ -1,5 +1,5 @@
 <?php
- date_default_timezone_set('Asia/Jerusalem');
+date_default_timezone_set('Asia/Jerusalem');
 if (!isset($_SESSION)) {
 	session_start();
 }
@@ -158,7 +158,10 @@ function login()
 				if ($logged_in_user['status'] == 'notverified') {
 					header('location: user-otp.php');
 				} else {
-					$query = "UPDATE Users SET last_activity=now() WHERE username='$username'";
+					$date = date("d-m-Y");
+					$time = date("h:i:sa");
+					$last_login = $date . " " . $time;
+					$query = "UPDATE Users SET last_activity='$last_login' WHERE username='$username'";
 					if ($connection->query($query) === TRUE) {
 						header('location: admin/dashboard.php');
 					}
@@ -219,7 +222,10 @@ function isUserVerified()
 			if ($update_res) {
 				$_SESSION['name'] = $name;
 				$_SESSION['email'] = $email;
-				$query = "UPDATE Users SET last_activity=now() WHERE email='$email'";
+				$date = date("d-m-Y");
+				$time = date("h:i:sa");
+				$last_login = $date . " " . $time;
+				$query = "UPDATE Users SET last_activity='$last_login' WHERE email='$email'";
 				if ($connection->query($query) === TRUE) {
 					header('location: admin/dashboard.php');
 				}
@@ -312,9 +318,11 @@ function register()
 			$password = md5($password_1); //encrypt the password before saving in the database
 			$code = rand(999999, 111111);
 			$status = "notverified";
-
-			$query = "INSERT INTO Users (username, email, fullname, user_type, password,code,status) 
-					  VALUES('$username', '$email','$fullname', '$user_type', '$password','$code','$status')";
+			$date = date("d-m-Y");
+			$time = date("h:i:sa");
+			$reg_date = $date . " " . $time;
+			$query = "INSERT INTO Users (username, email, fullname, user_type, password,code,status,reg_date) 
+					  VALUES('$username', '$email','$fullname', '$user_type', '$password','$code','$status','$reg_date')";
 			$data_check = mysqli_query($connection, $query);
 			if ($data_check) {
 				$subject = "Welcome to Anomaly Detection System";

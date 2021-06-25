@@ -40,7 +40,7 @@ function createUsersTable()
     code mediumint(50) NOT NULL,
     status text NOT NULL,
     last_activity VARCHAR(30) DEFAULT '0000-00-00 00:00:00' NOT NULL,
-    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    reg_date VARCHAR(30) NOT NULL
     )";
   if ($connection->query($sql_user) === TRUE) {
   } else {

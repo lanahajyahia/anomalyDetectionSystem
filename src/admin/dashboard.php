@@ -72,7 +72,7 @@ if (isset($_GET['export'])) {
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800" style="padding-top: 1em; padding-left: 0.5em;">Dashboard <?php echo date("d-m-Y"); ?></h1>
+                <h1 class="h3 mb-0 text-gray-800" style="padding-top: 1em; padding-left: 0.5em;">Dashboard <?php echo date("d/m/Y"); ?></h1>
                 <a href="?export" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate report for all attacks</a>
             </div>
 

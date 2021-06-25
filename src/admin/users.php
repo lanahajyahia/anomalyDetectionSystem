@@ -152,7 +152,7 @@ if (isset($_GET['export'])) {
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <p style="font-size=1em"> <?php echo display_error(); ?> </p>
+                        <p style="font-size=1em" > <?php echo display_error(); ?> </p>
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <input type="text" name="fullname" placeholder="Full Name" class="form-control" required>

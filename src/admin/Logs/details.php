@@ -15,7 +15,7 @@
     }
 
     section {
-        padding-top: 1rem;
+        padding-top: 0.5rem;
         width: 50%;
         margin: auto;
     }
